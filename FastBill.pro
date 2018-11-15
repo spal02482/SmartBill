@@ -26,15 +26,18 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         fastbill.cpp \
-    login.cpp
+    login.cpp \
+    invoice.cpp
 
 HEADERS += \
         fastbill.h \
-    login.h
+    login.h \
+    invoice.h
 
 FORMS += \
         fastbill.ui \
-    login.ui
+    login.ui \
+    invoice.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

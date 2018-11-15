@@ -1,18 +1,17 @@
 #include "login.h"
 #include "ui_login.h"
-#include "fastbill.h"
 
 #include <iostream>
 #include <QtSql>
 #include <QtDebug>
 #include <QFileInfo>
-#include <QMessageBox>
 
 Login::Login(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Login)
 {
     ui->setupUi(this);
+    QDialog::setAttribute(Qt::WA_DeleteOnClose);
     ui->UserName->setPlaceholderText(QString("Username Here"));
     ui->PassWord->setPlaceholderText((QString("Password Here")));
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
@@ -36,7 +35,7 @@ void Login::on_LoginBtn_clicked()
     QString password = ui->PassWord->text();
     std::cout << "print: " << username.toStdString() << " " << password.toStdString() << "\n";
     QSqlQuery query;
-    query.prepare("select password from userinfo where username = ?");
+    query.prepare("select PassWord from UserInfo where UserName = ?");
     query.addBindValue(username);
     if (query.exec()) {
         qDebug() << "Query Successfull\n";
@@ -44,12 +43,10 @@ void Login::on_LoginBtn_clicked()
             QString databasePassword = query.value(0).toString();
             qDebug() << databasePassword << endl;
             if (databasePassword.toStdString() == password.toStdString()) {
-                this->hide();
-                FastBill* fastbill = new FastBill();
-                fastbill->show();
+                this->done(0);
             }
             else {
-                QMessageBox::critical(nullptr, QString("Login"), QString("Login Failed"));
+                this->done(1);
             }
         }
     }
