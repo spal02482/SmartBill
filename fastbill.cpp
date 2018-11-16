@@ -18,19 +18,19 @@ FastBill::~FastBill()
     delete ui;
 }
 
-void FastBill::on_addInvoice_clicked()
+void FastBill::on_addInvoicePushButton_clicked()
 {
     Invoice* invoice = new Invoice();
     invoice->setWindowModality(Qt::ApplicationModal);
     invoice->open();
 }
 
-void FastBill::on_closeButton_clicked()
+void FastBill::on_closePushButton_clicked()
 {
     this->close();
 }
 
-void FastBill::on_invoicesReport_clicked()
+void FastBill::on_invoicesReportPushButton_clicked()
 {
     QSqlQueryModel* model = new QSqlQueryModel();
     QSqlQuery* query = new QSqlQuery();

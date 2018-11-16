@@ -16,11 +16,11 @@ public:
     ~FastBill();
 
 private slots:
-    void on_addInvoice_clicked();
+    void on_addInvoicePushButton_clicked();
 
-    void on_closeButton_clicked();
+    void on_closePushButton_clicked();
 
-    void on_invoicesReport_clicked();
+    void on_invoicesReportPushButton_clicked();
 
 private:
     Ui::FastBill *ui;

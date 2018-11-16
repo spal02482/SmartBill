@@ -14,7 +14,7 @@ Invoice::~Invoice()
     delete ui;
 }
 
-void Invoice::on_closeButton_clicked()
+void Invoice::on_closePushButton_clicked()
 {
     this->close();
 }

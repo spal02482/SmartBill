@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>474</width>
-    <height>456</height>
+    <width>533</width>
+    <height>474</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,7 @@
   <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>20</x>
      <y>10</y>
      <width>389</width>
      <height>445</height>
@@ -24,24 +24,24 @@
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <widget class="QLabel" name="clilentName">
+     <widget class="QLabel" name="clientNameLabel">
       <property name="text">
        <string>Name</string>
       </property>
      </widget>
     </item>
-    <item row="1" column="0" colspan="5">
-     <widget class="QLineEdit" name="lineEdit"/>
+    <item row="1" column="0" colspan="3">
+     <widget class="QLineEdit" name="clientNameLineEdit"/>
     </item>
     <item row="2" column="0">
-     <widget class="QLabel" name="nameLabel">
+     <widget class="QLabel" name="clientAddressLabel">
       <property name="text">
        <string>Address</string>
       </property>
      </widget>
     </item>
-    <item row="3" column="0" colspan="5">
-     <widget class="QPlainTextEdit" name="plainTextEdit"/>
+    <item row="3" column="0" colspan="3">
+     <widget class="QPlainTextEdit" name="clientAddressTextEdit"/>
     </item>
     <item row="4" column="0">
      <widget class="QLabel" name="issueDateLabel">
@@ -50,80 +50,80 @@
       </property>
      </widget>
     </item>
-    <item row="4" column="2">
-     <widget class="QLabel" name="label_4">
+    <item row="4" column="1">
+     <widget class="QLabel" name="dueDateLabel">
       <property name="text">
        <string>Due Date:</string>
       </property>
      </widget>
     </item>
-    <item row="4" column="4">
-     <widget class="QLabel" name="label_5">
+    <item row="4" column="2">
+     <widget class="QLabel" name="quantityLabel">
       <property name="text">
        <string>Quantity:</string>
       </property>
      </widget>
     </item>
     <item row="5" column="0">
-     <widget class="QDateEdit" name="issueDate"/>
+     <widget class="QDateEdit" name="issueDateDateEdit"/>
     </item>
-    <item row="5" column="2" colspan="2">
-     <widget class="QDateEdit" name="dueDate"/>
+    <item row="5" column="1">
+     <widget class="QDateEdit" name="dueDateDateEdit"/>
     </item>
-    <item row="5" column="4">
-     <widget class="QSpinBox" name="spinBox"/>
+    <item row="5" column="2">
+     <widget class="QSpinBox" name="quantitySpinBox"/>
     </item>
     <item row="6" column="0">
-     <widget class="QLabel" name="label_6">
+     <widget class="QLabel" name="billingAmountLabel">
       <property name="text">
        <string>Billing Amount</string>
       </property>
      </widget>
     </item>
-    <item row="6" column="1" colspan="2">
-     <widget class="QLabel" name="label_7">
+    <item row="6" column="1">
+     <widget class="QLabel" name="gstAmountLabel">
       <property name="text">
        <string>GST Amount</string>
       </property>
      </widget>
     </item>
-    <item row="6" column="3" colspan="2">
-     <widget class="QLabel" name="label_8">
+    <item row="6" column="2">
+     <widget class="QLabel" name="shipAmountLabel">
       <property name="text">
-       <string>Shipping Amount</string>
+       <string>Ship Amount</string>
       </property>
      </widget>
     </item>
     <item row="7" column="0">
-     <widget class="QLineEdit" name="lineEdit_2"/>
+     <widget class="QLineEdit" name="billingAmountLineEdit"/>
     </item>
-    <item row="7" column="1" colspan="2">
-     <widget class="QLineEdit" name="lineEdit_3"/>
+    <item row="7" column="1">
+     <widget class="QLineEdit" name="gstAmountLineEdit"/>
     </item>
-    <item row="7" column="3" colspan="2">
-     <widget class="QLineEdit" name="lineEdit_4"/>
+    <item row="7" column="2">
+     <widget class="QLineEdit" name="shipAmountLineEdit"/>
     </item>
     <item row="8" column="0">
-     <widget class="QLabel" name="label_9">
+     <widget class="QLabel" name="totalAmountLabel">
       <property name="text">
        <string>Total Amount</string>
       </property>
      </widget>
     </item>
     <item row="9" column="0" colspan="2">
-     <widget class="QLineEdit" name="lineEdit_5"/>
+     <widget class="QLineEdit" name="totalAmountLineEdit"/>
     </item>
     <item row="10" column="0">
-     <widget class="QPushButton" name="submitButton">
+     <widget class="QPushButton" name="submitPushButton">
       <property name="text">
        <string>Submit</string>
       </property>
      </widget>
     </item>
-    <item row="10" column="4">
-     <widget class="QPushButton" name="closeButton">
+    <item row="10" column="2">
+     <widget class="QPushButton" name="closeInvoicePushButton">
       <property name="text">
-       <string>Close'</string>
+       <string>Close</string>
       </property>
      </widget>
     </item>

@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>FastBill</string>
   </property>
-  <widget class="QPushButton" name="addInvoice">
+  <widget class="QPushButton" name="addInvoicePushButton">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -26,7 +26,7 @@
     <string>Add Invoice</string>
    </property>
   </widget>
-  <widget class="QLabel" name="companyName">
+  <widget class="QLabel" name="companyNameLabel">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -52,7 +52,7 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="closeButton">
+  <widget class="QPushButton" name="closePushButton">
    <property name="geometry">
     <rect>
      <x>500</x>
@@ -65,7 +65,7 @@
     <string>Close</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="invoicesReport">
+  <widget class="QPushButton" name="invoicesReportPushButton">
    <property name="geometry">
     <rect>
      <x>240</x>
@@ -78,7 +78,7 @@
     <string>Invoices Report</string>
    </property>
   </widget>
-  <widget class="QTableView" name="invoicesTable">
+  <widget class="QTableView" name="invoicesReportTableView">
    <property name="geometry">
     <rect>
      <x>0</x>
