@@ -16,7 +16,8 @@ public:
     ~Invoice();
 
 private slots:
-    void on_closePushButton_clicked();
+
+    void on_closeInvoicePushButton_clicked();
 
 private:
     Ui::Invoice *ui;

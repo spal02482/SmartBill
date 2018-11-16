@@ -18,7 +18,7 @@ public:
 private slots:
     void on_addInvoicePushButton_clicked();
 
-    void on_closePushButton_clicked();
+    void on_closeFastBillPushButton_clicked();
 
     void on_invoicesReportPushButton_clicked();
 

@@ -25,7 +25,7 @@ void FastBill::on_addInvoicePushButton_clicked()
     invoice->open();
 }
 
-void FastBill::on_closePushButton_clicked()
+void FastBill::on_closeFastBillPushButton_clicked()
 {
     this->close();
 }
@@ -37,5 +37,5 @@ void FastBill::on_invoicesReportPushButton_clicked()
     query->prepare("select * from ProductInfo");
     query->exec();
     model->setQuery(*query);
-    ui->invoicesTable->setModel(model);
+    ui->invoicesReportTableView->setModel(model);
 }
