@@ -18,8 +18,8 @@
     <rect>
      <x>10</x>
      <y>380</y>
-     <width>101</width>
-     <height>31</height>
+     <width>100</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="text">
@@ -55,27 +55,14 @@
   <widget class="QPushButton" name="closeFastBillPushButton">
    <property name="geometry">
     <rect>
-     <x>500</x>
-     <y>382</y>
-     <width>80</width>
-     <height>31</height>
+     <x>490</x>
+     <y>380</y>
+     <width>100</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="text">
     <string>Close</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="invoicesReportPushButton">
-   <property name="geometry">
-    <rect>
-     <x>240</x>
-     <y>380</y>
-     <width>111</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Invoices Report</string>
    </property>
   </widget>
   <widget class="QTableView" name="invoicesReportTableView">
@@ -86,6 +73,19 @@
      <width>616</width>
      <height>331</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="addProductPushButton">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>380</y>
+     <width>100</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Add Product</string>
    </property>
   </widget>
  </widget>

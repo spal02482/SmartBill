@@ -20,7 +20,7 @@ private slots:
 
     void on_closeFastBillPushButton_clicked();
 
-    void on_invoicesReportPushButton_clicked();
+    void on_addProductPushButton_clicked();
 
 private:
     Ui::FastBill *ui;

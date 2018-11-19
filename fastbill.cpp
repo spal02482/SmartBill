@@ -1,6 +1,8 @@
 #include "fastbill.h"
 #include "ui_fastbill.h"
+
 #include "invoice.h"
+#include "product.h"
 
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -11,6 +13,12 @@ FastBill::FastBill(QWidget *parent) :
     ui(new Ui::FastBill)
 {
     ui->setupUi(this);
+    QSqlQueryModel* model = new QSqlQueryModel();
+    QSqlQuery* query = new QSqlQuery();
+    query->prepare("select * from Report");
+    query->exec();
+    model->setQuery(*query);
+    ui->invoicesReportTableView->setModel(model);
 }
 
 FastBill::~FastBill()
@@ -22,6 +30,8 @@ void FastBill::on_addInvoicePushButton_clicked()
 {
     Invoice* invoice = new Invoice();
     invoice->setWindowModality(Qt::ApplicationModal);
+    invoice->setWindowTitle(QString("Invoice"));
+    invoice->setFixedSize(QSize(530, 491));
     invoice->open();
 }
 
@@ -30,12 +40,12 @@ void FastBill::on_closeFastBillPushButton_clicked()
     this->close();
 }
 
-void FastBill::on_invoicesReportPushButton_clicked()
+
+void FastBill::on_addProductPushButton_clicked()
 {
-    QSqlQueryModel* model = new QSqlQueryModel();
-    QSqlQuery* query = new QSqlQuery();
-    query->prepare("select * from ProductInfo");
-    query->exec();
-    model->setQuery(*query);
-    ui->invoicesReportTableView->setModel(model);
+    Product* product = new Product();
+    product->setWindowModality(Qt::ApplicationModal);
+    product->setWindowTitle("Product");
+    product->setFixedSize(QSize(455, 270));
+    product->open();
 }

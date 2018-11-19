@@ -7,6 +7,10 @@ Invoice::Invoice(QWidget *parent) :
 {
     ui->setupUi(this);
     QDialog::setAttribute(Qt::WA_DeleteOnClose);
+    ui->productNameComboBox->addItem("Suraj");
+    ui->productNameComboBox->addItem("Suraj");
+    ui->productNameComboBox->addItem("Suraj");
+    ui->productNameComboBox->addItem("Suraj");
 }
 
 Invoice::~Invoice()

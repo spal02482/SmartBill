@@ -6,32 +6,102 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>533</width>
-    <height>474</height>
+    <width>530</width>
+    <height>491</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>10</y>
-     <width>389</width>
-     <height>445</height>
+     <x>0</x>
+     <y>0</y>
+     <width>531</width>
+     <height>491</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QLabel" name="clientNameLabel">
+    <property name="sizeConstraint">
+     <enum>QLayout::SetNoConstraint</enum>
+    </property>
+    <item row="7" column="2">
+     <widget class="QSpinBox" name="quantitySpinBox"/>
+    </item>
+    <item row="3" column="0" colspan="3">
+     <widget class="QPlainTextEdit" name="clientAddressTextEdit"/>
+    </item>
+    <item row="11" column="0" colspan="3">
+     <widget class="QLineEdit" name="totalAmountLineEdit"/>
+    </item>
+    <item row="12" column="2">
+     <widget class="QPushButton" name="closeInvoicePushButton">
       <property name="text">
-       <string>Name</string>
+       <string>Close</string>
       </property>
      </widget>
     </item>
-    <item row="1" column="0" colspan="3">
-     <widget class="QLineEdit" name="clientNameLineEdit"/>
+    <item row="12" column="0">
+     <widget class="QPushButton" name="submitPushButton">
+      <property name="text">
+       <string>Submit</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1">
+     <widget class="QDateEdit" name="dueDateDateEdit"/>
+    </item>
+    <item row="6" column="2">
+     <widget class="QLabel" name="quantityLabel">
+      <property name="text">
+       <string>Quantity:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0">
+     <widget class="QDateEdit" name="issueDateDateEdit"/>
+    </item>
+    <item row="9" column="1">
+     <widget class="QLineEdit" name="gstAmountLineEdit"/>
+    </item>
+    <item row="4" column="0">
+     <widget class="QLabel" name="productNameLabel">
+      <property name="text">
+       <string>Product</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QLabel" name="dueDateLabel">
+      <property name="text">
+       <string>Due Date:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="2">
+     <widget class="QPushButton" name="addProductPushButton">
+      <property name="text">
+       <string>Add</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="2">
+     <widget class="QLabel" name="shipAmountLabel">
+      <property name="text">
+       <string>Ship Amount</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="1">
+     <widget class="QLabel" name="gstAmountLabel">
+      <property name="text">
+       <string>GST Amount</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="0">
+     <widget class="QLineEdit" name="billingAmountLineEdit"/>
     </item>
     <item row="2" column="0">
      <widget class="QLabel" name="clientAddressLabel">
@@ -40,92 +110,52 @@
       </property>
      </widget>
     </item>
-    <item row="3" column="0" colspan="3">
-     <widget class="QPlainTextEdit" name="clientAddressTextEdit"/>
-    </item>
-    <item row="4" column="0">
-     <widget class="QLabel" name="issueDateLabel">
+    <item row="0" column="0">
+     <widget class="QLabel" name="clientNameLabel">
       <property name="text">
-       <string>Issue Date:</string>
+       <string>Name</string>
       </property>
      </widget>
     </item>
-    <item row="4" column="1">
-     <widget class="QLabel" name="dueDateLabel">
-      <property name="text">
-       <string>Due Date:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="2">
-     <widget class="QLabel" name="quantityLabel">
-      <property name="text">
-       <string>Quantity:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0">
-     <widget class="QDateEdit" name="issueDateDateEdit"/>
-    </item>
-    <item row="5" column="1">
-     <widget class="QDateEdit" name="dueDateDateEdit"/>
-    </item>
-    <item row="5" column="2">
-     <widget class="QSpinBox" name="quantitySpinBox"/>
-    </item>
-    <item row="6" column="0">
-     <widget class="QLabel" name="billingAmountLabel">
-      <property name="text">
-       <string>Billing Amount</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="1">
-     <widget class="QLabel" name="gstAmountLabel">
-      <property name="text">
-       <string>GST Amount</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="2">
-     <widget class="QLabel" name="shipAmountLabel">
-      <property name="text">
-       <string>Ship Amount</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="0">
-     <widget class="QLineEdit" name="billingAmountLineEdit"/>
-    </item>
-    <item row="7" column="1">
-     <widget class="QLineEdit" name="gstAmountLineEdit"/>
-    </item>
-    <item row="7" column="2">
+    <item row="9" column="2">
      <widget class="QLineEdit" name="shipAmountLineEdit"/>
     </item>
-    <item row="8" column="0">
+    <item row="10" column="0">
      <widget class="QLabel" name="totalAmountLabel">
       <property name="text">
        <string>Total Amount</string>
       </property>
      </widget>
     </item>
-    <item row="9" column="0" colspan="2">
-     <widget class="QLineEdit" name="totalAmountLineEdit"/>
-    </item>
-    <item row="10" column="0">
-     <widget class="QPushButton" name="submitPushButton">
+    <item row="8" column="0">
+     <widget class="QLabel" name="billingAmountLabel">
       <property name="text">
-       <string>Submit</string>
+       <string>Billing Amount</string>
       </property>
      </widget>
     </item>
-    <item row="10" column="2">
-     <widget class="QPushButton" name="closeInvoicePushButton">
+    <item row="1" column="0" colspan="3">
+     <widget class="QLineEdit" name="clientNameLineEdit"/>
+    </item>
+    <item row="0" column="3">
+     <widget class="QLabel" name="productListLabel">
       <property name="text">
-       <string>Close</string>
+       <string>Product List</string>
       </property>
      </widget>
+    </item>
+    <item row="6" column="0">
+     <widget class="QLabel" name="issueDateLabel">
+      <property name="text">
+       <string>Issue Date:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0" colspan="2">
+     <widget class="QComboBox" name="productNameComboBox"/>
+    </item>
+    <item row="1" column="3" rowspan="12">
+     <widget class="QTextEdit" name="productListTextEdit"/>
     </item>
    </layout>
   </widget>

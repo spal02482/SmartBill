@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Product</class>
+ <widget class="QDialog" name="Product">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>455</width>
+    <height>270</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QLabel" name="productNameLabel">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>12</y>
+     <width>86</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Product Name</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="productNameLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>33</y>
+     <width>431</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="supplierNameLabel">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>62</y>
+     <width>89</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Supplier Name</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="priceLabel">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>62</y>
+     <width>30</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Price</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="quanitityLabel">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>62</y>
+     <width>52</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Quantity</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="productDescpnLabel">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>113</y>
+     <width>119</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Product Description</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="supplierNameLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>83</y>
+     <width>231</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="quanititySpinBox">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>83</y>
+     <width>71</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="priceDoubleSpinBox">
+   <property name="geometry">
+    <rect>
+     <x>249</x>
+     <y>83</y>
+     <width>101</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="productDescpnPlainTextEdit">
+   <property name="geometry">
+    <rect>
+     <x>11</x>
+     <y>134</y>
+     <width>429</width>
+     <height>99</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="addProductInPushButton">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>240</y>
+     <width>80</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="text">
+    <string>Add</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="cancelAddProductPushButton">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>239</y>
+     <width>80</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
