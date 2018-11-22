@@ -24,7 +24,7 @@ void FastBill::on_addInvoicePushButton_clicked()
     Invoice* invoice = new Invoice();
     invoice->setWindowModality(Qt::ApplicationModal);
     invoice->setWindowTitle(QString("Invoice"));
-    invoice->setFixedSize(QSize(530, 491));
+    invoice->setFixedSize(QSize(630, 363));
     invoice->open();
 }
 
@@ -39,6 +39,6 @@ void FastBill::on_addProductPushButton_clicked()
     Product* product = new Product();
     product->setWindowModality(Qt::ApplicationModal);
     product->setWindowTitle("Product");
-    product->setFixedSize(QSize(455, 270));
+    product->setFixedSize(QSize(630, 375));
     product->open();
 }

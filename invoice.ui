@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>568</width>
-    <height>494</height>
+    <width>630</width>
+    <height>375</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,55 +16,38 @@
   <widget class="QLabel" name="gstAmountLabel">
    <property name="geometry">
     <rect>
-     <x>102</x>
-     <y>367</y>
-     <width>76</width>
-     <height>16</height>
+     <x>115</x>
+     <y>230</y>
+     <width>101</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="text">
     <string>GST Amount</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
   <widget class="QPushButton" name="submitPushButton">
    <property name="geometry">
     <rect>
-     <x>1</x>
-     <y>467</y>
-     <width>80</width>
-     <height>23</height>
+     <x>5</x>
+     <y>332</y>
+     <width>101</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
     <string>Submit</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="billingAmountLineEdit">
-   <property name="geometry">
-    <rect>
-     <x>1</x>
-     <y>388</y>
-     <width>95</width>
-     <height>23</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QDateEdit" name="dueDateDateEdit">
    <property name="geometry">
     <rect>
-     <x>102</x>
-     <y>337</y>
-     <width>86</width>
-     <height>24</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="gstAmountLineEdit">
-   <property name="geometry">
-    <rect>
-     <x>102</x>
-     <y>388</y>
-     <width>95</width>
+     <x>115</x>
+     <y>300</y>
+     <width>101</width>
      <height>23</height>
     </rect>
    </property>
@@ -72,9 +55,9 @@
   <widget class="QLabel" name="clientNameLabel">
    <property name="geometry">
     <rect>
-     <x>1</x>
-     <y>1</y>
-     <width>36</width>
+     <x>5</x>
+     <y>0</y>
+     <width>321</width>
      <height>16</height>
     </rect>
    </property>
@@ -85,9 +68,9 @@
   <widget class="QSpinBox" name="quantitySpinBox">
    <property name="geometry">
     <rect>
-     <x>203</x>
-     <y>337</y>
-     <width>47</width>
+     <x>225</x>
+     <y>200</y>
+     <width>61</width>
      <height>24</height>
     </rect>
    </property>
@@ -95,32 +78,35 @@
   <widget class="QLabel" name="totalAmountLabel">
    <property name="geometry">
     <rect>
-     <x>1</x>
-     <y>417</y>
-     <width>81</width>
-     <height>16</height>
+     <x>225</x>
+     <y>280</y>
+     <width>101</width>
+     <height>23</height>
     </rect>
    </property>
    <property name="text">
     <string>Total Amount</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
   <widget class="QLineEdit" name="clientNameLineEdit">
    <property name="geometry">
     <rect>
-     <x>0</x>
+     <x>5</x>
      <y>20</y>
-     <width>125</width>
-     <height>23</height>
+     <width>321</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>
   <widget class="QPushButton" name="addProductPushButton">
    <property name="geometry">
     <rect>
-     <x>203</x>
-     <y>287</y>
-     <width>80</width>
+     <x>295</x>
+     <y>200</y>
+     <width>31</width>
      <height>23</height>
     </rect>
    </property>
@@ -131,9 +117,9 @@
   <widget class="QLabel" name="clientAddressLabel">
    <property name="geometry">
     <rect>
-     <x>1</x>
-     <y>51</y>
-     <width>49</width>
+     <x>5</x>
+     <y>50</y>
+     <width>321</width>
      <height>16</height>
     </rect>
    </property>
@@ -144,46 +130,52 @@
   <widget class="QLabel" name="issueDateLabel">
    <property name="geometry">
     <rect>
-     <x>1</x>
-     <y>316</y>
-     <width>68</width>
-     <height>16</height>
+     <x>5</x>
+     <y>280</y>
+     <width>101</width>
+     <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>Issue Date:</string>
+    <string>Issue Date</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QLabel" name="shipAmountLabel">
    <property name="geometry">
     <rect>
-     <x>203</x>
-     <y>367</y>
-     <width>78</width>
+     <x>225</x>
+     <y>230</y>
+     <width>101</width>
      <height>16</height>
     </rect>
    </property>
    <property name="text">
     <string>Ship Amount</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
   <widget class="QPlainTextEdit" name="clientAddressTextEdit">
    <property name="geometry">
     <rect>
-     <x>1</x>
+     <x>5</x>
      <y>72</y>
-     <width>297</width>
-     <height>188</height>
+     <width>321</width>
+     <height>101</height>
     </rect>
    </property>
   </widget>
   <widget class="QPushButton" name="closeInvoicePushButton">
    <property name="geometry">
     <rect>
-     <x>203</x>
-     <y>467</y>
-     <width>80</width>
-     <height>23</height>
+     <x>225</x>
+     <y>332</y>
+     <width>101</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
@@ -193,81 +185,67 @@
   <widget class="QLabel" name="billingAmountLabel">
    <property name="geometry">
     <rect>
-     <x>1</x>
-     <y>367</y>
-     <width>88</width>
+     <x>5</x>
+     <y>230</y>
+     <width>101</width>
      <height>16</height>
     </rect>
    </property>
    <property name="text">
     <string>Billing Amount</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
   </widget>
   <widget class="QDateEdit" name="issueDateDateEdit">
    <property name="geometry">
     <rect>
-     <x>1</x>
-     <y>337</y>
-     <width>86</width>
-     <height>24</height>
+     <x>5</x>
+     <y>300</y>
+     <width>101</width>
+     <height>23</height>
     </rect>
    </property>
   </widget>
   <widget class="QLabel" name="dueDateLabel">
    <property name="geometry">
     <rect>
-     <x>102</x>
-     <y>316</y>
-     <width>61</width>
-     <height>16</height>
+     <x>115</x>
+     <y>280</y>
+     <width>101</width>
+     <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>Due Date:</string>
+    <string>Due Date</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QLabel" name="quantityLabel">
    <property name="geometry">
     <rect>
-     <x>203</x>
-     <y>316</y>
-     <width>56</width>
+     <x>225</x>
+     <y>180</y>
+     <width>61</width>
      <height>16</height>
     </rect>
    </property>
    <property name="text">
-    <string>Quantity:</string>
+    <string>Quantity</string>
    </property>
-  </widget>
-  <widget class="QLineEdit" name="totalAmountLineEdit">
-   <property name="geometry">
-    <rect>
-     <x>1</x>
-     <y>438</y>
-     <width>125</width>
-     <height>23</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="productListLabel">
-   <property name="geometry">
-    <rect>
-     <x>304</x>
-     <y>1</y>
-     <width>71</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Product List</string>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QLabel" name="productNameLabel">
    <property name="geometry">
     <rect>
-     <x>1</x>
-     <y>266</y>
-     <width>46</width>
+     <x>5</x>
+     <y>180</y>
+     <width>211</width>
      <height>16</height>
     </rect>
    </property>
@@ -275,36 +253,93 @@
     <string>Product</string>
    </property>
   </widget>
-  <widget class="QListView" name="producListView">
+  <widget class="QTableView" name="productTableView">
    <property name="geometry">
     <rect>
-     <x>304</x>
-     <y>22</y>
-     <width>191</width>
-     <height>441</height>
+     <x>335</x>
+     <y>5</y>
+     <width>290</width>
+     <height>360</height>
     </rect>
    </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
   </widget>
-  <widget class="QComboBox" name="productNameComboBox">
+  <widget class="QLineEdit" name="productNameLineEdit">
    <property name="geometry">
     <rect>
-     <x>1</x>
-     <y>287</y>
-     <width>79</width>
+     <x>5</x>
+     <y>200</y>
+     <width>211</width>
      <height>23</height>
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="shipAmountLineEdit">
+  <widget class="QSpinBox" name="shipAmountDoubleSpinBox">
    <property name="geometry">
     <rect>
-     <x>203</x>
-     <y>388</y>
-     <width>95</width>
+     <x>225</x>
+     <y>250</y>
+     <width>101</width>
      <height>23</height>
     </rect>
    </property>
   </widget>
+  <widget class="QDoubleSpinBox" name="billingAmountDoubleSpinBox">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>250</y>
+     <width>101</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="gstAmountDoubleSpinBox">
+   <property name="geometry">
+    <rect>
+     <x>115</x>
+     <y>250</y>
+     <width>101</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="totalAmountDoubleSpinBox">
+   <property name="geometry">
+    <rect>
+     <x>225</x>
+     <y>300</y>
+     <width>101</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <zorder>totalAmountDoubleSpinBox</zorder>
+  <zorder>gstAmountDoubleSpinBox</zorder>
+  <zorder>billingAmountDoubleSpinBox</zorder>
+  <zorder>gstAmountLabel</zorder>
+  <zorder>submitPushButton</zorder>
+  <zorder>dueDateDateEdit</zorder>
+  <zorder>clientNameLabel</zorder>
+  <zorder>quantitySpinBox</zorder>
+  <zorder>totalAmountLabel</zorder>
+  <zorder>clientNameLineEdit</zorder>
+  <zorder>addProductPushButton</zorder>
+  <zorder>clientAddressLabel</zorder>
+  <zorder>issueDateLabel</zorder>
+  <zorder>shipAmountLabel</zorder>
+  <zorder>clientAddressTextEdit</zorder>
+  <zorder>closeInvoicePushButton</zorder>
+  <zorder>billingAmountLabel</zorder>
+  <zorder>issueDateDateEdit</zorder>
+  <zorder>dueDateLabel</zorder>
+  <zorder>quantityLabel</zorder>
+  <zorder>productNameLabel</zorder>
+  <zorder>productTableView</zorder>
+  <zorder>productNameLineEdit</zorder>
+  <zorder>shipAmountDoubleSpinBox</zorder>
  </widget>
  <resources/>
  <connections/>

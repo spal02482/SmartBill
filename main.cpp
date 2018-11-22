@@ -1,4 +1,3 @@
-#include "fastbill.h"
 #include "login.h"
 
 #include <iostream>
@@ -10,15 +9,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     Login* login = new Login();
-    int r = login->exec();
-    qDebug() << r << "\n";
-    if (!r) {
-        FastBill* fastbill = new FastBill();
-        fastbill->setWindowModality(Qt::ApplicationModal);
-        fastbill->show();
-    }
-    else {
-        QMessageBox::critical(nullptr, QString("Login"), QString("Login Failed"));
-    }
+    login->open();
+    qDebug() << a.topLevelWidgets();
     return a.exec();
 }
