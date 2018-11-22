@@ -6,158 +6,304 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>530</width>
-    <height>491</height>
+    <width>568</width>
+    <height>494</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QLabel" name="gstAmountLabel">
+   <property name="geometry">
+    <rect>
+     <x>102</x>
+     <y>367</y>
+     <width>76</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>GST Amount</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="submitPushButton">
+   <property name="geometry">
+    <rect>
+     <x>1</x>
+     <y>467</y>
+     <width>80</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Submit</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="billingAmountLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>1</x>
+     <y>388</y>
+     <width>95</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QDateEdit" name="dueDateDateEdit">
+   <property name="geometry">
+    <rect>
+     <x>102</x>
+     <y>337</y>
+     <width>86</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="gstAmountLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>102</x>
+     <y>388</y>
+     <width>95</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="clientNameLabel">
+   <property name="geometry">
+    <rect>
+     <x>1</x>
+     <y>1</y>
+     <width>36</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Name</string>
+   </property>
+  </widget>
+  <widget class="QSpinBox" name="quantitySpinBox">
+   <property name="geometry">
+    <rect>
+     <x>203</x>
+     <y>337</y>
+     <width>47</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="totalAmountLabel">
+   <property name="geometry">
+    <rect>
+     <x>1</x>
+     <y>417</y>
+     <width>81</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Total Amount</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="clientNameLineEdit">
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>0</y>
-     <width>531</width>
-     <height>491</height>
+     <y>20</y>
+     <width>125</width>
+     <height>23</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <property name="sizeConstraint">
-     <enum>QLayout::SetNoConstraint</enum>
-    </property>
-    <item row="7" column="2">
-     <widget class="QSpinBox" name="quantitySpinBox"/>
-    </item>
-    <item row="3" column="0" colspan="3">
-     <widget class="QPlainTextEdit" name="clientAddressTextEdit"/>
-    </item>
-    <item row="11" column="0" colspan="3">
-     <widget class="QLineEdit" name="totalAmountLineEdit"/>
-    </item>
-    <item row="12" column="2">
-     <widget class="QPushButton" name="closeInvoicePushButton">
-      <property name="text">
-       <string>Close</string>
-      </property>
-     </widget>
-    </item>
-    <item row="12" column="0">
-     <widget class="QPushButton" name="submitPushButton">
-      <property name="text">
-       <string>Submit</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="1">
-     <widget class="QDateEdit" name="dueDateDateEdit"/>
-    </item>
-    <item row="6" column="2">
-     <widget class="QLabel" name="quantityLabel">
-      <property name="text">
-       <string>Quantity:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="0">
-     <widget class="QDateEdit" name="issueDateDateEdit"/>
-    </item>
-    <item row="9" column="1">
-     <widget class="QLineEdit" name="gstAmountLineEdit"/>
-    </item>
-    <item row="4" column="0">
-     <widget class="QLabel" name="productNameLabel">
-      <property name="text">
-       <string>Product</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="1">
-     <widget class="QLabel" name="dueDateLabel">
-      <property name="text">
-       <string>Due Date:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="2">
-     <widget class="QPushButton" name="addProductPushButton">
-      <property name="text">
-       <string>Add</string>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="2">
-     <widget class="QLabel" name="shipAmountLabel">
-      <property name="text">
-       <string>Ship Amount</string>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="1">
-     <widget class="QLabel" name="gstAmountLabel">
-      <property name="text">
-       <string>GST Amount</string>
-      </property>
-     </widget>
-    </item>
-    <item row="9" column="0">
-     <widget class="QLineEdit" name="billingAmountLineEdit"/>
-    </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="clientAddressLabel">
-      <property name="text">
-       <string>Address</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="clientNameLabel">
-      <property name="text">
-       <string>Name</string>
-      </property>
-     </widget>
-    </item>
-    <item row="9" column="2">
-     <widget class="QLineEdit" name="shipAmountLineEdit"/>
-    </item>
-    <item row="10" column="0">
-     <widget class="QLabel" name="totalAmountLabel">
-      <property name="text">
-       <string>Total Amount</string>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="0">
-     <widget class="QLabel" name="billingAmountLabel">
-      <property name="text">
-       <string>Billing Amount</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0" colspan="3">
-     <widget class="QLineEdit" name="clientNameLineEdit"/>
-    </item>
-    <item row="0" column="3">
-     <widget class="QLabel" name="productListLabel">
-      <property name="text">
-       <string>Product List</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="0">
-     <widget class="QLabel" name="issueDateLabel">
-      <property name="text">
-       <string>Issue Date:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0" colspan="2">
-     <widget class="QComboBox" name="productNameComboBox"/>
-    </item>
-    <item row="1" column="3" rowspan="12">
-     <widget class="QTextEdit" name="productListTextEdit"/>
-    </item>
-   </layout>
+  </widget>
+  <widget class="QPushButton" name="addProductPushButton">
+   <property name="geometry">
+    <rect>
+     <x>203</x>
+     <y>287</y>
+     <width>80</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Add</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="clientAddressLabel">
+   <property name="geometry">
+    <rect>
+     <x>1</x>
+     <y>51</y>
+     <width>49</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Address</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="issueDateLabel">
+   <property name="geometry">
+    <rect>
+     <x>1</x>
+     <y>316</y>
+     <width>68</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Issue Date:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="shipAmountLabel">
+   <property name="geometry">
+    <rect>
+     <x>203</x>
+     <y>367</y>
+     <width>78</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Ship Amount</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="clientAddressTextEdit">
+   <property name="geometry">
+    <rect>
+     <x>1</x>
+     <y>72</y>
+     <width>297</width>
+     <height>188</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="closeInvoicePushButton">
+   <property name="geometry">
+    <rect>
+     <x>203</x>
+     <y>467</y>
+     <width>80</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Close</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="billingAmountLabel">
+   <property name="geometry">
+    <rect>
+     <x>1</x>
+     <y>367</y>
+     <width>88</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Billing Amount</string>
+   </property>
+  </widget>
+  <widget class="QDateEdit" name="issueDateDateEdit">
+   <property name="geometry">
+    <rect>
+     <x>1</x>
+     <y>337</y>
+     <width>86</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="dueDateLabel">
+   <property name="geometry">
+    <rect>
+     <x>102</x>
+     <y>316</y>
+     <width>61</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Due Date:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="quantityLabel">
+   <property name="geometry">
+    <rect>
+     <x>203</x>
+     <y>316</y>
+     <width>56</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Quantity:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="totalAmountLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>1</x>
+     <y>438</y>
+     <width>125</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="productListLabel">
+   <property name="geometry">
+    <rect>
+     <x>304</x>
+     <y>1</y>
+     <width>71</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Product List</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="productNameLabel">
+   <property name="geometry">
+    <rect>
+     <x>1</x>
+     <y>266</y>
+     <width>46</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Product</string>
+   </property>
+  </widget>
+  <widget class="QListView" name="producListView">
+   <property name="geometry">
+    <rect>
+     <x>304</x>
+     <y>22</y>
+     <width>191</width>
+     <height>441</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="productNameComboBox">
+   <property name="geometry">
+    <rect>
+     <x>1</x>
+     <y>287</y>
+     <width>79</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="shipAmountLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>203</x>
+     <y>388</y>
+     <width>95</width>
+     <height>23</height>
+    </rect>
+   </property>
   </widget>
  </widget>
  <resources/>

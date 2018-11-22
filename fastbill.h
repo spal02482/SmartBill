@@ -1,7 +1,14 @@
 #ifndef FASTBILL_H
 #define FASTBILL_H
 
+#include "invoice.h"
+#include "product.h"
+
 #include <QDialog>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlQueryModel>
+
 
 namespace Ui {
 class FastBill;

@@ -1,13 +1,6 @@
 #include "fastbill.h"
 #include "ui_fastbill.h"
 
-#include "invoice.h"
-#include "product.h"
-
-#include <QSqlDatabase>
-#include <QSqlQuery>
-#include <QSqlQueryModel>
-
 FastBill::FastBill(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FastBill)

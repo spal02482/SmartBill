@@ -1,11 +1,6 @@
 #include "login.h"
 #include "ui_login.h"
 
-#include <iostream>
-#include <QtSql>
-#include <QtDebug>
-#include <QFileInfo>
-
 Login::Login(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Login)
