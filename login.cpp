@@ -1,26 +1,23 @@
 #include "login.h"
 #include "ui_login.h"
 
+#include "fastbilldb.h"
+
 Login::Login(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Login)
 {
+    QDialog::setAttribute(Qt::WA_DeleteOnClose);
     ui->setupUi(this);
     ui->UserName->setPlaceholderText(QString("Username Here"));
     ui->PassWord->setPlaceholderText((QString("Password Here")));
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("/home/surajpal/projects/FastBill/FastBill/fastbill.db");
-    if (db.open()) {
-        qDebug() << "Connected\n";
-    }
-    else {
-        qDebug() << "Connection Failed\n";
-    }
+    fbdb.createConnection();
 }
 
 Login::~Login()
 {
-    db.close();
+    fbdb.closeConnection();
+    qDebug() << "Deleting Login Window and Closing Database Connection";
     delete ui;
 }
 
@@ -30,8 +27,8 @@ void Login::on_LoginBtn_clicked()
     QString password = ui->PassWord->text();
     qDebug() << username << " " << password;
 
-    QSqlQuery query;
-    query.prepare("select PassWord from UserInfo where UserName = ?");
+    QSqlQuery query(fbdb.getConnection());
+    query.prepare("SELECT PassWord FROM UserInfo WHERE UserName = ?");
     query.addBindValue(username);
     bool querySuccess = query.exec();
 
@@ -52,4 +49,9 @@ void Login::on_LoginBtn_clicked()
             QMessageBox::critical(nullptr, QString("Login"), QString("Login failed"));
         }
     }
+    else {
+        qDebug() << query.lastError();
+    }
+
+    query.finish();
 }

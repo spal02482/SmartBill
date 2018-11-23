@@ -2,13 +2,11 @@
 #define LOGIN_H
 
 #include "fastbill.h"
+#include "fastbilldb.h"
 
-#include <QDialog>
-#include <QtSql>
-#include <QtDebug>
-#include <QFileInfo>
+#include <QApplication>
 #include <QMessageBox>
-
+#include <QtDebug>
 
 namespace Ui {
 class Login;
@@ -27,8 +25,8 @@ private slots:
 
 private:
     Ui::Login *ui;
+    fastbilldb fbdb;
     FastBill* fastbill;
-    QSqlDatabase db;
 };
 
 #endif // LOGIN_H

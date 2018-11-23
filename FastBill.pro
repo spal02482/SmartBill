@@ -28,13 +28,15 @@ SOURCES += \
         fastbill.cpp \
     login.cpp \
     invoice.cpp \
-    product.cpp
+    product.cpp \
+    fastbilldb.cpp
 
 HEADERS += \
         fastbill.h \
     login.h \
     invoice.h \
-    product.h
+    product.h \
+    fastbilldb.h
 
 FORMS += \
         fastbill.ui \

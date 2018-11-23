@@ -31,6 +31,7 @@ private slots:
 
 private:
     Ui::FastBill *ui;
+    fastbilldb fbdb;
 };
 
 #endif // FASTBILL_H

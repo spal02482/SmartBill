@@ -1,7 +1,7 @@
 #include "invoice.h"
 #include "ui_invoice.h"
 
-Invoice::Invoice(QWidget *parent) :
+Invoice::Invoice(fastbilldb& fbdb, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Invoice)
 {
@@ -11,6 +11,7 @@ Invoice::Invoice(QWidget *parent) :
 
 Invoice::~Invoice()
 {
+    qDebug() << "Deleting Invoice Window";
     delete ui;
 }
 

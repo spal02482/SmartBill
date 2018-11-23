@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>455</width>
-    <height>270</height>
+    <height>275</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,12 +18,12 @@
     <rect>
      <x>11</x>
      <y>12</y>
-     <width>86</width>
+     <width>101</width>
      <height>16</height>
     </rect>
    </property>
    <property name="text">
-    <string>Product Name</string>
+    <string>Product Name*</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="productNameLineEdit">
@@ -52,27 +52,27 @@
   <widget class="QLabel" name="priceLabel">
    <property name="geometry">
     <rect>
-     <x>250</x>
-     <y>62</y>
-     <width>30</width>
+     <x>260</x>
+     <y>60</y>
+     <width>41</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
-    <string>Price</string>
+    <string>Price*</string>
    </property>
   </widget>
   <widget class="QLabel" name="quanitityLabel">
    <property name="geometry">
     <rect>
-     <x>360</x>
-     <y>62</y>
-     <width>52</width>
+     <x>370</x>
+     <y>60</y>
+     <width>61</width>
      <height>16</height>
     </rect>
    </property>
    <property name="text">
-    <string>Quantity</string>
+    <string>Quantity*</string>
    </property>
   </widget>
   <widget class="QLabel" name="productDescpnLabel">
@@ -93,7 +93,7 @@
     <rect>
      <x>11</x>
      <y>83</y>
-     <width>231</width>
+     <width>241</width>
      <height>23</height>
     </rect>
    </property>
@@ -101,7 +101,7 @@
   <widget class="QSpinBox" name="quanititySpinBox">
    <property name="geometry">
     <rect>
-     <x>360</x>
+     <x>370</x>
      <y>83</y>
      <width>71</width>
      <height>24</height>
@@ -111,29 +111,19 @@
   <widget class="QDoubleSpinBox" name="priceDoubleSpinBox">
    <property name="geometry">
     <rect>
-     <x>249</x>
+     <x>260</x>
      <y>83</y>
      <width>101</width>
      <height>24</height>
     </rect>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="productDescpnPlainTextEdit">
-   <property name="geometry">
-    <rect>
-     <x>11</x>
-     <y>134</y>
-     <width>429</width>
-     <height>99</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QPushButton" name="addProductInPushButton">
    <property name="geometry">
     <rect>
-     <x>270</x>
+     <x>210</x>
      <y>240</y>
-     <width>80</width>
+     <width>101</width>
      <height>23</height>
     </rect>
    </property>
@@ -150,9 +140,9 @@
   <widget class="QPushButton" name="cancelAddProductPushButton">
    <property name="geometry">
     <rect>
-     <x>360</x>
-     <y>239</y>
-     <width>80</width>
+     <x>340</x>
+     <y>240</y>
+     <width>101</width>
      <height>23</height>
     </rect>
    </property>
@@ -160,6 +150,28 @@
     <string>Cancel</string>
    </property>
   </widget>
+  <widget class="QLineEdit" name="productDescpnLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>130</y>
+     <width>431</width>
+     <height>101</height>
+    </rect>
+   </property>
+  </widget>
+  <zorder>productDescpnLineEdit</zorder>
+  <zorder>productNameLabel</zorder>
+  <zorder>productNameLineEdit</zorder>
+  <zorder>supplierNameLabel</zorder>
+  <zorder>priceLabel</zorder>
+  <zorder>quanitityLabel</zorder>
+  <zorder>productDescpnLabel</zorder>
+  <zorder>supplierNameLineEdit</zorder>
+  <zorder>quanititySpinBox</zorder>
+  <zorder>priceDoubleSpinBox</zorder>
+  <zorder>addProductInPushButton</zorder>
+  <zorder>cancelAddProductPushButton</zorder>
  </widget>
  <resources/>
  <connections/>

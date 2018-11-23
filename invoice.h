@@ -1,6 +1,8 @@
 #ifndef INVOICE_H
 #define INVOICE_H
 
+#include "fastbilldb.h"
+
 #include <QDialog>
 
 namespace Ui {
@@ -12,7 +14,7 @@ class Invoice : public QDialog
     Q_OBJECT
 
 public:
-    explicit Invoice(QWidget *parent = nullptr);
+    explicit Invoice(fastbilldb& fbdb, QWidget *parent = nullptr);
     ~Invoice();
 
 private slots:

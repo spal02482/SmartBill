@@ -27,7 +27,11 @@
      <widget class="QLineEdit" name="UserName"/>
     </item>
     <item>
-     <widget class="QLineEdit" name="PassWord"/>
+     <widget class="QLineEdit" name="PassWord">
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
