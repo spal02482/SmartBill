@@ -3,7 +3,8 @@
 fastbilldb::fastbilldb()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("/home/surajpal/projects/FastBill/FastBill/fastbill.db");
+    QString databasePath = "C:/Users/Suraj/Projects/FastBill/FastBill/fastbill.db";
+    db.setDatabaseName(databasePath);
 }
 
 fastbilldb::~fastbilldb()
