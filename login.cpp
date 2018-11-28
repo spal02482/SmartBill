@@ -42,11 +42,11 @@ void Login::on_LoginBtn_clicked()
                 this->close();
             }
             else {
-                QMessageBox::critical(nullptr, QString("Login"), QString("Wrong Password"));
+                QMessageBox::critical(this, QString("Login"), QString("Wrong Password"));
             }
         }
         else {
-            QMessageBox::critical(nullptr, QString("Login"), QString("Login failed"));
+            QMessageBox::critical(this, QString("Login"), QString("Login failed"));
         }
     }
     else {

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>616</width>
-    <height>428</height>
+    <width>1000</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QPushButton" name="addInvoicePushButton">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>380</y>
+     <x>0</x>
+     <y>660</y>
      <width>100</width>
      <height>30</height>
     </rect>
@@ -31,8 +31,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>616</width>
-     <height>41</height>
+     <width>1011</width>
+     <height>81</height>
     </rect>
    </property>
    <property name="font">
@@ -55,8 +55,8 @@
   <widget class="QPushButton" name="closeFastBillPushButton">
    <property name="geometry">
     <rect>
-     <x>490</x>
-     <y>380</y>
+     <x>880</x>
+     <y>660</y>
      <width>100</width>
      <height>30</height>
     </rect>
@@ -69,17 +69,17 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>41</y>
-     <width>616</width>
-     <height>331</height>
+     <y>81</y>
+     <width>1001</width>
+     <height>571</height>
     </rect>
    </property>
   </widget>
   <widget class="QPushButton" name="addProductPushButton">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>380</y>
+     <x>500</x>
+     <y>660</y>
      <width>100</width>
      <height>30</height>
     </rect>

@@ -7,6 +7,8 @@
 #include <QSqlQueryModel>
 #include <QSqlTableModel>
 #include <QVariant>
+#include <QComboBox>
+#include <QCompleter>
 
 class fastbilldb
 {
