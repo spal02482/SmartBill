@@ -34,25 +34,19 @@ Invoice::Invoice(fastbilldb& fbdb, QWidget *parent) :
 Invoice::~Invoice()
 {
     delete completer;
-    qDebug() << "Deleting Invoice Window";
     delete ui;
+    qDebug() << "Deleting Invoice Window";
 }
 
 bool Invoice::validateInvoice(QString clientName, int numberOfProductsAdded, double billingAmount, \
                               double gstAmount, double shipAmount, QDate issueDate, QDate dueDate) const
 {
+    bool invoiceValid = false;
     if (clientName != "" and numberOfProductsAdded > 0 and billingAmount > 0.0 and gstAmount >= 0.0 and shipAmount >= 0.0 \
             and QDate::currentDate() >= issueDate and QDate::currentDate() >= dueDate) {
-        return true;
+        invoiceValid = true;
     }
-    else {
-        return false;
-    }
-}
-
-void Invoice::on_closeInvoicePushButton_clicked()
-{
-    this->close();
+    return invoiceValid;
 }
 
 void Invoice::on_addProductPushButton_clicked()
@@ -86,12 +80,12 @@ void Invoice::on_addProductPushButton_clicked()
     query.finish();
 
     if (querySuccess == false) {
-        QMessageBox::warning(this, "Failed to Add Product", "1. Check whether the Product exists or not.\n"
-                             "2. Quantity of Product you are trying to add is more than present in the stock.\n");
+        QMessageBox::warning(this, tr("Failed to Add Product"), tr("1. Check whether the Product exists or not.\n"
+                             "2. Quantity of Product you are trying to add is more than present in the stock.\n"));
         return;
     }
 
-    QTableWidget& productTableWidget = *ui->productTableWidget;
+    QTableWidget& productTableWidget = *(ui->productTableWidget);
 
     int row = productTableWidget.rowCount();
     productTableWidget.insertRow(row);
@@ -100,4 +94,32 @@ void Invoice::on_addProductPushButton_clicked()
     productTableWidget.setItem(row, 1, new QTableWidgetItem(productName));
     productTableWidget.setItem(row, 2, new QTableWidgetItem(QString::number(quantity)));
     productTableWidget.setItem(row, 3, new QTableWidgetItem(QString::number(price * quantity)));
+
+    numberOfProductsAdded += 1;
+}
+
+void Invoice::on_submitPushButton_clicked()
+{
+    if (doneInvoice) {
+        doneInvoice = true;
+        close();
+    }
+    else {
+        QMessageBox::warning(this, tr("Invoice Submission Failed"), tr("Check Whether all fields are filled with valid values"));
+    }
+}
+
+void Invoice::on_doneInvoicePushButton_clicked()
+{
+    QString clientName = ui->clientNameLineEdit->text();
+    double billingAmount = ui->billingAmountDoubleSpinBox->value();
+    double gstAmount = ui->gstAmountDoubleSpinBox->value();
+    double shipAmount = ui->shipAmountDoubleSpinBox->value();
+    QDate issueDate = ui->issueDateDateEdit->date();
+    QDate dueDate = ui->dueDateDateEdit->date();
+
+    if (validateInvoice(clientName, numberOfProductsAdded, billingAmount, gstAmount, shipAmount, issueDate, dueDate)) {
+        ui->totalAmountDoubleSpinBox->setValue(billingAmount + gstAmount + shipAmount);
+        doneInvoice = true;
+    }
 }

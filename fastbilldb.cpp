@@ -9,18 +9,17 @@ fastbilldb::fastbilldb()
 
 fastbilldb::~fastbilldb()
 {
-    qDebug() << "Removed Database Connection";
     QSqlDatabase::removeDatabase("");
+    qDebug() << "Removed Database Connection";
 }
 
 void fastbilldb::createConnection()
 {
     if (db.open()) {
-        qDebug() << "Connection Successfully Created";
+        qDebug() << "Connection Successfully created to Database";
     }
     else {
-        qDebug() << "Connection to Database Failed";
-        qDebug() << db.lastError();
+        qDebug() << "Connection to Database Failed\n" << db.lastError();
     }
 }
 
@@ -32,4 +31,5 @@ QSqlDatabase fastbilldb::getConnection()
 void fastbilldb::closeConnection()
 {
     db.close();
+    qDebug() << "Connection to Database closed";
 }

@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>Product</class>
  <widget class="QDialog" name="Product">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Product</string>
   </property>
   <widget class="QLabel" name="productNameLabel">
    <property name="geometry">
@@ -107,6 +110,9 @@
      <height>24</height>
     </rect>
    </property>
+   <property name="maximum">
+    <number>100000000</number>
+   </property>
   </widget>
   <widget class="QDoubleSpinBox" name="priceDoubleSpinBox">
    <property name="geometry">
@@ -116,6 +122,9 @@
      <width>101</width>
      <height>24</height>
     </rect>
+   </property>
+   <property name="maximum">
+    <double>1000000000.000000000000000</double>
    </property>
   </widget>
   <widget class="QPushButton" name="addProductInPushButton">
@@ -158,6 +167,12 @@
      <width>431</width>
      <height>101</height>
     </rect>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
    </property>
   </widget>
   <zorder>productDescpnLineEdit</zorder>

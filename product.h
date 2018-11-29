@@ -30,7 +30,6 @@ private slots:
 
 private:
     Ui::Product *ui;
-    int numberOfProductsAdded = 0;
 };
 
 #endif // PRODUCT_H

@@ -3,12 +3,10 @@
 
 #include "invoice.h"
 #include "product.h"
+#include "productview.h"
+#include "fastbilldb.h"
 
-#include <QDialog>
-#include <QSqlDatabase>
-#include <QSqlQuery>
-#include <QSqlQueryModel>
-
+#include <QLayout>
 
 namespace Ui {
 class FastBill;
@@ -25,13 +23,16 @@ public:
 private slots:
     void on_addInvoicePushButton_clicked();
 
-    void on_closeFastBillPushButton_clicked();
-
     void on_addProductPushButton_clicked();
+
+    void on_viewProductPushButton_clicked();
 
 private:
     Ui::FastBill *ui;
     fastbilldb fbdb;
+    Invoice* invoice;
+    Product* product;
+    ProductView* productView;
 };
 
 #endif // FASTBILL_H

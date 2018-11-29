@@ -16,8 +16,8 @@ Product::Product(fastbilldb& fbdb, QWidget *parent) :
 
 Product::~Product()
 {
-    qDebug() << "Deleting Product Window";
     delete ui;
+    qDebug() << "Deleting Product Window";
 }
 
 bool Product::validateProduct(QString ProductName, double Price, int NumberInStock)
@@ -25,14 +25,12 @@ bool Product::validateProduct(QString ProductName, double Price, int NumberInSto
     query.prepare("SELECT * FROM ProductInfo WHERE ProductName = ?");
     query.addBindValue(ProductName);
     query.exec();
+    bool productValid = false;
     if (ProductName != "" and Price >= 0.0 and NumberInStock > 0 and !query.next()) {
-        query.finish();
-        return true;
+        productValid = true;
     }
-    else {
-        query.finish();
-        return false;
-    }
+    query.finish();
+    return productValid;
 }
 
 /* Cancel Adding Product in ProductInfo Table */
@@ -77,8 +75,8 @@ void Product::on_addProductInPushButton_clicked()
         query.finish();
     }
     else {
-        QMessageBox::critical(this, "Failed to Add Product", "Make sure that all asterisks marked "
-                              "fields are filled and product already doesn't exist");
+        QMessageBox::critical(this, tr("Failed to Add Product"), tr("Make sure that\n 1. All asterisks marked"
+                              "fields are filled\n2. Product already doesn't exist"));
     }
 
     this->close();

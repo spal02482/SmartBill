@@ -1,13 +1,10 @@
 #include "login.h"
 #include "ui_login.h"
 
-#include "fastbilldb.h"
-
 Login::Login(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Login)
 {
-    QDialog::setAttribute(Qt::WA_DeleteOnClose);
     ui->setupUi(this);
     ui->UserName->setPlaceholderText(QString("Username Here"));
     ui->PassWord->setPlaceholderText((QString("Password Here")));
@@ -17,8 +14,8 @@ Login::Login(QWidget *parent) :
 Login::~Login()
 {
     fbdb.closeConnection();
-    qDebug() << "Deleting Login Window and Closing Database Connection";
     delete ui;
+    qDebug() << "Deleting Login Window" << "\nClosing Database Connection";
 }
 
 void Login::on_LoginBtn_clicked()
@@ -42,11 +39,11 @@ void Login::on_LoginBtn_clicked()
                 this->close();
             }
             else {
-                QMessageBox::critical(this, QString("Login"), QString("Wrong Password"));
+                QMessageBox::critical(this, tr("Login"), tr("Wrong Password"));
             }
         }
         else {
-            QMessageBox::critical(this, QString("Login"), QString("Login failed"));
+            QMessageBox::critical(this, tr("Login"), tr("Login failed"));
         }
     }
     else {

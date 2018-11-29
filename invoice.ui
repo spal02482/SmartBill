@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>Invoice</class>
  <widget class="QDialog" name="Invoice">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Invoice</string>
   </property>
   <widget class="QLabel" name="gstAmountLabel">
    <property name="geometry">
@@ -175,7 +178,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="closeInvoicePushButton">
+  <widget class="QPushButton" name="doneInvoicePushButton">
    <property name="geometry">
     <rect>
      <x>225</x>
@@ -185,7 +188,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Close</string>
+    <string>Done</string>
    </property>
   </widget>
   <widget class="QLabel" name="billingAmountLabel">
@@ -377,6 +380,9 @@
      <height>23</height>
     </rect>
    </property>
+   <property name="maximum">
+    <double>1000000000000.000000000000000</double>
+   </property>
   </widget>
   <zorder>totalAmountDoubleSpinBox</zorder>
   <zorder>gstAmountDoubleSpinBox</zorder>
@@ -393,7 +399,7 @@
   <zorder>issueDateLabel</zorder>
   <zorder>shipAmountLabel</zorder>
   <zorder>clientAddressTextEdit</zorder>
-  <zorder>closeInvoicePushButton</zorder>
+  <zorder>doneInvoicePushButton</zorder>
   <zorder>billingAmountLabel</zorder>
   <zorder>issueDateDateEdit</zorder>
   <zorder>dueDateLabel</zorder>

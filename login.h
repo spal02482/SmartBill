@@ -4,9 +4,8 @@
 #include "fastbill.h"
 #include "fastbilldb.h"
 
-#include <QApplication>
+
 #include <QMessageBox>
-#include <QtDebug>
 
 namespace Ui {
 class Login;

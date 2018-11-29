@@ -29,20 +29,23 @@ SOURCES += \
     login.cpp \
     invoice.cpp \
     product.cpp \
-    fastbilldb.cpp
+    fastbilldb.cpp \
+    productview.cpp
 
 HEADERS += \
         fastbill.h \
     login.h \
     invoice.h \
     product.h \
-    fastbilldb.h
+    fastbilldb.h \
+    productview.h
 
 FORMS += \
         fastbill.ui \
     login.ui \
     invoice.ui \
-    product.ui
+    product.ui \
+    productview.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

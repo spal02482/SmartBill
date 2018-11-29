@@ -4,7 +4,9 @@
 #include "fastbilldb.h"
 
 #include <QDialog>
+
 #include <QMessageBox>
+#include <QCompleter>
 
 namespace Ui {
 class Invoice;
@@ -22,14 +24,18 @@ public:
 
 private slots:
 
-    void on_closeInvoicePushButton_clicked();
-
     void on_addProductPushButton_clicked();
+
+    void on_submitPushButton_clicked();
+
+    void on_doneInvoicePushButton_clicked();
 
 private:
     Ui::Invoice *ui;
     QCompleter* completer;
     QSqlQuery query;
+    int numberOfProductsAdded = 0;
+    bool doneInvoice = false;
 };
 
 #endif // INVOICE_H
