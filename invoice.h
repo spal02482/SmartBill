@@ -1,7 +1,7 @@
 #ifndef INVOICE_H
 #define INVOICE_H
 
-#include "fastbilldb.h"
+#include "smartbilldb.h"
 
 #include <QDialog>
 
@@ -17,7 +17,7 @@ class Invoice : public QDialog
     Q_OBJECT
 
 public:
-    explicit Invoice(fastbilldb& fbdb, QWidget *parent = nullptr);
+    explicit Invoice(smartbilldb& fbdb, QWidget *parent = nullptr);
     ~Invoice();
 
     bool validateInvoice(QString, int, double, double, double, QDate, QDate) const;

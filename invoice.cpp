@@ -2,7 +2,7 @@
 #include "ui_invoice.h"
 
 
-Invoice::Invoice(fastbilldb& fbdb, QWidget *parent) :
+Invoice::Invoice(smartbilldb& fbdb, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Invoice)
 {

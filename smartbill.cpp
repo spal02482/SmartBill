@@ -1,9 +1,9 @@
-#include "fastbill.h"
-#include "ui_fastbill.h"
+#include "smartbill.h"
+#include "ui_smartbill.h"
 
-FastBill::FastBill(QWidget *parent) :
+SmartBill::SmartBill(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::FastBill)
+    ui(new Ui::SmartBill)
 {
     ui->setupUi(this);
 
@@ -17,29 +17,29 @@ FastBill::FastBill(QWidget *parent) :
     ui->invoicesReportTableView->setModel(model);
 }
 
-FastBill::~FastBill()
+SmartBill::~SmartBill()
 {
     fbdb.closeConnection();
     delete ui;
-    qDebug() << "Closed Database Connection\n" << "Deleting FastBill Window";
+    qDebug() << "Closed Database Connection\n" << "Deleting SmartBill Window";
 }
 
 
-void FastBill::on_addInvoicePushButton_clicked()
+void SmartBill::on_addInvoicePushButton_clicked()
 {
     invoice = new Invoice(fbdb, this);
     invoice->setFixedSize(QSize(630, 363));
     invoice->open();
 }
 
-void FastBill::on_addProductPushButton_clicked()
+void SmartBill::on_addProductPushButton_clicked()
 {
     product = new Product(fbdb, this);
     product->setFixedSize(QSize(455, 275));
     product->open();
 }
 
-void FastBill::on_viewProductPushButton_clicked()
+void SmartBill::on_viewProductPushButton_clicked()
 {
     productView = new ProductView(fbdb, this);
     productView->setFixedSize(QSize(605, 500));

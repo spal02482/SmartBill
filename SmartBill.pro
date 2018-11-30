@@ -7,7 +7,7 @@
 QT       += core gui sql
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = FastBill
+TARGET = SmartBill
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -25,27 +25,27 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        fastbill.cpp \
     login.cpp \
     invoice.cpp \
     product.cpp \
-    fastbilldb.cpp \
-    productview.cpp
+    productview.cpp \
+    smartbill.cpp \
+    smartbilldb.cpp
 
 HEADERS += \
-        fastbill.h \
     login.h \
     invoice.h \
     product.h \
-    fastbilldb.h \
-    productview.h
+    productview.h \
+    smartbilldb.h \
+    smartbill.h
 
 FORMS += \
-        fastbill.ui \
     login.ui \
     invoice.ui \
     product.ui \
-    productview.ui
+    productview.ui \
+    smartbill.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

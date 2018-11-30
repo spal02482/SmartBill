@@ -1,5 +1,5 @@
-#ifndef FASTBILLDB_H
-#define FASTBILLDB_H
+#ifndef SMARTBILLDB_H
+#define SMARTBILLDB_H
 
 #include <QtDebug>
 
@@ -8,11 +8,11 @@
 #include <QSqlQuery>
 #include <QSqlQueryModel>
 
-class fastbilldb
+class smartbilldb
 {
 public:
-    fastbilldb();
-    ~fastbilldb();
+    smartbilldb();
+    ~smartbilldb();
     void createConnection();
     QSqlDatabase getConnection();
     void closeConnection();
@@ -20,4 +20,4 @@ private:
     QSqlDatabase db;
 };
 
-#endif // FASTBILLDB_H
+#endif // SMARTBILLDB_H

@@ -1,7 +1,7 @@
 #ifndef PRODUCT_H
 #define PRODUCT_H
 
-#include "fastbilldb.h"
+#include "smartbilldb.h"
 
 #include <QDialog>
 #include <QMessageBox>
@@ -15,7 +15,7 @@ class Product : public QDialog
     Q_OBJECT
 
 public:
-    explicit Product(fastbilldb& fbdb, QWidget *parent = nullptr);
+    explicit Product(smartbilldb& fbdb, QWidget *parent = nullptr);
     ~Product();
 
     bool validateProduct(QString, double, int);

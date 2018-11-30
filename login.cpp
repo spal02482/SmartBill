@@ -33,9 +33,9 @@ void Login::on_LoginBtn_clicked()
         query.next();
         if (query.isValid()) {
             if (query.value(0).toString() == password) {
-                fastbill = new FastBill();
-                fastbill->setWindowModality(Qt::ApplicationModal);
-                fastbill->show();
+                smartbill = new SmartBill();
+                smartbill->setWindowModality(Qt::ApplicationModal);
+                smartbill->show();
                 this->close();
             }
             else {

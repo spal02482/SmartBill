@@ -1,19 +1,19 @@
-#include "fastbilldb.h"
+#include "smartbilldb.h"
 
-fastbilldb::fastbilldb()
+smartbilldb::smartbilldb()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
-    QString databasePath = "C:/Users/Suraj/Projects/FastBill/FastBill/fastbill.db";
+    QString databasePath = "C:/Users/Suraj/Projects/SmartBill/SmartBill/smartbill.db";
     db.setDatabaseName(databasePath);
 }
 
-fastbilldb::~fastbilldb()
+smartbilldb::~smartbilldb()
 {
     QSqlDatabase::removeDatabase("");
     qDebug() << "Removed Database Connection";
 }
 
-void fastbilldb::createConnection()
+void smartbilldb::createConnection()
 {
     if (db.open()) {
         qDebug() << "Connection Successfully created to Database";
@@ -23,12 +23,12 @@ void fastbilldb::createConnection()
     }
 }
 
-QSqlDatabase fastbilldb::getConnection()
+QSqlDatabase smartbilldb::getConnection()
 {
     return QSqlDatabase::database();
 }
 
-void fastbilldb::closeConnection()
+void smartbilldb::closeConnection()
 {
     db.close();
     qDebug() << "Connection to Database closed";

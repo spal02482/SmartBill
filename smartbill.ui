@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>FastBill</class>
- <widget class="QWidget" name="FastBill">
+ <class>SmartBill</class>
+ <widget class="QWidget" name="SmartBill">
   <property name="windowModality">
    <enum>Qt::WindowModal</enum>
   </property>
@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>FastBill</string>
+   <string>SmartBill</string>
   </property>
   <widget class="QLabel" name="companyNameLabel">
    <property name="geometry">

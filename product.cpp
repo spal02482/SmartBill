@@ -1,7 +1,7 @@
 #include "product.h"
 #include "ui_product.h"
 
-Product::Product(fastbilldb& fbdb, QWidget *parent) :
+Product::Product(smartbilldb& fbdb, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Product)
 {

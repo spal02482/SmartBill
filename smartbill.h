@@ -1,24 +1,24 @@
-#ifndef FASTBILL_H
-#define FASTBILL_H
+#ifndef SMARTBILL_H
+#define SMARTBILL_H
 
 #include "invoice.h"
 #include "product.h"
 #include "productview.h"
-#include "fastbilldb.h"
+#include "smartbilldb.h"
 
 #include <QLayout>
 
 namespace Ui {
-class FastBill;
+class SmartBill;
 }
 
-class FastBill : public QWidget
+class SmartBill : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit FastBill(QWidget *parent = nullptr);
-    ~FastBill();
+    explicit SmartBill(QWidget *parent = nullptr);
+    ~SmartBill();
 
 private slots:
     void on_addInvoicePushButton_clicked();
@@ -28,11 +28,11 @@ private slots:
     void on_viewProductPushButton_clicked();
 
 private:
-    Ui::FastBill *ui;
-    fastbilldb fbdb;
+    Ui::SmartBill *ui;
+    smartbilldb fbdb;
     Invoice* invoice;
     Product* product;
     ProductView* productView;
 };
 
-#endif // FASTBILL_H
+#endif // SMARTBILL_H

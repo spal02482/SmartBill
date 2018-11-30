@@ -1,8 +1,8 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 
-#include "fastbill.h"
-#include "fastbilldb.h"
+#include "smartbill.h"
+#include "smartbilldb.h"
 
 
 #include <QMessageBox>
@@ -24,8 +24,8 @@ private slots:
 
 private:
     Ui::Login *ui;
-    fastbilldb fbdb;
-    FastBill* fastbill;
+    smartbilldb fbdb;
+    SmartBill* smartbill;
 };
 
 #endif // LOGIN_H

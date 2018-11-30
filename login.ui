@@ -48,12 +48,12 @@
     <string>Login!!</string>
    </property>
   </widget>
-  <widget class="QLabel" name="FastBill">
+  <widget class="QLabel" name="SmartBill">
    <property name="geometry">
     <rect>
-     <x>150</x>
+     <x>110</x>
      <y>50</y>
-     <width>371</width>
+     <width>451</width>
      <height>91</height>
     </rect>
    </property>
@@ -66,7 +66,7 @@
     </font>
    </property>
    <property name="text">
-    <string>FastBill</string>
+    <string>SmartBill</string>
    </property>
    <property name="textFormat">
     <enum>Qt::RichText</enum>

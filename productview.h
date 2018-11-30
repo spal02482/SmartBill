@@ -1,7 +1,7 @@
 #ifndef PRODUCTVIEW_H
 #define PRODUCTVIEW_H
 
-#include "fastbilldb.h"
+#include "smartbilldb.h"
 
 #include <QDialog>
 
@@ -14,7 +14,7 @@ class ProductView : public QDialog
     Q_OBJECT
 
 public:
-    explicit ProductView(fastbilldb &fbdb, QWidget *parent = nullptr);
+    explicit ProductView(smartbilldb &fbdb, QWidget *parent = nullptr);
     ~ProductView();
 
 private:
