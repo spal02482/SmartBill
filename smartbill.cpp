@@ -9,7 +9,8 @@ SmartBill::SmartBill(QWidget *parent) :
     fbdb.createConnection();
     QSqlQueryModel* model = new QSqlQueryModel();
     QSqlQuery query(fbdb.getConnection());
-    query.prepare("SELECT * FROM Report");
+    query.prepare("SELECT InvoiceID, ClientName, ClientAddress, ProductList, IssueDate, DueDate,"
+                  "BillingAmount, GstAmount, ShipAmount, (BillingAmount + GstAmount + ShipAmount) FROM InvoiceInfo");
     query.exec();
     model->setQuery(query);
     ui->invoicesReportTableView->setModel(model);

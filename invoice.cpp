@@ -175,3 +175,4 @@ void Invoice::on_shipAmountDoubleSpinBox_valueChanged(double value)
      ui->totalAmountDoubleSpinBox->setValue(ui->totalAmountDoubleSpinBox->value() - prevShipAmount + value);
      prevShipAmount = value;
 }
+

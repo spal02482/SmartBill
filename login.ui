@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Login</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="smartbill.qrc">
+    <normaloff>:/Icons/smartbill.jpeg</normaloff>:/Icons/smartbill.jpeg</iconset>
+  </property>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
@@ -114,6 +118,8 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="smartbill.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -3,6 +3,7 @@
         <file>New Invoice.png</file>
         <file>New Product.png</file>
         <file>View Product.png</file>
+        <file>smartbill.jpeg</file>
     </qresource>
     <qresource prefix="/Database">
         <file>smartbill.db</file>

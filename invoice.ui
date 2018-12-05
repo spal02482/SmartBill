@@ -16,6 +16,10 @@
   <property name="windowTitle">
    <string>Invoice</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="smartbill.qrc">
+    <normaloff>:/Icons/smartbill.jpeg</normaloff>:/Icons/smartbill.jpeg</iconset>
+  </property>
   <widget class="QLabel" name="gstAmountLabel">
    <property name="geometry">
     <rect>
@@ -418,6 +422,8 @@
   <tabstop>submitPushButton</tabstop>
   <tabstop>productTableWidget</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="smartbill.qrc"/>
+ </resources>
  <connections/>
 </ui>

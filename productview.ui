@@ -22,6 +22,10 @@
   <property name="windowTitle">
    <string>All Products</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="smartbill.qrc">
+    <normaloff>:/Icons/smartbill.jpeg</normaloff>:/Icons/smartbill.jpeg</iconset>
+  </property>
   <widget class="QTableView" name="productViewTableView">
    <property name="geometry">
     <rect>
@@ -45,6 +49,8 @@
    </attribute>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="smartbill.qrc"/>
+ </resources>
  <connections/>
 </ui>

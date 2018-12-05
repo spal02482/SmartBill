@@ -16,6 +16,10 @@
   <property name="windowTitle">
    <string>Product</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="smartbill.qrc">
+    <normaloff>:/Icons/smartbill.jpeg</normaloff>:/Icons/smartbill.jpeg</iconset>
+  </property>
   <widget class="QLabel" name="productNameLabel">
    <property name="geometry">
     <rect>
@@ -197,6 +201,8 @@
   <tabstop>addProductInPushButton</tabstop>
   <tabstop>cancelAddProductPushButton</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="smartbill.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -9,48 +9,24 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1265</width>
-    <height>600</height>
+    <width>1365</width>
+    <height>633</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>SmartBill</string>
   </property>
-  <widget class="QLabel" name="companyNameLabel">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>30</y>
-     <width>1251</width>
-     <height>81</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Castellar</family>
-     <pointsize>16</pointsize>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QLabel { background-color:rgb(170, 170, 255); color:red }</string>
-   </property>
-   <property name="text">
-    <string>&lt;b&gt;Dwaipayana Technologies Pvt. Ltd.&lt;/b&gt;</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignHCenter|Qt::AlignTop</set>
-   </property>
-  </widget>
+  <property name="windowIcon">
+   <iconset resource="smartbill.qrc">
+    <normaloff>:/Icons/smartbill.jpeg</normaloff>:/Icons/smartbill.jpeg</iconset>
+  </property>
   <widget class="QTableView" name="invoicesReportTableView">
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>110</y>
-     <width>1251</width>
-     <height>491</height>
+     <y>144</y>
+     <width>1371</width>
+     <height>531</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -71,6 +47,12 @@
      <pointsize>10</pointsize>
     </font>
    </property>
+   <property name="editTriggers">
+    <set>QAbstractItemView::AllEditTriggers</set>
+   </property>
+   <attribute name="verticalHeaderVisible">
+    <bool>false</bool>
+   </attribute>
   </widget>
   <widget class="QPushButton" name="addInvoicePushButton">
    <property name="geometry">
@@ -130,90 +112,6 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="companyEmailLabel">
-   <property name="geometry">
-    <rect>
-     <x>969</x>
-     <y>60</y>
-     <width>271</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Gabriola</family>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QLabel {color:rgb(170, 0, 0)}</string>
-   </property>
-   <property name="text">
-    <string>&lt;b&gt;contact.dwaipayanatech@gmail.com&lt;/b&gt;</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="companyContactLabel">
-   <property name="geometry">
-    <rect>
-     <x>1110</x>
-     <y>80</y>
-     <width>131</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Gabriola</family>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QLabel {color:rgb(170, 0, 0)}</string>
-   </property>
-   <property name="text">
-    <string>&lt;b&gt;+91 776 00 41608&lt;/b&gt;</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignRight|Qt::AlignTop|Qt::AlignTrailing</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="companyAddressLabel">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>30</y>
-     <width>221</width>
-     <height>81</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Gabriola</family>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QLabel { background-color:rgb(170, 170, 255); color:red }</string>
-   </property>
-   <property name="text">
-    <string>&lt;b&gt;Ashoka House, Mahavir Nagar&lt;br&gt; Near Powai Station &lt;br&gt;Powai, Mumbai 400321&lt;/b&gt;</string>
-   </property>
-   <property name="textFormat">
-    <enum>Qt::RichText</enum>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-   </property>
-   <property name="margin">
-    <number>1</number>
-   </property>
-   <property name="indent">
-    <number>0</number>
-   </property>
-  </widget>
   <widget class="QPushButton" name="viewProductPushButton">
    <property name="geometry">
     <rect>
@@ -231,6 +129,49 @@
      <normaloff>:/Icons/View Product.png</normaloff>:/Icons/View Product.png</iconset>
    </property>
   </widget>
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>100</y>
+     <width>151</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>80</y>
+     <width>47</width>
+     <height>13</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Name</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>100</y>
+     <width>21</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>S</string>
+   </property>
+  </widget>
+  <zorder>addInvoicePushButton</zorder>
+  <zorder>addProductPushButton</zorder>
+  <zorder>viewProductPushButton</zorder>
+  <zorder>invoicesReportTableView</zorder>
+  <zorder>lineEdit</zorder>
+  <zorder>label</zorder>
+  <zorder>pushButton</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
