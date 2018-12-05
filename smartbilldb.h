@@ -8,6 +8,8 @@
 #include <QSqlQuery>
 #include <QSqlQueryModel>
 
+#include <memory> // for using unique_ptr
+
 class smartbilldb
 {
 public:

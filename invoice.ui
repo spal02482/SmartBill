@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>630</width>
+    <width>611</width>
     <height>375</height>
    </rect>
   </property>
@@ -82,6 +82,9 @@
    </property>
    <property name="maximum">
     <number>1000000000</number>
+   </property>
+   <property name="value">
+    <number>1</number>
    </property>
   </widget>
   <widget class="QLabel" name="totalAmountLabel">
@@ -166,29 +169,6 @@
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QPlainTextEdit" name="clientAddressTextEdit">
-   <property name="geometry">
-    <rect>
-     <x>5</x>
-     <y>72</y>
-     <width>321</width>
-     <height>101</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="doneInvoicePushButton">
-   <property name="geometry">
-    <rect>
-     <x>225</x>
-     <y>332</y>
-     <width>101</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Done</string>
    </property>
   </widget>
   <widget class="QLabel" name="billingAmountLabel">
@@ -384,6 +364,23 @@
     <double>1000000000000.000000000000000</double>
    </property>
   </widget>
+  <widget class="QLineEdit" name="clientAddressLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>72</y>
+     <width>321</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+   <property name="clearButtonEnabled">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <zorder>clientAddressLineEdit</zorder>
   <zorder>totalAmountDoubleSpinBox</zorder>
   <zorder>gstAmountDoubleSpinBox</zorder>
   <zorder>billingAmountDoubleSpinBox</zorder>
@@ -398,8 +395,6 @@
   <zorder>clientAddressLabel</zorder>
   <zorder>issueDateLabel</zorder>
   <zorder>shipAmountLabel</zorder>
-  <zorder>clientAddressTextEdit</zorder>
-  <zorder>doneInvoicePushButton</zorder>
   <zorder>billingAmountLabel</zorder>
   <zorder>issueDateDateEdit</zorder>
   <zorder>dueDateLabel</zorder>
@@ -409,6 +404,20 @@
   <zorder>productNameLineEdit</zorder>
   <zorder>shipAmountDoubleSpinBox</zorder>
  </widget>
+ <tabstops>
+  <tabstop>clientNameLineEdit</tabstop>
+  <tabstop>productNameLineEdit</tabstop>
+  <tabstop>quantitySpinBox</tabstop>
+  <tabstop>addProductPushButton</tabstop>
+  <tabstop>billingAmountDoubleSpinBox</tabstop>
+  <tabstop>gstAmountDoubleSpinBox</tabstop>
+  <tabstop>shipAmountDoubleSpinBox</tabstop>
+  <tabstop>issueDateDateEdit</tabstop>
+  <tabstop>dueDateDateEdit</tabstop>
+  <tabstop>totalAmountDoubleSpinBox</tabstop>
+  <tabstop>submitPushButton</tabstop>
+  <tabstop>productTableWidget</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

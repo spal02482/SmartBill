@@ -8,6 +8,9 @@
 #include <QMessageBox>
 #include <QCompleter>
 
+#include <QJsonObject>
+#include <QJsonDocument>
+
 namespace Ui {
 class Invoice;
 }
@@ -20,7 +23,8 @@ public:
     explicit Invoice(smartbilldb& fbdb, QWidget *parent = nullptr);
     ~Invoice();
 
-    bool validateInvoice(QString, int, double, double, double, QDate, QDate) const;
+    bool validateInvoice() const;
+    bool initializeInvoice();
 
 private slots:
 
@@ -28,14 +32,37 @@ private slots:
 
     void on_submitPushButton_clicked();
 
-    void on_doneInvoicePushButton_clicked();
+    void on_billingAmountDoubleSpinBox_valueChanged(double arg1);
+
+    void on_gstAmountDoubleSpinBox_valueChanged(double arg1);
+
+    void on_shipAmountDoubleSpinBox_valueChanged(double arg1);
 
 private:
     Ui::Invoice *ui;
-    QCompleter* completer;
-    QSqlQuery query;
+    std::unique_ptr<QCompleter> completer;
+    std::unique_ptr<QSqlQuery> query;
     int numberOfProductsAdded = 0;
     bool doneInvoice = false;
+
+    /* Invoice Data */
+    QString clientName;
+    QString clientAddress;
+    double billingAmount;
+    double gstAmount;
+    double shipAmount;
+    QDate issueDate;
+    QDate dueDate;
+    QString productList;
+
+    /* Json Helpers */
+    QJsonObject productListJSONobj;
+    std::unique_ptr<QJsonDocument> productListJSONdoc;
+
+    /* Previous Value holders for Amounts */
+    double prevBillingAmount = 0;
+    double prevGstAmount = 0;
+    double prevShipAmount = 0;
 };
 
-#endif // INVOICE_H
+#endif // INVOICE_H;

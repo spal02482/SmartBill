@@ -188,6 +188,15 @@
   <zorder>addProductInPushButton</zorder>
   <zorder>cancelAddProductPushButton</zorder>
  </widget>
+ <tabstops>
+  <tabstop>productNameLineEdit</tabstop>
+  <tabstop>supplierNameLineEdit</tabstop>
+  <tabstop>priceDoubleSpinBox</tabstop>
+  <tabstop>quanititySpinBox</tabstop>
+  <tabstop>productDescpnLineEdit</tabstop>
+  <tabstop>addProductInPushButton</tabstop>
+  <tabstop>cancelAddProductPushButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

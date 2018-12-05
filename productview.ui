@@ -38,7 +38,7 @@
     <enum>QAbstractItemView::SelectRows</enum>
    </property>
    <property name="showGrid">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <attribute name="verticalHeaderVisible">
     <bool>false</bool>

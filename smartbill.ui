@@ -88,8 +88,8 @@
     <string/>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>../../../Downloads/New Invoice.png</normaloff>../../../Downloads/New Invoice.png</iconset>
+    <iconset resource="smartbill.qrc">
+     <normaloff>:/Icons/New Invoice.png</normaloff>:/Icons/New Invoice.png</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -114,8 +114,8 @@
     <string/>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>../../../Downloads/New Product.png</normaloff>../../../Downloads/New Product.png</iconset>
+    <iconset resource="smartbill.qrc">
+     <normaloff>:/Icons/New Product.png</normaloff>:/Icons/New Product.png</iconset>
    </property>
    <property name="iconSize">
     <size>
@@ -128,29 +128,6 @@
    </property>
    <property name="flat">
     <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="viewProductPushButton">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>0</y>
-     <width>30</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>../../../Downloads/View Product.png</normaloff>../../../Downloads/View Product.png</iconset>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>19</width>
-     <height>19</height>
-    </size>
    </property>
   </widget>
   <widget class="QLabel" name="companyEmailLabel">
@@ -237,8 +214,27 @@
     <number>0</number>
    </property>
   </widget>
+  <widget class="QPushButton" name="viewProductPushButton">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>0</y>
+     <width>30</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="smartbill.qrc">
+     <normaloff>:/Icons/View Product.png</normaloff>:/Icons/View Product.png</iconset>
+   </property>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="smartbill.qrc"/>
+ </resources>
  <connections/>
 </ui>

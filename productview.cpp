@@ -6,15 +6,14 @@ ProductView::ProductView(smartbilldb& fbdb, QWidget *parent) :
     ui(new Ui::ProductView)
 {
     ui->setupUi(this);
-    model = new QSqlQueryModel(this);
+    model.reset(new QSqlQueryModel(this));
     QSqlQuery query(fbdb.getConnection());
     query.exec("SELECT ProductID, ProductName, Price, NumberInStock, SupplierName, Description FROM ProductInfo where isDeleted = 0");
     model->setQuery(query);
-    ui->productViewTableView->setModel(model);
+    ui->productViewTableView->setModel(model.get());
 }
 
 ProductView::~ProductView()
 {
-    delete model;
     delete ui;
 }

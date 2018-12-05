@@ -19,7 +19,7 @@ public:
 
 private:
     Ui::ProductView *ui;
-    QSqlQueryModel *model;
+    std::unique_ptr<QSqlQueryModel> model;
 };
 
 #endif // PRODUCTVIEW_H

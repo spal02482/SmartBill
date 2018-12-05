@@ -7,6 +7,7 @@
 #include "smartbilldb.h"
 
 #include <QLayout>
+#include <QTableView>
 
 namespace Ui {
 class SmartBill;
@@ -30,8 +31,13 @@ private slots:
 private:
     Ui::SmartBill *ui;
     smartbilldb fbdb;
+    /* For adding new Invoices */
     Invoice* invoice;
+
+    /* For adding new Products */
     Product* product;
+
+    /* For viewing added Products */
     ProductView* productView;
 };
 

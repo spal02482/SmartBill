@@ -6,9 +6,7 @@ SmartBill::SmartBill(QWidget *parent) :
     ui(new Ui::SmartBill)
 {
     ui->setupUi(this);
-
     fbdb.createConnection();
-
     QSqlQueryModel* model = new QSqlQueryModel();
     QSqlQuery query(fbdb.getConnection());
     query.prepare("SELECT * FROM Report");
@@ -42,6 +40,6 @@ void SmartBill::on_addProductPushButton_clicked()
 void SmartBill::on_viewProductPushButton_clicked()
 {
     productView = new ProductView(fbdb, this);
-    productView->setFixedSize(QSize(605, 500));
+    productView->setFixedSize(QSize(600, 500));
     productView->open();
 }

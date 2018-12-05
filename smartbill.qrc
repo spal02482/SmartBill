@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/Icons">
+        <file>New Invoice.png</file>
+        <file>New Product.png</file>
+        <file>View Product.png</file>
+    </qresource>
+    <qresource prefix="/Database">
+        <file>smartbill.db</file>
+    </qresource>
+</RCC>
