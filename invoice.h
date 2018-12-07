@@ -21,10 +21,12 @@ class Invoice : public QDialog
 
 public:
     explicit Invoice(smartbilldb& fbdb, QWidget *parent = nullptr);
+    explicit Invoice(smartbilldb& fbdb, QString, QString, double, double, double, QDate, QDate, QString, int, QWidget *parent = nullptr);
     ~Invoice();
 
+    void initializeInvoiceWindow(Ui::Invoice*, smartbilldb&);
     bool validateInvoice() const;
-    bool initializeInvoice();
+    bool initializeInvoiceData();
 
 private slots:
 
@@ -32,11 +34,11 @@ private slots:
 
     void on_submitPushButton_clicked();
 
-    void on_billingAmountDoubleSpinBox_valueChanged(double arg1);
+    void on_billingAmountDoubleSpinBox_valueChanged(double);
 
-    void on_gstAmountDoubleSpinBox_valueChanged(double arg1);
+    void on_gstAmountDoubleSpinBox_valueChanged(double);
 
-    void on_shipAmountDoubleSpinBox_valueChanged(double arg1);
+    void on_shipAmountDoubleSpinBox_valueChanged(double);
 
 private:
     Ui::Invoice *ui;
@@ -63,6 +65,9 @@ private:
     double prevBillingAmount = 0;
     double prevGstAmount = 0;
     double prevShipAmount = 0;
+
+     bool updateInvoice = false;
+     int toBeUpdatedinvoiceID = 0;
 };
 
 #endif // INVOICE_H;

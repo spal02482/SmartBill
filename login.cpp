@@ -35,6 +35,8 @@ void Login::on_LoginBtn_clicked()
             if (query.value(0).toString() == password) {
                 smartbill = new SmartBill();
                 smartbill->setWindowModality(Qt::ApplicationModal);
+                smartbill->showMaximized();
+                qDebug() << smartbill->size();
                 smartbill->show();
                 this->close();
             }

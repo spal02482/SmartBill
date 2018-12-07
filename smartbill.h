@@ -3,12 +3,13 @@
 
 #include "invoice.h"
 #include "product.h"
-#include "productview.h"
 #include "smartbilldb.h"
 
 #include <QLayout>
 #include <QTableView>
 
+#include <QValidator>
+#include <cctype>
 namespace Ui {
 class SmartBill;
 }
@@ -21,6 +22,8 @@ public:
     explicit SmartBill(QWidget *parent = nullptr);
     ~SmartBill();
 
+     QString selectQueryParam;
+
 private slots:
     void on_addInvoicePushButton_clicked();
 
@@ -28,9 +31,24 @@ private slots:
 
     void on_viewProductPushButton_clicked();
 
+    void on_clientNameLineEditSearch_editingFinished();
+
+    void on_invoiceIDLineEditSearch_editingFinished();
+
+    void on_issueDateDateEditSearch_editingFinished();
+
+    void on_dueDateDateEditSearch_editingFinished();
+
+    void on_clearSearchPushButton_clicked();
+
+    void on_updateInvoicePushButton_clicked();
+
+    void on_invoicesReportTableView_doubleClicked(const QModelIndex &index);
+
 private:
     Ui::SmartBill *ui;
     smartbilldb fbdb;
+    std::unique_ptr<QSqlQueryModel> model;
     /* For adding new Invoices */
     Invoice* invoice;
 
@@ -38,7 +56,17 @@ private:
     Product* product;
 
     /* For viewing added Products */
-    ProductView* productView;
+    //ProductView* productView;
+    QTableView *productViewTableView;
+    QDialog* ProductView;
+    std::unique_ptr<QSqlQueryModel> modelProductView;
+
+    std::unique_ptr<QCompleter> completer;
+};
+
+class NameValidator : QValidator
+{
+    QValidator::State validate(QString&, int&) const;
 };
 
 #endif // SMARTBILL_H

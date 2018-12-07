@@ -2,13 +2,8 @@
 #include "ui_invoice.h"
 
 
-Invoice::Invoice(smartbilldb& fbdb, QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::Invoice)
+void Invoice::initializeInvoiceWindow(Ui::Invoice* ui, smartbilldb& fbdb)
 {
-    ui->setupUi(this);
-    qDebug() << "Created Invoice Window.";
-
     /* Invoice window should be deleted upon closing it. */
     QDialog::setAttribute(Qt::WA_DeleteOnClose);
 
@@ -32,12 +27,71 @@ Invoice::Invoice(smartbilldb& fbdb, QWidget *parent) :
     }
     query->finish();
 
-    qDebug() << productNames;
+    //qDebug() << productNames;
 
     /* Populate the completer with the products available and set it for autocompletion of Product Names. */
     completer.reset(new QCompleter(productNames));
     completer->setCaseSensitivity(Qt::CaseInsensitive);
     ui->productNameLineEdit->setCompleter(completer.get());
+}
+
+
+Invoice::Invoice(smartbilldb& fbdb, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::Invoice)
+{
+    ui->setupUi(this);
+    qDebug() << "Created Invoice Window.";
+    initializeInvoiceWindow(ui, fbdb);
+}
+
+Invoice::Invoice(smartbilldb& fbdb, QString clientName, QString clientAddress, \
+                 double billingAmount, double gstAmount, double shipAmount, \
+                 QDate issueDate, QDate dueDate, QString productList, int InvoiceID, QWidget* parent) :
+    QDialog(parent),
+    ui(new Ui::Invoice)
+{
+    toBeUpdatedinvoiceID = InvoiceID;
+    ui->setupUi(this);
+    qDebug() << "Created Invoice Window, with Invoice Parameter values";
+    initializeInvoiceWindow(ui, fbdb);
+
+    updateInvoice = true;
+    qDebug() << billingAmount << gstAmount << shipAmount << issueDate.toString() << dueDate.toString();
+    ui->clientNameLineEdit->setText(clientName);
+    ui->clientAddressLineEdit->setText(clientAddress);
+    ui->billingAmountDoubleSpinBox->setValue(billingAmount);
+    ui->gstAmountDoubleSpinBox->setValue(gstAmount);
+    ui->shipAmountDoubleSpinBox->setValue(shipAmount);
+    ui->issueDateDateEdit->setDate(issueDate);
+    ui->dueDateDateEdit->setDate(dueDate);
+
+    QJsonDocument doc = QJsonDocument::fromJson(productList.toUtf8());
+    productListJSONobj = doc.object();
+
+    for (QJsonObject::iterator it = productListJSONobj.begin(); it != productListJSONobj.end(); ++it) {
+        int productID = it.key().toInt();
+        int quantity = it.value().toInt();
+        QSqlQuery query(fbdb.getConnection());
+        query.prepare("SELECT ProductName, Price FROM ProductInfo WHERE ProductID = ?");
+        query.addBindValue(productID);
+        query.exec();
+
+        QTableWidget& productTableWidget = *(ui->productTableWidget);
+
+        if (query.next()) {
+            QString productName = query.value(0).toString();
+            double price = query.value(1).toDouble();
+
+            int row = productTableWidget.rowCount();
+            productTableWidget.insertRow(row);
+
+            productTableWidget.setItem(row, 0, new QTableWidgetItem(QString::number(productID)));
+            productTableWidget.setItem(row, 1, new QTableWidgetItem(productName));
+            productTableWidget.setItem(row, 2, new QTableWidgetItem(QString::number(quantity)));
+            productTableWidget.setItem(row, 3, new QTableWidgetItem(QString::number(price * quantity)));
+        }
+    }
 }
 
 Invoice::~Invoice()
@@ -56,9 +110,9 @@ bool Invoice::validateInvoice() const
     return invoiceValid;
 }
 
-bool Invoice::initializeInvoice()
+bool Invoice::initializeInvoiceData()
 {
-    bool initializedInvoice = false;
+    bool initializedInvoiceData = false;
 
     clientName = ui->clientNameLineEdit->text();
     clientAddress = ui->clientAddressLineEdit->text();
@@ -79,10 +133,10 @@ bool Invoice::initializeInvoice()
         productListJSONdoc = std::make_unique<QJsonDocument>(productListJSONobj);
         productList = productListJSONdoc->toJson(QJsonDocument::Compact);
 
-        initializedInvoice = (productList != "");
+        initializedInvoiceData = (productList != "");
     }
 
-    return initializedInvoice;
+    return initializedInvoiceData;
 }
 
 void Invoice::on_addProductPushButton_clicked()
@@ -138,9 +192,16 @@ void Invoice::on_addProductPushButton_clicked()
 
 void Invoice::on_submitPushButton_clicked()
 {
-    if (initializeInvoice()) {
-        query->prepare("INSERT INTO InvoiceInfo (ClientName, ClientAddress, ProductList, IssueDate, DueDate, "
-                       "BillingAmount, GstAmount, ShipAmount) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    if (initializeInvoiceData()) {
+
+        if (updateInvoice) {
+            query->prepare("UPDATE InvoiceInfo SET ClientName = ?, ClientAddress = ?, ProductList = ?, IssueDate = ?,"
+                           "DueDate = ?, BillingAmount = ?, GstAmount = ?, ShipAmount = ? WHERE InvoiceID = ?");
+        }
+        else {
+            query->prepare("INSERT INTO InvoiceInfo (ClientName, ClientAddress, ProductList, IssueDate, DueDate, "
+                           "BillingAmount, GstAmount, ShipAmount) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        }
         query->addBindValue(clientName);
         query->addBindValue(clientAddress);
         query->addBindValue(productList);
@@ -149,6 +210,9 @@ void Invoice::on_submitPushButton_clicked()
         query->addBindValue(billingAmount);
         query->addBindValue(gstAmount);
         query->addBindValue(shipAmount);
+        if (updateInvoice) {
+            query->addBindValue(toBeUpdatedinvoiceID);
+        }
         query->exec();
         qDebug() << query->lastError();
         close();

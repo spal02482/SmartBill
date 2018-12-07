@@ -28,7 +28,6 @@ SOURCES += \
     login.cpp \
     invoice.cpp \
     product.cpp \
-    productview.cpp \
     smartbill.cpp \
     smartbilldb.cpp
 
@@ -36,7 +35,6 @@ HEADERS += \
     login.h \
     invoice.h \
     product.h \
-    productview.h \
     smartbilldb.h \
     smartbill.h
 
@@ -44,7 +42,6 @@ FORMS += \
     login.ui \
     invoice.ui \
     product.ui \
-    productview.ui \
     smartbill.ui
 
 # Default rules for deployment.
