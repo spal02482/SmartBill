@@ -304,7 +304,7 @@
     <string>Clear</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="updateInvoicePushButton">
+  <widget class="QPushButton" name="openInvoiceReportPushButton">
    <property name="geometry">
     <rect>
      <x>924</x>
@@ -314,7 +314,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Update Invoice</string>
+    <string>Open Invoice Report</string>
    </property>
   </widget>
   <zorder>label_5</zorder>
@@ -331,7 +331,7 @@
   <zorder>label_3</zorder>
   <zorder>label_4</zorder>
   <zorder>clearSearchPushButton</zorder>
-  <zorder>updateInvoicePushButton</zorder>
+  <zorder>openInvoiceReportPushButton</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>

@@ -165,8 +165,98 @@ void SmartBill::on_invoicesReportTableView_doubleClicked(const QModelIndex &inde
    invoice->open();
 }
 
-void SmartBill::on_updateInvoicePushButton_clicked()
+void SmartBill::on_openInvoiceReportPushButton_clicked()
 {
+    QModelIndex index = ui->invoicesReportTableView->currentIndex();
+    QModelIndex idx = index.siblingAtColumn(0);
+    int InvoiceID = idx.data(Qt::DisplayRole).toInt();
+    QSqlQuery query(fbdb.getConnection());
+    query.prepare("SELECT * FROM InvoiceInfo WHERE InvoiceID = ?");
+    query.addBindValue(InvoiceID);
+    query.exec();
+
+    QString clientName;
+    QString clientAddress;
+    QString productList;
+    double billingAmount = 0.0;
+    double gstAmount = 0.0;
+    double shipAmount = 0.0;
+    QString issueDate;
+    QString dueDate;
+
+    if (query.next()) {
+        clientName = query.value(1).toString();
+        clientAddress = query.value(2).toString();
+        productList = query.value(3).toString();
+        issueDate = query.value(4).toString();
+        dueDate = query.value(5).toString();
+        billingAmount = query.value(6).toDouble();
+        gstAmount = query.value(7).toDouble();
+        shipAmount = query.value(8).toDouble();
+    }
+
+    invoiceReportDialog = new QDialog(this);
+    invoiceReportDialog->setGeometry(0, 0, 700, 600);
+    invoiceReportTextEdit = new QTextEdit(invoiceReportDialog);
+    invoiceReportTextEdit->setGeometry(5, 5, 690, 545);
+    QPushButton* btn = new QPushButton("Print", invoiceReportDialog);
+    btn->setGeometry(5, 550, 100, 45);
+
+    QString html =
+            "<h1 align=\"center\">Invoice</h1><br>"
+            "<h2 align=\"center\"><b>" + clientName + "</b></h2><br>"
+            "<h3 align=\"center\"><i>" + clientAddress + "</i></h3><br>"
+            "<table align=\"center\" border=\"1\">"
+            "<tr>"
+            "<td>ProductID</td>"
+            "<td>ProductName</td>"
+            "<td>Quantity</td>"
+            "<td>Price/Item</td>"
+            "<td>Price</td>"
+            "</tr>";
+
+    QJsonDocument doc = QJsonDocument::fromJson(productList.toUtf8());
+    QJsonObject obj = doc.object();
+
+    for (QJsonObject::Iterator it = obj.begin(); it != obj.end(); ++it) {
+        qDebug() << it.key() << it.value() <<  it.value().toString();
+        html += "<tr>";
+        int ProductID = it.key().toInt();
+        QSqlQuery query(fbdb.getConnection());
+        query.prepare("SELECT ProductName, Price FROM ProductInfo WHERE ProductID = ?");
+        query.addBindValue(ProductID);
+        query.exec();
+
+        if (query.next()) {
+            html += ("<td>" + it.key() + "</td>");
+            html += ("<td>" + query.value(0).toString() + "</td>");
+            html += ("<td>" + QString::number(it.value().toInt()) + "</td>");
+            html += ("<td>" + query.value(1).toString() + "</td>");
+            html += ("<td>" + QString::number((query.value(1).toDouble() * it.value().toInt())) + "</td>");
+        }
+        html += "</tr>";
+    }
+
+    html += "</table>";
+
+    html += "<h3 align=\"center\">GST Price: " + QString::number(gstAmount) + "</h3>";
+    html += "<h3 align=\"center\">Shipping Price: " + QString::number(shipAmount) + "</h3>";
+    html += "<h2 align=\"center\">Total Price: " + QString::number(billingAmount + gstAmount + shipAmount) + "</h2>";
+    html += "<h3 align=\"center\">Date issued: " + issueDate + "</h3>";
+    html += "<h3 align=\"center\">Payment due till date: " + dueDate + "</h3>";
+
+    invoiceReportTextEdit->setHtml(html);
+    invoiceReportDialog->open();
+    QObject::connect(btn, SIGNAL(clicked()), this, SLOT(printInvoiceReport()));
+}
+
+void SmartBill::printInvoiceReport()
+{
+    QPrinter printer;
+    QPrintDialog printDialog(&printer, invoiceReportDialog);
+    if (printDialog.exec() == QDialog::Accepted) {
+        invoiceReportTextEdit->print(&printer);
+    }
 
 }
 
@@ -218,3 +308,5 @@ void SmartBill::on_viewProductPushButton_clicked()
 
     ProductView->open();
 }
+
+

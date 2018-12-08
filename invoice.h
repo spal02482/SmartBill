@@ -68,6 +68,7 @@ private:
 
      bool updateInvoice = false;
      int toBeUpdatedinvoiceID = 0;
+
 };
 
 #endif // INVOICE_H;

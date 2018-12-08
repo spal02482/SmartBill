@@ -12,7 +12,7 @@ void Invoice::initializeInvoiceWindow(Ui::Invoice* ui, smartbilldb& fbdb)
     ui->dueDateDateEdit->setDate(QDate::currentDate());
 
     /* Initialize query with the database. */
-    query.reset(new QSqlQuery(fbdb.getConnection()));
+    query = std::make_unique<QSqlQuery>(fbdb.getConnection());
 
     /* Set the Headers in the Add Product Table Widget. */
     QList<QString> productLabelsList ({"ID", "Name", "Qty", "Price"});
@@ -58,6 +58,8 @@ Invoice::Invoice(smartbilldb& fbdb, QString clientName, QString clientAddress, \
 
     updateInvoice = true;
     qDebug() << billingAmount << gstAmount << shipAmount << issueDate.toString() << dueDate.toString();
+
+    this->billingAmount = billingAmount;
     ui->clientNameLineEdit->setText(clientName);
     ui->clientAddressLineEdit->setText(clientAddress);
     ui->billingAmountDoubleSpinBox->setValue(billingAmount);
@@ -224,19 +226,19 @@ void Invoice::on_submitPushButton_clicked()
 
 void Invoice::on_billingAmountDoubleSpinBox_valueChanged(double value)
 {
-    ui->totalAmountDoubleSpinBox->setValue(ui->totalAmountDoubleSpinBox->value() - prevBillingAmount + value);
+    ui->totalAmountDoubleSpinBox->setValue(ui->totalAmountDoubleSpinBox->value() + value - prevBillingAmount);
     prevBillingAmount = value;
 }
 
 void Invoice::on_gstAmountDoubleSpinBox_valueChanged(double value)
 {
-     ui->totalAmountDoubleSpinBox->setValue(ui->totalAmountDoubleSpinBox->value() - prevGstAmount + value);
+     ui->totalAmountDoubleSpinBox->setValue(ui->totalAmountDoubleSpinBox->value() + value - prevGstAmount);
      prevGstAmount = value;
 }
 
 void Invoice::on_shipAmountDoubleSpinBox_valueChanged(double value)
 {
-     ui->totalAmountDoubleSpinBox->setValue(ui->totalAmountDoubleSpinBox->value() - prevShipAmount + value);
+     ui->totalAmountDoubleSpinBox->setValue(ui->totalAmountDoubleSpinBox->value() + value - prevShipAmount);
      prevShipAmount = value;
 }
 

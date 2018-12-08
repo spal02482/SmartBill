@@ -9,7 +9,12 @@
 #include <QTableView>
 
 #include <QValidator>
+#include <QTextEdit>
 #include <cctype>
+
+#include <QPrinter>
+#include <QPrintDialog>
+
 namespace Ui {
 class SmartBill;
 }
@@ -41,9 +46,11 @@ private slots:
 
     void on_clearSearchPushButton_clicked();
 
-    void on_updateInvoicePushButton_clicked();
-
     void on_invoicesReportTableView_doubleClicked(const QModelIndex &index);
+
+    void on_openInvoiceReportPushButton_clicked();
+
+    void printInvoiceReport();
 
 private:
     Ui::SmartBill *ui;
@@ -62,6 +69,9 @@ private:
     std::unique_ptr<QSqlQueryModel> modelProductView;
 
     std::unique_ptr<QCompleter> completer;
+
+    QDialog* invoiceReportDialog;
+    QTextEdit* invoiceReportTextEdit;
 };
 
 class NameValidator : QValidator
