@@ -97,12 +97,14 @@ void SmartBill::on_invoiceIDLineEditSearch_editingFinished()
 void SmartBill::on_issueDateDateEditSearch_editingFinished()
 {
     QDate issueDate = ui->issueDateDateEditSearch->date();
+    qDebug() << issueDate.isNull() << issueDate.isValid();
     if (!issueDate.isNull()) {
         QSqlQuery query(fbdb.getConnection());
         query.prepare("SELECT " + selectQueryParam + " FROM InvoiceInfo WHERE IssueDate = ? and isDeleted = 0");
-        query.addBindValue(issueDate.toString());
-        qDebug() << "issueDateSearch: " << issueDate.toString();
+        query.addBindValue(issueDate.toString("ddd MMM dd yyyy"));
+        qDebug() << "issueDateSearch: " << issueDate.toString("ddd MMM dd yyyy");
         query.exec();
+        qDebug() << query.lastError();
         model->setQuery(query);
         /* Don't do query.finish(). */
     }
@@ -114,8 +116,8 @@ void SmartBill::on_dueDateDateEditSearch_editingFinished()
     if (!dueDate.isNull()) {
         QSqlQuery query(fbdb.getConnection());
         query.prepare("SELECT " + selectQueryParam + " FROM InvoiceInfo WHERE DueDate = ? and isDeleted = 0");
-        query.addBindValue(dueDate.toString());
-        qDebug() << "dueDateSearch: " << dueDate.toString();
+        query.addBindValue(dueDate.toString("ddd MMM dd yyyy"));
+        qDebug() << "dueDateSearch: " << dueDate.toString("ddd MMM dd yyyy");
         query.exec();
         model->setQuery(query);
         /* Don't do query.finish(). */

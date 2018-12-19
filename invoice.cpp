@@ -1,6 +1,9 @@
 #include "invoice.h"
 #include "ui_invoice.h"
 
+/*
+ * The Date Format used Here is 'ddd MMM dd yyyy' i.e. Fri Jan 04 2019
+ */
 
 void Invoice::initializeInvoiceWindow(Ui::Invoice* ui, smartbilldb& fbdb)
 {
@@ -207,8 +210,8 @@ void Invoice::on_submitPushButton_clicked()
         query->addBindValue(clientName);
         query->addBindValue(clientAddress);
         query->addBindValue(productList);
-        query->addBindValue(issueDate.toString());
-        query->addBindValue(dueDate.toString());
+        query->addBindValue(issueDate.toString("ddd MMM dd yyyy"));
+        query->addBindValue(dueDate.toString("ddd MMM dd yyyy"));
         query->addBindValue(billingAmount);
         query->addBindValue(gstAmount);
         query->addBindValue(shipAmount);
