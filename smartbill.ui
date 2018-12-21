@@ -93,6 +93,9 @@
      <height>30</height>
     </rect>
    </property>
+   <property name="toolTip">
+    <string>Add New Invoice</string>
+   </property>
    <property name="whatsThis">
     <string extracomment="New Invoice"/>
    </property>
@@ -118,6 +121,9 @@
      <width>30</width>
      <height>30</height>
     </rect>
+   </property>
+   <property name="toolTip">
+    <string>Add New Product</string>
    </property>
    <property name="whatsThis">
     <string extracomment="New Product"/>
@@ -150,6 +156,9 @@
      <width>30</width>
      <height>30</height>
     </rect>
+   </property>
+   <property name="toolTip">
+    <string>View All Products</string>
    </property>
    <property name="text">
     <string/>
@@ -443,10 +452,10 @@
   <widget class="QLabel" name="companyLogoLabel">
    <property name="geometry">
     <rect>
-     <x>1060</x>
+     <x>1030</x>
      <y>50</y>
-     <width>71</width>
-     <height>61</height>
+     <width>121</width>
+     <height>71</height>
     </rect>
    </property>
    <property name="text">
@@ -465,8 +474,21 @@
      <height>30</height>
     </rect>
    </property>
+   <property name="toolTip">
+    <string>Change company Info</string>
+   </property>
    <property name="text">
     <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="smartbill.qrc">
+     <normaloff>:/Icons/Change Company Info.png</normaloff>:/Icons/Change Company Info.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>20</width>
+     <height>20</height>
+    </size>
    </property>
   </widget>
   <zorder>label_5</zorder>
