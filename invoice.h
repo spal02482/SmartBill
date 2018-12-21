@@ -1,15 +1,22 @@
 #ifndef INVOICE_H
 #define INVOICE_H
 
-#include "smartbilldb.h"
-
 #include <QDialog>
 
-#include <QMessageBox>
+#include <QDebug>
+
+#include <QDate>
 #include <QCompleter>
+#include <QMessageBox>
 
 #include <QJsonObject>
 #include <QJsonDocument>
+
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QSqlDatabase>
+
+#include <memory>
 
 namespace Ui {
 class Invoice;
@@ -20,11 +27,11 @@ class Invoice : public QDialog
     Q_OBJECT
 
 public:
-    explicit Invoice(smartbilldb& fbdb, QWidget *parent = nullptr);
-    explicit Invoice(smartbilldb& fbdb, QString, QString, double, double, double, QDate, QDate, QString, int, QWidget *parent = nullptr);
+    explicit Invoice(QWidget *parent = nullptr);
+    explicit Invoice(QString, QString, double, double, double, QDate, QDate, QString, int, QWidget *parent = nullptr);
     ~Invoice();
 
-    void initializeInvoiceWindow(Ui::Invoice*, smartbilldb&);
+    void initializeInvoiceWindow(Ui::Invoice*);
     bool validateInvoice() const;
     bool initializeInvoiceData();
 
@@ -66,8 +73,8 @@ private:
     double prevGstAmount = 0;
     double prevShipAmount = 0;
 
-     bool updateInvoice = false;
-     int toBeUpdatedinvoiceID = 0;
+    bool updateInvoice = false;
+    int toBeUpdatedinvoiceID = 0;
 
 };
 

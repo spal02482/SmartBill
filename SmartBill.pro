@@ -28,14 +28,12 @@ SOURCES += \
     login.cpp \
     invoice.cpp \
     product.cpp \
-    smartbill.cpp \
-    smartbilldb.cpp
+    smartbill.cpp
 
 HEADERS += \
     login.h \
     invoice.h \
     product.h \
-    smartbilldb.h \
     smartbill.h
 
 FORMS += \

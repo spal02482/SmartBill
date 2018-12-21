@@ -2,10 +2,11 @@
 #define LOGIN_H
 
 #include "smartbill.h"
-#include "smartbilldb.h"
 
-
+#include <QDebug>
 #include <QMessageBox>
+#include <QSqlQuery>
+#include <QSqlError>
 
 namespace Ui {
 class Login;
@@ -24,7 +25,7 @@ private slots:
 
 private:
     Ui::Login *ui;
-    smartbilldb fbdb;
+    std::unique_ptr<QSqlDatabase> db;
     SmartBill* smartbill;
 };
 

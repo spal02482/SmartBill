@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1158</width>
+    <width>1157</width>
     <height>700</height>
    </rect>
   </property>
@@ -47,10 +47,10 @@
   <widget class="QTableView" name="invoicesReportTableView">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>110</y>
-     <width>1131</width>
-     <height>581</height>
+     <x>0</x>
+     <y>170</y>
+     <width>1158</width>
+     <height>531</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -162,8 +162,8 @@
   <widget class="QLineEdit" name="clientNameLineEditSearch">
    <property name="geometry">
     <rect>
-     <x>111</x>
-     <y>82</y>
+     <x>91</x>
+     <y>141</y>
      <width>150</width>
      <height>21</height>
     </rect>
@@ -180,8 +180,8 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>111</x>
-     <y>61</y>
+     <x>91</x>
+     <y>120</y>
      <width>151</width>
      <height>16</height>
     </rect>
@@ -199,9 +199,9 @@
   <widget class="QLineEdit" name="invoiceIDLineEditSearch">
    <property name="geometry">
     <rect>
-     <x>21</x>
-     <y>82</y>
-     <width>59</width>
+     <x>0</x>
+     <y>140</y>
+     <width>70</width>
      <height>21</height>
     </rect>
    </property>
@@ -209,9 +209,9 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>21</x>
-     <y>61</y>
-     <width>55</width>
+     <x>0</x>
+     <y>120</y>
+     <width>60</width>
      <height>16</height>
     </rect>
    </property>
@@ -222,11 +222,16 @@
   <widget class="QDateEdit" name="issueDateDateEditSearch">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>82</y>
-     <width>91</width>
+     <x>260</x>
+     <y>141</y>
+     <width>111</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
    </property>
    <property name="minimumDateTime">
     <datetime>
@@ -242,18 +247,23 @@
   <widget class="QDateEdit" name="dueDateDateEditSearch">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>82</y>
-     <width>91</width>
+     <x>430</x>
+     <y>141</y>
+     <width>101</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>80</y>
+     <x>380</x>
+     <y>139</y>
      <width>31</width>
      <height>21</height>
     </rect>
@@ -268,8 +278,8 @@
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>61</y>
+     <x>280</x>
+     <y>120</y>
      <width>81</width>
      <height>20</height>
     </rect>
@@ -281,8 +291,8 @@
   <widget class="QLabel" name="label_5">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>61</y>
+     <x>430</x>
+     <y>120</y>
      <width>81</width>
      <height>20</height>
     </rect>
@@ -294,9 +304,9 @@
   <widget class="QPushButton" name="clearSearchPushButton">
    <property name="geometry">
     <rect>
-     <x>1070</x>
-     <y>80</y>
-     <width>75</width>
+     <x>1086</x>
+     <y>138</y>
+     <width>64</width>
      <height>23</height>
     </rect>
    </property>
@@ -307,14 +317,156 @@
   <widget class="QPushButton" name="openInvoiceReportPushButton">
    <property name="geometry">
     <rect>
-     <x>924</x>
-     <y>82</y>
-     <width>131</width>
+     <x>940</x>
+     <y>140</y>
+     <width>140</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
     <string>Open Invoice Report</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="companyNameLabel">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>40</y>
+     <width>1030</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>28</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Dwaipayana Technologies Pvt. Ltd.</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="margin">
+    <number>20</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="companyEmailLabel">
+   <property name="geometry">
+    <rect>
+     <x>809</x>
+     <y>40</y>
+     <width>221</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>contact.dwaipayanatech@gmail.com</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="companyContact1Label">
+   <property name="geometry">
+    <rect>
+     <x>920</x>
+     <y>60</y>
+     <width>110</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>+91 776 00 41608</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="companyAddressLabel">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>0</y>
+     <width>751</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Candara</family>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <italic>true</italic>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Bhaktivedanta Swami Marg, Gulmohar Road, Suvarna Nagar, Vile Parle (W), Mumbai, Maharashtra 400056</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="companyContact2Label">
+   <property name="geometry">
+    <rect>
+     <x>920</x>
+     <y>80</y>
+     <width>110</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>+91 733 77 63918</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="companyCinLabel">
+   <property name="geometry">
+    <rect>
+     <x>849</x>
+     <y>100</y>
+     <width>181</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;b&gt;CIN:&lt;/b&gt; U72200KA2018PTC114875</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="companyLogoLabel">
+   <property name="geometry">
+    <rect>
+     <x>1060</x>
+     <y>50</y>
+     <width>71</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="smartbill.qrc">:/Icons/smartbill.jpeg</pixmap>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="changeCompanyInfoPushButton">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>0</y>
+     <width>30</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
   <zorder>label_5</zorder>
@@ -332,6 +484,14 @@
   <zorder>label_4</zorder>
   <zorder>clearSearchPushButton</zorder>
   <zorder>openInvoiceReportPushButton</zorder>
+  <zorder>companyNameLabel</zorder>
+  <zorder>companyEmailLabel</zorder>
+  <zorder>companyContact1Label</zorder>
+  <zorder>companyAddressLabel</zorder>
+  <zorder>companyContact2Label</zorder>
+  <zorder>companyCinLabel</zorder>
+  <zorder>companyLogoLabel</zorder>
+  <zorder>changeCompanyInfoPushButton</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>

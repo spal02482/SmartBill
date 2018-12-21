@@ -6,16 +6,32 @@ Login::Login(QWidget *parent) :
     ui(new Ui::Login)
 {
     ui->setupUi(this);
-    ui->UserName->setPlaceholderText(QString("Username Here"));
-    ui->PassWord->setPlaceholderText((QString("Password Here")));
-    fbdb.createConnection();
+
+    db = std::make_unique<QSqlDatabase>(QSqlDatabase::addDatabase("QSQLITE"));
+    db->setDatabaseName(QCoreApplication::applicationDirPath() + "/smartbill.db");
+    qDebug() << "Database Connection Added";
+
+    if (db->open()) {
+        qDebug() << "Connection opened to Database";
+    }
+    else {
+        qDebug() << "Couldn't open database connection";
+    }
+
+    ui->UserName->setPlaceholderText(tr("Username Here"));
+    ui->PassWord->setPlaceholderText(tr("Password Here"));
 }
 
 Login::~Login()
 {
-    fbdb.closeConnection();
+    db->close();
+    qDebug() << "Connection to Database closed";
+
+    QSqlDatabase::removeDatabase(QSqlDatabase::database().connectionName());
+    qDebug() << "Database Connection Removed";
+
     delete ui;
-    qDebug() << "Deleting Login Window" << "\nClosing Database Connection";
+    qDebug() << "Deleting Login Window";
 }
 
 void Login::on_LoginBtn_clicked()
@@ -24,7 +40,7 @@ void Login::on_LoginBtn_clicked()
     QString password = ui->PassWord->text();
     qDebug() << username << " " << password;
 
-    QSqlQuery query(fbdb.getConnection());
+    QSqlQuery query;
     query.prepare("SELECT PassWord FROM UserInfo WHERE UserName = ?");
     query.addBindValue(username);
     bool querySuccess = query.exec();
@@ -33,8 +49,8 @@ void Login::on_LoginBtn_clicked()
         query.next();
         if (query.isValid()) {
             if (query.value(0).toString() == password) {
+                query.finish();
                 smartbill = new SmartBill();
-                smartbill->setWindowModality(Qt::ApplicationModal);
                 smartbill->showMaximized();
                 qDebug() << smartbill->size();
                 smartbill->show();
@@ -49,8 +65,6 @@ void Login::on_LoginBtn_clicked()
         }
     }
     else {
-        qDebug() << query.lastError();
+        qDebug() << "Login:" << query.lastError();
     }
-
-    query.finish();
 }

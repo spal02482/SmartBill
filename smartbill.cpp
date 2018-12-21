@@ -23,24 +23,61 @@ SmartBill::SmartBill(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SmartBill)
 {
-    selectQueryParam = "InvoiceID, ClientName, ClientAddress, ProductList, IssueDate, DueDate, BillingAmount,"
-            "GstAmount, ShipAmount, (BillingAmount + GstAmount + ShipAmount)";
+    this->setAttribute(Qt::WA_DeleteOnClose);
+
     ui->setupUi(this);
-    fbdb.createConnection();
-    model = std::make_unique<QSqlQueryModel>(this);
-    model->setQuery("SELECT " + selectQueryParam +  " FROM InvoiceInfo WHERE isDeleted = 0", fbdb.getConnection());
-    ui->invoicesReportTableView->setModel(model.get());
 
     QSqlQuery query;
-    query.exec("SELECT ClientName FROM InvoiceInfo");
-    QStringList clientNamesList;
-    while (query.next()) {
-        clientNamesList << query.value(0).toString();
+    query.exec("SELECT * FROM CompanyInfo");
+
+    if (!query.next()) {
+        qDebug() << "Error retrieving values, SmartBill Constructor:" << query.lastError();
+        return;
     }
+
+    ui->companyNameLabel->setText(query.value(0).toString());
+    ui->companyEmailLabel->setText(query.value(1).toString());
+    ui->companyCinLabel->setText("<b>CIN:</b>" + query.value(2).toString());
+    ui->companyAddressLabel->setText(query.value(3).toString());
+    ui->companyContact1Label->setText(query.value(4).toString());
+    ui->companyContact2Label->setText(query.value(5).toString());
+
+    selectQueryParam = "InvoiceID, ClientName, ClientAddress, IssueDate, DueDate, BillingAmount,"
+                       "GstAmount, ShipAmount, (BillingAmount + GstAmount + ShipAmount), ProductList";
+
+    model = std::make_unique<QSqlQueryModel>(this);
+    model->setQuery("SELECT " + selectQueryParam +  " FROM InvoiceInfo WHERE isDeleted = 0");
+    ui->invoicesReportTableView->setModel(model.get());
+
+    QSqlQueryModel* clientNamesList = new QSqlQueryModel(this);
+    clientNamesList->setQuery("SELECT ClientName FROM InvoiceInfo");
     completer = std::make_unique<QCompleter>(clientNamesList);
     completer->setCaseSensitivity(Qt::CaseInsensitive);
     ui->clientNameLineEditSearch->setCompleter(completer.get());
-    query.finish();
+
+    /*Set Header Data. */
+    model->setHeaderData(0, Qt::Horizontal, tr("Invoice ID"), Qt::DisplayRole);
+    model->setHeaderData(1, Qt::Horizontal, tr("Name"), Qt::DisplayRole);
+    model->setHeaderData(2, Qt::Horizontal, tr("Address"), Qt::DisplayRole);
+    model->setHeaderData(3, Qt::Horizontal, tr("Date issued"), Qt::DisplayRole);
+    model->setHeaderData(4, Qt::Horizontal, tr("Date due"), Qt::DisplayRole);
+    model->setHeaderData(5, Qt::Horizontal, tr("Bill Amount"), Qt::DisplayRole);
+    model->setHeaderData(6, Qt::Horizontal, tr("GST"), Qt::DisplayRole);
+    model->setHeaderData(7, Qt::Horizontal, tr("Shipping Cost"), Qt::DisplayRole);
+    model->setHeaderData(8, Qt::Horizontal, tr("Total Amount"), Qt::DisplayRole);
+    model->setHeaderData(9, Qt::Horizontal, tr("Products Bought"), Qt::DisplayRole);
+
+    /* Set Column Widths. */
+    ui->invoicesReportTableView->setColumnWidth(0, 30);
+    ui->invoicesReportTableView->setColumnWidth(1, 80);
+    ui->invoicesReportTableView->setColumnWidth(2, 100);
+    ui->invoicesReportTableView->setColumnWidth(3, 80);
+    ui->invoicesReportTableView->setColumnWidth(4, 80);
+    ui->invoicesReportTableView->setColumnWidth(5, 50);
+    ui->invoicesReportTableView->setColumnWidth(6, 70);
+    ui->invoicesReportTableView->setColumnWidth(7, 70);
+    ui->invoicesReportTableView->setColumnWidth(8, 70);
+    ui->invoicesReportTableView->setColumnWidth(9, 100);
 
     ui->issueDateDateEditSearch->setDate(QDate::currentDate());
     ui->dueDateDateEditSearch->setDate(QDate::currentDate());
@@ -48,22 +85,21 @@ SmartBill::SmartBill(QWidget *parent) :
 
 SmartBill::~SmartBill()
 {
-    fbdb.closeConnection();
     delete ui;
-    qDebug() << "Closed Database Connection\n" << "Deleting SmartBill Window";
+    qDebug() << "Deleting SmartBill Window";
 }
 
 
 void SmartBill::on_addInvoicePushButton_clicked()
 {
-    invoice = new Invoice(fbdb, this);
+    invoice = new Invoice(this);
     invoice->setFixedSize(QSize(630, 363));
     invoice->open();
 }
 
 void SmartBill::on_addProductPushButton_clicked()
 {
-    product = new Product(fbdb, this);
+    product = new Product(this);
     product->setFixedSize(QSize(455, 275));
     product->open();
 }
@@ -73,7 +109,7 @@ void SmartBill::on_clientNameLineEditSearch_editingFinished()
     QString clientName = ui->clientNameLineEditSearch->text();
     qDebug() << clientName;
     if (clientName != "") {
-       QSqlQuery query(fbdb.getConnection());
+       QSqlQuery query;
        query.prepare("SELECT " + selectQueryParam + " FROM InvoiceInfo WHERE ClientName = ? and isDeleted = 0");
        query.addBindValue(clientName);
        query.exec();
@@ -85,7 +121,7 @@ void SmartBill::on_invoiceIDLineEditSearch_editingFinished()
 {
     int invoiceID = ui->invoiceIDLineEditSearch->text().toInt();
     if (invoiceID > 0) {
-        QSqlQuery query(fbdb.getConnection());
+        QSqlQuery query;
         query.prepare("SELECT " + selectQueryParam + " FROM InvoiceInfo WHERE InvoiceID = ? and isDeleted = 0");
         query.addBindValue(invoiceID);
         query.exec();
@@ -99,7 +135,7 @@ void SmartBill::on_issueDateDateEditSearch_editingFinished()
     QDate issueDate = ui->issueDateDateEditSearch->date();
     qDebug() << issueDate.isNull() << issueDate.isValid();
     if (!issueDate.isNull()) {
-        QSqlQuery query(fbdb.getConnection());
+        QSqlQuery query;
         query.prepare("SELECT " + selectQueryParam + " FROM InvoiceInfo WHERE IssueDate = ? and isDeleted = 0");
         query.addBindValue(issueDate.toString("ddd MMM dd yyyy"));
         qDebug() << "issueDateSearch: " << issueDate.toString("ddd MMM dd yyyy");
@@ -114,7 +150,7 @@ void SmartBill::on_dueDateDateEditSearch_editingFinished()
 {
     QDate dueDate = ui->dueDateDateEditSearch->date();
     if (!dueDate.isNull()) {
-        QSqlQuery query(fbdb.getConnection());
+        QSqlQuery query;
         query.prepare("SELECT " + selectQueryParam + " FROM InvoiceInfo WHERE DueDate = ? and isDeleted = 0");
         query.addBindValue(dueDate.toString("ddd MMM dd yyyy"));
         qDebug() << "dueDateSearch: " << dueDate.toString("ddd MMM dd yyyy");
@@ -130,14 +166,14 @@ void SmartBill::on_clearSearchPushButton_clicked()
     ui->clientNameLineEditSearch->clear();
     ui->issueDateDateEditSearch->setDate(QDate::currentDate());
     ui->dueDateDateEditSearch->setDate(QDate::currentDate());
-    model->setQuery("SELECT " + selectQueryParam + " FROM InvoiceInfo WHERE isDeleted = 0", fbdb.getConnection());
+    model->setQuery("SELECT " + selectQueryParam + " FROM InvoiceInfo WHERE isDeleted = 0");
 }
 
 void SmartBill::on_invoicesReportTableView_doubleClicked(const QModelIndex &index)
 {
    QModelIndex idx = index.siblingAtColumn(0);
    int InvoiceID = idx.data(Qt::DisplayRole).toInt();
-   QSqlQuery query(fbdb.getConnection());
+   QSqlQuery query;
    query.prepare("SELECT * FROM InvoiceInfo WHERE InvoiceID = ?");
    query.addBindValue(InvoiceID);
    query.exec();
@@ -162,7 +198,7 @@ void SmartBill::on_invoicesReportTableView_doubleClicked(const QModelIndex &inde
        shipAmount = query.value(8).toDouble();
    }
 
-   Invoice* invoice = new Invoice(fbdb, clientName, clientAddress, billingAmount, gstAmount, shipAmount, issueDate, \
+   Invoice* invoice = new Invoice(clientName, clientAddress, billingAmount, gstAmount, shipAmount, issueDate, \
                                   dueDate, productList, InvoiceID, this);
    invoice->open();
 }
@@ -172,7 +208,7 @@ void SmartBill::on_openInvoiceReportPushButton_clicked()
     QModelIndex index = ui->invoicesReportTableView->currentIndex();
     QModelIndex idx = index.siblingAtColumn(0);
     int InvoiceID = idx.data(Qt::DisplayRole).toInt();
-    QSqlQuery query(fbdb.getConnection());
+    QSqlQuery query;
     query.prepare("SELECT * FROM InvoiceInfo WHERE InvoiceID = ?");
     query.addBindValue(InvoiceID);
     query.exec();
@@ -224,7 +260,7 @@ void SmartBill::on_openInvoiceReportPushButton_clicked()
         qDebug() << it.key() << it.value() <<  it.value().toString();
         html += "<tr>";
         int ProductID = it.key().toInt();
-        QSqlQuery query(fbdb.getConnection());
+        QSqlQuery query;
         query.prepare("SELECT ProductName, Price FROM ProductInfo WHERE ProductID = ?");
         query.addBindValue(ProductID);
         query.exec();
@@ -264,7 +300,6 @@ void SmartBill::printInvoiceReport()
 
 void SmartBill::on_viewProductPushButton_clicked()
 {
-    qDebug() << "view product push button clicked";
     QDialog* ProductView = new QDialog(this);
     if (ProductView->objectName().isEmpty())
         ProductView->setObjectName(QStringLiteral("ProductView"));
@@ -287,7 +322,7 @@ void SmartBill::on_viewProductPushButton_clicked()
     productViewTableView->verticalHeader()->setVisible(false);
 
     modelProductView = std::make_unique<QSqlQueryModel>(ProductView);
-    QSqlQuery query(fbdb.getConnection());
+    QSqlQuery query;
     query.exec("SELECT ProductID, ProductName, Price, NumberInStock, SupplierName, Description FROM ProductInfo where isDeleted = 0");
     modelProductView->setQuery(query);
     productViewTableView->setModel(modelProductView.get());
@@ -312,3 +347,95 @@ void SmartBill::on_viewProductPushButton_clicked()
 }
 
 
+
+void SmartBill::on_changeCompanyInfoPushButton_clicked()
+{
+    QSqlQuery query;
+    query.exec("SELECT * FROM CompanyInfo");
+
+    if (!query.next()) {
+        qDebug() << "Error retrieving values, Change Company Info:" << query.lastError();
+        return;
+    }
+
+    QLabel *label, *label_2, *label_3, *label_4, *label_5, *label_6;
+
+    companyInfo = new QDialog(this);
+    companyInfo->setWindowModality(Qt::ApplicationModal);
+    companyInfo->resize(572, 355);
+
+    label = new QLabel(companyInfo);
+    label->setObjectName(QStringLiteral("label"));
+    label->setGeometry(QRect(10, 10, 101, 16));
+    companyName = new QLineEdit(companyInfo);
+    companyName->setObjectName(QStringLiteral("companyName"));
+    companyName->setGeometry(QRect(10, 30, 361, 20));
+    companyName->setText(query.value(0).toString());
+    label_2 = new QLabel(companyInfo);
+    label_2->setObjectName(QStringLiteral("label_2"));
+    label_2->setGeometry(QRect(10, 60, 111, 20));
+    companyEmail = new QLineEdit(companyInfo);
+    companyEmail->setObjectName(QStringLiteral("companyEmail"));
+    companyEmail->setGeometry(QRect(10, 80, 361, 21));
+    companyEmail->setText(query.value(1).toString());
+    label_3 = new QLabel(companyInfo);
+    label_3->setObjectName(QStringLiteral("label_3"));
+    label_3->setGeometry(QRect(10, 110, 47, 16));
+    companyCIN = new QLineEdit(companyInfo);
+    companyCIN->setObjectName(QStringLiteral("companyCin"));
+    companyCIN->setGeometry(QRect(10, 130, 361, 21));
+    companyCIN->setText(query.value(2).toString());
+    label_4 = new QLabel(companyInfo);
+    label_4->setObjectName(QStringLiteral("label_4"));
+    label_4->setGeometry(QRect(10, 160, 47, 13));
+    companyAddress = new QLineEdit(companyInfo);
+    companyAddress->setObjectName(QStringLiteral("companyAddress"));
+    companyAddress->setGeometry(QRect(10, 180, 361, 41));
+    companyAddress->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+    companyAddress->setText(query.value(3).toString());
+    companyContact1 = new QLineEdit(companyInfo);
+    companyContact1->setObjectName(QStringLiteral("companyContact1"));
+    companyContact1->setGeometry(QRect(10, 250, 181, 20));
+    companyContact1->setText(query.value(4).toString());
+    companyContact2 = new QLineEdit(companyInfo);
+    companyContact2->setObjectName(QStringLiteral("companyContact2"));
+    companyContact2->setGeometry(QRect(200, 250, 171, 20));
+    companyContact2->setText(query.value(5).toString());
+    label_5 = new QLabel(companyInfo);
+    label_5->setObjectName(QStringLiteral("label_5"));
+    label_5->setGeometry(QRect(10, 230, 71, 16));
+    label_6 = new QLabel(companyInfo);
+    label_6->setObjectName(QStringLiteral("label_6"));
+    label_6->setGeometry(QRect(200, 230, 47, 13));
+    companyLogo = new QLabel(companyInfo);
+    companyLogo->setObjectName(QStringLiteral("companyLogo"));
+    companyLogo->setGeometry(QRect(400, 30, 151, 151));
+
+    submitCompanyInfoPushButton = new QPushButton(companyInfo);
+    submitCompanyInfoPushButton->setObjectName(QStringLiteral("submitCompanyInfoPushButton"));
+    submitCompanyInfoPushButton->setGeometry(QRect(10, 300, 60, 30));
+    submitCompanyInfoPushButton->setText("Submit");
+
+    QObject::connect(submitCompanyInfoPushButton, SIGNAL(clicked()), this, SLOT(submitCompanyInfo()));
+
+    companyInfo->open();
+}
+
+void SmartBill::submitCompanyInfo()
+{
+    QSqlQuery query;
+    query.prepare("UPDATE CompanyInfo SET CompanyName = ?, CompanyEmail = ?, CompanyCIN = ?, CompanyAddress = ?,"
+                  "CompanyContact1 = ?, CompanyContact2 = ?");
+    query.addBindValue(companyName->text());
+    query.addBindValue(companyEmail->text());
+    query.addBindValue(companyCIN->text());
+    query.addBindValue(companyAddress->text());
+    query.addBindValue(companyContact1->text());
+    query.addBindValue(companyContact2->text());
+    query.exec();
+
+    QMessageBox::information(this, tr("Success"), tr("Company Information successfully changed.\n"
+                                                     "Restart Application for the change to Reflect."));
+
+    companyInfo->close();
+}

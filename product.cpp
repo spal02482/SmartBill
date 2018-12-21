@@ -1,7 +1,7 @@
 #include "product.h"
 #include "ui_product.h"
 
-Product::Product(smartbilldb& fbdb, QWidget *parent) :
+Product::Product(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Product)
 {
@@ -9,9 +9,6 @@ Product::Product(smartbilldb& fbdb, QWidget *parent) :
 
     /* Delete the Dialog upon closing */
     QDialog::setAttribute(Qt::WA_DeleteOnClose);
-
-    /* Create a query object, prepare the Insert query and bind values to it and Execute it */
-    QSqlQuery query(fbdb.getConnection());
 }
 
 Product::~Product()
@@ -22,6 +19,8 @@ Product::~Product()
 
 bool Product::validateProduct(QString ProductName, double Price, int NumberInStock)
 {
+    /* Create a query object, prepare the Insert query and bind values to it and Execute it */
+    QSqlQuery query;
     query.prepare("SELECT * FROM ProductInfo WHERE ProductName = ?");
     query.addBindValue(ProductName);
     query.exec();
@@ -57,6 +56,7 @@ void Product::on_addProductInPushButton_clicked()
 
         QString sql = "INSERT INTO ProductInfo (ProductName, Price, NumberInStock, SupplierName, Description)"
                 "VALUES (?, ?, ?, ?, ?)";
+        QSqlQuery query;
         query.prepare(sql);
         query.addBindValue(ProductName);
         query.addBindValue(Price);

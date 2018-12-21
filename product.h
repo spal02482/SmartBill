@@ -1,10 +1,17 @@
 #ifndef PRODUCT_H
 #define PRODUCT_H
 
-#include "smartbilldb.h"
-
 #include <QDialog>
+
+#include <QDebug>
+
 #include <QMessageBox>
+
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QSqlDatabase>
+
+#include <memory>
 
 namespace Ui {
 class Product;
@@ -15,12 +22,10 @@ class Product : public QDialog
     Q_OBJECT
 
 public:
-    explicit Product(smartbilldb& fbdb, QWidget *parent = nullptr);
+    explicit Product(QWidget *parent = nullptr);
     ~Product();
 
     bool validateProduct(QString, double, int);
-
-    QSqlQuery query;
 
 private slots:
 

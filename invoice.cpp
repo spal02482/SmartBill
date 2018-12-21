@@ -5,17 +5,17 @@
  * The Date Format used Here is 'ddd MMM dd yyyy' i.e. Fri Jan 04 2019
  */
 
-void Invoice::initializeInvoiceWindow(Ui::Invoice* ui, smartbilldb& fbdb)
+void Invoice::initializeInvoiceWindow(Ui::Invoice* ui)
 {
     /* Invoice window should be deleted upon closing it. */
-    QDialog::setAttribute(Qt::WA_DeleteOnClose);
+    this->setAttribute(Qt::WA_DeleteOnClose);
 
     /* Assign the Issue and Due date current Date. */
     ui->issueDateDateEdit->setDate(QDate::currentDate());
     ui->dueDateDateEdit->setDate(QDate::currentDate());
 
     /* Initialize query with the database. */
-    query = std::make_unique<QSqlQuery>(fbdb.getConnection());
+    query = std::make_unique<QSqlQuery>();
 
     /* Set the Headers in the Add Product Table Widget. */
     QList<QString> productLabelsList ({"ID", "Name", "Qty", "Price"});
@@ -39,16 +39,16 @@ void Invoice::initializeInvoiceWindow(Ui::Invoice* ui, smartbilldb& fbdb)
 }
 
 
-Invoice::Invoice(smartbilldb& fbdb, QWidget *parent) :
+Invoice::Invoice(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Invoice)
 {
     ui->setupUi(this);
     qDebug() << "Created Invoice Window.";
-    initializeInvoiceWindow(ui, fbdb);
+    initializeInvoiceWindow(ui);
 }
 
-Invoice::Invoice(smartbilldb& fbdb, QString clientName, QString clientAddress, \
+Invoice::Invoice(QString clientName, QString clientAddress, \
                  double billingAmount, double gstAmount, double shipAmount, \
                  QDate issueDate, QDate dueDate, QString productList, int InvoiceID, QWidget* parent) :
     QDialog(parent),
@@ -57,7 +57,7 @@ Invoice::Invoice(smartbilldb& fbdb, QString clientName, QString clientAddress, \
     toBeUpdatedinvoiceID = InvoiceID;
     ui->setupUi(this);
     qDebug() << "Created Invoice Window, with Invoice Parameter values";
-    initializeInvoiceWindow(ui, fbdb);
+    initializeInvoiceWindow(ui);
 
     updateInvoice = true;
     qDebug() << billingAmount << gstAmount << shipAmount << issueDate.toString() << dueDate.toString();
@@ -77,7 +77,7 @@ Invoice::Invoice(smartbilldb& fbdb, QString clientName, QString clientAddress, \
     for (QJsonObject::iterator it = productListJSONobj.begin(); it != productListJSONobj.end(); ++it) {
         int productID = it.key().toInt();
         int quantity = it.value().toInt();
-        QSqlQuery query(fbdb.getConnection());
+        QSqlQuery query;
         query.prepare("SELECT ProductName, Price FROM ProductInfo WHERE ProductID = ?");
         query.addBindValue(productID);
         query.exec();
