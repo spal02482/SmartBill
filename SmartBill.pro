@@ -21,6 +21,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+# The Date Format used in the entire Application is 'ddd MMM dd yyyy' i.e. Fri Jan 04 2019
+
 CONFIG += c++14
 
 SOURCES += \
@@ -28,19 +30,22 @@ SOURCES += \
     login.cpp \
     invoice.cpp \
     product.cpp \
-    smartbill.cpp
+    smartbill.cpp \
+    company.cpp
 
 HEADERS += \
     login.h \
     invoice.h \
     product.h \
-    smartbill.h
+    smartbill.h \
+    company.h
 
 FORMS += \
     login.ui \
     invoice.ui \
     product.ui \
-    smartbill.ui
+    smartbill.ui \
+    company.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

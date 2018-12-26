@@ -1,24 +1,24 @@
 #ifndef SMARTBILL_H
 #define SMARTBILL_H
 
+#include <QtCore/QDebug>
+#include <QtGui/QValidator>
+#include <QtWidgets/QLayout>
+#include <QtWidgets/QTableView>
+#include <QtWidgets/QTextEdit>
+#include <QtSql/QSqlQuery>
+#include <QtSql/QSqlError>
+#include <QtSql/QSqlQueryModel>
+#include <QtSql/QSqlRecord>
+#include <QtPrintSupport/QPrinter>
+#include <QtPrintSupport/QPrintDialog>
+
+#include <cctype>
+#include <memory>
+
 #include "invoice.h"
 #include "product.h"
-
-#include <QLayout>
-#include <QTableView>
-
-#include <QDebug>
-
-#include <QValidator>
-#include <QTextEdit>
-#include <cctype>
-
-#include <QPrinter>
-#include <QPrintDialog>
-
-#include <QSqlQuery>
-#include <QSqlError>
-#include <QSqlQueryModel>
+#include "company.h"
 
 namespace Ui {
 class SmartBill;
@@ -31,37 +31,24 @@ class SmartBill : public QWidget
 public:
     explicit SmartBill(QWidget *parent = nullptr);
     ~SmartBill();
-
-    void reloadClientNames();
-
-     QString selectQueryParam;
+    QString selectQueryParam;
 
 private slots:
     void on_addInvoicePushButton_clicked();
-
     void on_addProductPushButton_clicked();
-
     void on_viewProductPushButton_clicked();
-
-    void on_clientNameLineEditSearch_editingFinished();
-
+    void updateProductInfo(const QModelIndex&);
     void on_invoiceIDLineEditSearch_editingFinished();
-
+    void on_clientNameLineEditSearch_editingFinished();
     void on_issueDateDateEditSearch_editingFinished();
-
     void on_dueDateDateEditSearch_editingFinished();
-
-    void on_clearSearchPushButton_clicked();
-
-    void on_invoicesReportTableView_doubleClicked(const QModelIndex &index);
-
+    void on_refreshPushButton_clicked();
+    void on_invoicesReportTableView_doubleClicked(const QModelIndex&);
     void on_openInvoiceReportPushButton_clicked();
-
     void printInvoiceReport();
-
-    void submitCompanyInfo();
-
     void on_changeCompanyInfoPushButton_clicked();
+    void submitCompanyInfo();
+    void on_paymentStatusComboBox_activated(const QString&);
 
 private:
     Ui::SmartBill *ui;
@@ -71,6 +58,9 @@ private:
 
     /* For adding new Products */
     Product* product;
+
+    /* For changing Company Info */
+    company* companyInfo;
 
     /* For viewing added Products */
     QTableView *productViewTableView;
@@ -83,7 +73,6 @@ private:
     QTextEdit* invoiceReportTextEdit;
 
     /* Company Info */
-    QDialog* companyInfo;
     QLineEdit* companyName;
     QLineEdit* companyEmail;
     QLineEdit* companyCIN;

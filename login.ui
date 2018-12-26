@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>677</width>
-    <height>349</height>
+    <height>367</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -76,45 +76,17 @@
     <enum>Qt::RichText</enum>
    </property>
   </widget>
-  <widget class="QLabel" name="loginSuccess">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
+  <widget class="QPushButton" name="changeCredPushButton">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>400</y>
-     <width>201</width>
-     <height>20</height>
+     <x>20</x>
+     <y>300</y>
+     <width>161</width>
+     <height>23</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <weight>75</weight>
-     <italic>false</italic>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="focusPolicy">
-    <enum>Qt::ClickFocus</enum>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::Box</enum>
-   </property>
-   <property name="lineWidth">
-    <number>2</number>
-   </property>
    <property name="text">
-    <string>[+] Status</string>
-   </property>
-   <property name="textFormat">
-    <enum>Qt::RichText</enum>
-   </property>
-   <property name="scaledContents">
-    <bool>false</bool>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
+    <string>Change Credentials</string>
    </property>
   </widget>
  </widget>

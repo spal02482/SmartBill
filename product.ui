@@ -9,9 +9,27 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>455</width>
-    <height>275</height>
+    <width>441</width>
+    <height>268</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>441</width>
+    <height>268</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>441</width>
+    <height>268</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Product</string>
@@ -36,7 +54,7 @@
   <widget class="QLineEdit" name="productNameLineEdit">
    <property name="geometry">
     <rect>
-     <x>11</x>
+     <x>5</x>
      <y>33</y>
      <width>431</width>
      <height>23</height>
@@ -98,7 +116,7 @@
   <widget class="QLineEdit" name="supplierNameLineEdit">
    <property name="geometry">
     <rect>
-     <x>11</x>
+     <x>5</x>
      <y>83</y>
      <width>241</width>
      <height>23</height>
@@ -108,7 +126,7 @@
   <widget class="QSpinBox" name="quanititySpinBox">
    <property name="geometry">
     <rect>
-     <x>370</x>
+     <x>365</x>
      <y>83</y>
      <width>71</width>
      <height>24</height>
@@ -121,7 +139,7 @@
   <widget class="QDoubleSpinBox" name="priceDoubleSpinBox">
    <property name="geometry">
     <rect>
-     <x>260</x>
+     <x>255</x>
      <y>83</y>
      <width>101</width>
      <height>24</height>
@@ -134,14 +152,14 @@
   <widget class="QPushButton" name="addProductInPushButton">
    <property name="geometry">
     <rect>
-     <x>210</x>
+     <x>346</x>
      <y>240</y>
-     <width>101</width>
+     <width>90</width>
      <height>23</height>
     </rect>
    </property>
    <property name="sizePolicy">
-    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
      <horstretch>0</horstretch>
      <verstretch>0</verstretch>
     </sizepolicy>
@@ -150,23 +168,10 @@
     <string>Add</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="cancelAddProductPushButton">
-   <property name="geometry">
-    <rect>
-     <x>340</x>
-     <y>240</y>
-     <width>101</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Cancel</string>
-   </property>
-  </widget>
   <widget class="QLineEdit" name="productDescpnLineEdit">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>5</x>
      <y>130</y>
      <width>431</width>
      <height>101</height>
@@ -190,7 +195,6 @@
   <zorder>quanititySpinBox</zorder>
   <zorder>priceDoubleSpinBox</zorder>
   <zorder>addProductInPushButton</zorder>
-  <zorder>cancelAddProductPushButton</zorder>
  </widget>
  <tabstops>
   <tabstop>productNameLineEdit</tabstop>
@@ -199,7 +203,6 @@
   <tabstop>quanititySpinBox</tabstop>
   <tabstop>productDescpnLineEdit</tabstop>
   <tabstop>addProductInPushButton</tabstop>
-  <tabstop>cancelAddProductPushButton</tabstop>
  </tabstops>
  <resources>
   <include location="smartbill.qrc"/>

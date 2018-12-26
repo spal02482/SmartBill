@@ -1,15 +1,13 @@
 #ifndef PRODUCT_H
 #define PRODUCT_H
 
-#include <QDialog>
-
-#include <QDebug>
-
-#include <QMessageBox>
-
-#include <QSqlQuery>
-#include <QSqlError>
-#include <QSqlDatabase>
+#include <QtCore/QDebug>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QMessageBox>
+#include <QtSql/QSqlQuery>
+#include <QtSql/QSqlError>
+#include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlRecord>
 
 #include <memory>
 
@@ -23,18 +21,19 @@ class Product : public QDialog
 
 public:
     explicit Product(QWidget *parent = nullptr);
+    explicit Product(QSqlRecord , QWidget *parent = nullptr);
     ~Product();
 
     bool validateProduct(QString, double, int);
 
 private slots:
-
-    void on_cancelAddProductPushButton_clicked();
-
     void on_addProductInPushButton_clicked();
 
 private:
     Ui::Product *ui;
+
+    bool updateProduct = false;
+    int toBeUpdatedProductID = 0;
 };
 
 #endif // PRODUCT_H

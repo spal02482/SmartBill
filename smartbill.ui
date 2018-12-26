@@ -9,25 +9,25 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1157</width>
-    <height>700</height>
+    <width>1336</width>
+    <height>768</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
-    <width>0</width>
-    <height>0</height>
+    <width>1336</width>
+    <height>768</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1366</width>
+    <width>1336</width>
     <height>768</height>
    </size>
   </property>
@@ -49,8 +49,8 @@
     <rect>
      <x>0</x>
      <y>170</y>
-     <width>1158</width>
-     <height>531</height>
+     <width>1336</width>
+     <height>558</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -172,9 +172,9 @@
    <property name="geometry">
     <rect>
      <x>91</x>
-     <y>141</y>
+     <y>140</y>
      <width>150</width>
-     <height>21</height>
+     <height>23</height>
     </rect>
    </property>
    <property name="font">
@@ -211,7 +211,7 @@
      <x>0</x>
      <y>140</y>
      <width>70</width>
-     <height>21</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
@@ -232,9 +232,9 @@
    <property name="geometry">
     <rect>
      <x>260</x>
-     <y>141</y>
+     <y>140</y>
      <width>111</width>
-     <height>21</height>
+     <height>23</height>
     </rect>
    </property>
    <property name="font">
@@ -257,9 +257,9 @@
    <property name="geometry">
     <rect>
      <x>430</x>
-     <y>141</y>
+     <y>140</y>
      <width>101</width>
-     <height>21</height>
+     <height>23</height>
     </rect>
    </property>
    <property name="font">
@@ -310,23 +310,23 @@
     <string>Due Date</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="clearSearchPushButton">
+  <widget class="QPushButton" name="refreshPushButton">
    <property name="geometry">
     <rect>
-     <x>1086</x>
-     <y>138</y>
+     <x>1267</x>
+     <y>140</y>
      <width>64</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
-    <string>Clear</string>
+    <string>Refresh</string>
    </property>
   </widget>
   <widget class="QPushButton" name="openInvoiceReportPushButton">
    <property name="geometry">
     <rect>
-     <x>940</x>
+     <x>1120</x>
      <y>140</y>
      <width>140</width>
      <height>23</height>
@@ -339,9 +339,9 @@
   <widget class="QLabel" name="companyNameLabel">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>0</x>
      <y>40</y>
-     <width>1030</width>
+     <width>1211</width>
      <height>81</height>
     </rect>
    </property>
@@ -363,7 +363,7 @@
   <widget class="QLabel" name="companyEmailLabel">
    <property name="geometry">
     <rect>
-     <x>809</x>
+     <x>980</x>
      <y>40</y>
      <width>221</width>
      <height>20</height>
@@ -379,7 +379,7 @@
   <widget class="QLabel" name="companyContact1Label">
    <property name="geometry">
     <rect>
-     <x>920</x>
+     <x>1091</x>
      <y>60</y>
      <width>110</width>
      <height>20</height>
@@ -395,9 +395,9 @@
   <widget class="QLabel" name="companyAddressLabel">
    <property name="geometry">
     <rect>
-     <x>400</x>
+     <x>531</x>
      <y>0</y>
-     <width>751</width>
+     <width>800</width>
      <height>30</height>
     </rect>
    </property>
@@ -420,7 +420,7 @@
   <widget class="QLabel" name="companyContact2Label">
    <property name="geometry">
     <rect>
-     <x>920</x>
+     <x>1091</x>
      <y>80</y>
      <width>110</width>
      <height>20</height>
@@ -436,7 +436,7 @@
   <widget class="QLabel" name="companyCinLabel">
    <property name="geometry">
     <rect>
-     <x>849</x>
+     <x>1020</x>
      <y>100</y>
      <width>181</width>
      <height>20</height>
@@ -452,17 +452,20 @@
   <widget class="QLabel" name="companyLogoLabel">
    <property name="geometry">
     <rect>
-     <x>1030</x>
-     <y>50</y>
-     <width>121</width>
-     <height>71</height>
+     <x>1220</x>
+     <y>40</y>
+     <width>101</width>
+     <height>81</height>
     </rect>
    </property>
    <property name="text">
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap resource="smartbill.qrc">:/Icons/smartbill.jpeg</pixmap>
+    <pixmap resource="smartbill.qrc">:/Icons/smartbill_low_res.jpg</pixmap>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QPushButton" name="changeCompanyInfoPushButton">
@@ -475,7 +478,7 @@
     </rect>
    </property>
    <property name="toolTip">
-    <string>Change company Info</string>
+    <string>Change Company Info</string>
    </property>
    <property name="text">
     <string/>
@@ -491,6 +494,22 @@
     </size>
    </property>
   </widget>
+  <widget class="QComboBox" name="paymentStatusComboBox">
+   <property name="geometry">
+    <rect>
+     <x>1010</x>
+     <y>140</y>
+     <width>101</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="editable">
+    <bool>false</bool>
+   </property>
+   <property name="currentText">
+    <string/>
+   </property>
+  </widget>
   <zorder>label_5</zorder>
   <zorder>addInvoicePushButton</zorder>
   <zorder>addProductPushButton</zorder>
@@ -504,7 +523,7 @@
   <zorder>dueDateDateEditSearch</zorder>
   <zorder>label_3</zorder>
   <zorder>label_4</zorder>
-  <zorder>clearSearchPushButton</zorder>
+  <zorder>refreshPushButton</zorder>
   <zorder>openInvoiceReportPushButton</zorder>
   <zorder>companyNameLabel</zorder>
   <zorder>companyEmailLabel</zorder>
@@ -514,6 +533,7 @@
   <zorder>companyCinLabel</zorder>
   <zorder>companyLogoLabel</zorder>
   <zorder>changeCompanyInfoPushButton</zorder>
+  <zorder>paymentStatusComboBox</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>

@@ -52,17 +52,18 @@ def func():
    IssueDate = Date.strftime('%a %b %d %Y')
    DueDate = (Date + datetime.timedelta(days = day_offset + random.randint(1, 7))).strftime('%a %b %d %Y')
 
-   return (ClientName, ClientAddress, ProductList, IssueDate, DueDate, BillingAmount, GstAmount, ShipAmount)
+   return (ClientName, ClientAddress, ProductList, IssueDate, DueDate, BillingAmount, GstAmount, ShipAmount,
+      (BillingAmount))
    
 
-conn = sqlite3.connect('../Projects/SmartBill/SmartBill/smartbill.db')
+conn = sqlite3.connect('smartbill.db')
 cursor = conn.cursor()
 
 
-for i in range(99):
+for i in range(49):
    result = func()
    print(result)
    cursor.execute('''insert into InvoiceInfo (ClientName, ClientAddress, ProductList, IssueDate, DueDate,
-      BillingAmount, GstAmount, ShipAmount) values (?, ?, ?, ?, ?, ?, ?, ?)''', result)
+      BillingAmount, GstAmount, ShipAmount, PaidAmount) values (?, ?, ?, ?, ?, ?, ?, ?, ?)''', result)
 
 conn.commit()
