@@ -3,6 +3,7 @@
 
 #include <QtCore/QDebug>
 #include <QtGui/QValidator>
+#include <QtGui/QTextTableCell>
 #include <QtWidgets/QLayout>
 #include <QtWidgets/QTableView>
 #include <QtWidgets/QTextEdit>
@@ -32,6 +33,7 @@ public:
     explicit SmartBill(QWidget *parent = nullptr);
     ~SmartBill();
     QString selectQueryParam;
+    void setCellContent(QTextTable*, int, int, QString, QTextCursor*);
 
 private slots:
     void on_addInvoicePushButton_clicked();

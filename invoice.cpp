@@ -114,7 +114,7 @@ void Invoice::initializeInvoiceWindow(Ui::Invoice* ui)
     ui->productTableWidget->setColumnWidth(2, 55);
     ui->productTableWidget->setColumnWidth(3, 60);
 
-    qDebug() << "Invoice: initializeInvoiceWindow() " << "Invoice Window initialized";
+    qDebug() << "Invoice: initializeInvoiceWindow(): " << "Invoice Window initialized";
 }
 
 
@@ -129,7 +129,7 @@ bool Invoice::validateInvoice() const
             and shipAmount >= 0.0 and issueDate >= QDate::currentDate() and dueDate >=  QDate::currentDate()) {
         invoiceValid = true;
     }
-    qDebug() << "Invoice: validateInvoice() " << "Invoice validation: " << invoiceValid;
+    qDebug() << "Invoice: validateInvoice(): " << "Invoice validation: " << invoiceValid;
     return invoiceValid;
 }
 
@@ -150,6 +150,7 @@ bool Invoice::collectInvoiceData()
     paidAmount = ui->paidAmountDoubleSpinBox->value();
     issueDate = ui->issueDateDateEdit->date();
     dueDate = ui->dueDateDateEdit->date();
+    dueDate_sqlite = ui->dueDateDateEdit->date();
 
     if (validateInvoice()) {
         QTableWidget& productTableWidget = *(ui->productTableWidget);
@@ -164,7 +165,7 @@ bool Invoice::collectInvoiceData()
         collectedInvoiceData = (productList != "");
     }
 
-    qDebug() << "Invoice: collectInvoiceData() " << "Invoice data collection: " << collectedInvoiceData;
+    qDebug() << "Invoice: collectInvoiceData(): " << "Invoice data collection: " << collectedInvoiceData;
     return collectedInvoiceData;
 }
 
@@ -240,18 +241,19 @@ void Invoice::on_submitInvoicePushButton_clicked()
         QSqlQuery query;
         if (updateInvoice) {
             query.prepare("UPDATE InvoiceInfo SET ClientName = ?, ClientAddress = ?, ProductList = ?, IssueDate = ?,"
-                          "DueDate = ?, BillingAmount = ?, GstAmount = ?, ShipAmount = ?, PaidAmount = ? "
+                          "DueDate = ?, DueDate_sqlite = ?, BillingAmount = ?, GstAmount = ?, ShipAmount = ?, PaidAmount = ? "
                           "WHERE InvoiceID = ? and isDeleted = 0");
         }
         else {
-            query.prepare("INSERT INTO InvoiceInfo (ClientName, ClientAddress, ProductList, IssueDate, DueDate, "
-                           "BillingAmount, GstAmount, ShipAmount, PaidAmount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            query.prepare("INSERT INTO InvoiceInfo (ClientName, ClientAddress, ProductList, IssueDate, DueDate, DueDate_sqlite, "
+                           "BillingAmount, GstAmount, ShipAmount, PaidAmount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         }
         query.addBindValue(clientName);
         query.addBindValue(clientAddress);
         query.addBindValue(productList);
-        query.addBindValue(issueDate.toString("yyyy-MM-dd"));
-        query.addBindValue(dueDate.toString("yyyy-MM-dd"));
+        query.addBindValue(issueDate.toString());
+        query.addBindValue(dueDate.toString());
+        query.addBindValue(dueDate_sqlite.toString("yyyy-MM-dd"));
         query.addBindValue(billingAmount);
         query.addBindValue(gstAmount);
         query.addBindValue(shipAmount);
@@ -275,7 +277,7 @@ void Invoice::on_submitInvoicePushButton_clicked()
         QMessageBox::warning(this, tr("Invoice Submission Failed"), tr("Check whether all fields are filled with valid values."));
     }
 
-    qDebug() << "Invoice: on_submitInvoicePushButton_clicked() " << "Invoice submitted";
+    qDebug() << "Invoice: on_submitInvoicePushButton_clicked(): " << "Invoice submitted";
 }
 
 void Invoice::on_billingAmountDoubleSpinBox_valueChanged(double value)

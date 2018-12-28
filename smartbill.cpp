@@ -70,12 +70,14 @@ SmartBill::SmartBill(QWidget *parent) :
 
     ui->issueDateDateEditSearch->setDate(QDate::currentDate());
     ui->dueDateDateEditSearch->setDate(QDate::currentDate());
+
+    qDebug() << "Smartbill: SmartBill Constructor: " << "SmartBill Window constructed";
 }
 
 SmartBill::~SmartBill()
 {
     delete ui;
-    qDebug() << "Deleting SmartBill Window";
+    qDebug() << "Smartbill: SmartBill Desstructor: " << "SmartBill Window destroyed";
 }
 
 
@@ -183,22 +185,21 @@ void SmartBill::on_clientNameLineEditSearch_editingFinished()
        query.addBindValue(clientName);
        query.exec();
        model->setQuery(query);
+       /* Don't do query.finish(). */
     }
 }
 
 void SmartBill::on_issueDateDateEditSearch_editingFinished()
 {
     QDate issueDate = ui->issueDateDateEditSearch->date();
-    qDebug() << issueDate.isNull() << issueDate.isValid();
     if (!issueDate.isNull()) {
         QSqlQuery query;
         query.prepare("SELECT " + selectQueryParam + " FROM InvoiceInfo WHERE IssueDate = ? and isDeleted = 0");
-        query.addBindValue(issueDate.toString("yyyy-MM-dd"));
-        qDebug() << "issueDateSearch: " << issueDate.toString("yyyy-MM-dd");
+        query.addBindValue(issueDate.toString());
+        qDebug() << "issueDateSearch: " << issueDate.toString();
         query.exec();
         qDebug() << query.lastError();
         model->setQuery(query);
-        /* Don't do query.finish(). */
     }
 }
 
@@ -208,8 +209,8 @@ void SmartBill::on_dueDateDateEditSearch_editingFinished()
     if (!dueDate.isNull()) {
         QSqlQuery query;
         query.prepare("SELECT " + selectQueryParam + " FROM InvoiceInfo WHERE DueDate = ? and isDeleted = 0");
-        query.addBindValue(dueDate.toString("yyyy-MM-dd"));
-        qDebug() << "dueDateSearch: " << dueDate.toString("yyyy-MM-dd");
+        query.addBindValue(dueDate.toString());
+        qDebug() << "dueDateSearch: " << dueDate.toString();
         query.exec();
         model->setQuery(query);
         /* Don't do query.finish(). */
@@ -249,8 +250,8 @@ void SmartBill::on_invoicesReportTableView_doubleClicked(const QModelIndex &inde
        clientName = query.value(1).toString();
        clientAddress = query.value(2).toString();
        productList = query.value(3).toString();
-       issueDate = QDate::fromString(query.value(4).toString(), "yyyy-MM-dd");
-       dueDate = QDate::fromString(query.value(5).toString(), "yyyy-MM-dd");
+       issueDate = QDate::fromString(query.value(4).toString());
+       dueDate = QDate::fromString(query.value(5).toString());
        billingAmount = query.value(6).toDouble();
        gstAmount = query.value(7).toDouble();
        shipAmount = query.value(8).toDouble();
@@ -262,87 +263,135 @@ void SmartBill::on_invoicesReportTableView_doubleClicked(const QModelIndex &inde
    invoice->open();
 }
 
+void SmartBill::setCellContent(QTextTable* table, int row, int col, QString string, QTextCursor* cursor)
+{
+    QTextTableCell cell = table->cellAt(row, col);
+    QTextCursor cellCursor = cell.firstCursorPosition();
+
+    QTextBlockFormat cellBlockFormat(cellCursor.blockFormat());
+    cellBlockFormat.setAlignment(Qt::AlignHCenter);
+    cellCursor.setBlockFormat(cellBlockFormat);
+
+    cellCursor.insertText(string);
+    cursor->movePosition(QTextCursor::NextBlock);
+}
+
 void SmartBill::on_openInvoiceReportPushButton_clicked()
 {
     QModelIndex index = ui->invoicesReportTableView->currentIndex();
     QModelIndex idx = index.siblingAtColumn(0);
     int InvoiceID = idx.data(Qt::DisplayRole).toInt();
+
+    invoiceReportDialog = new QDialog(this);
+    invoiceReportDialog->setGeometry(0, 0, 600, 700);
+    invoiceReportTextEdit = new QTextEdit(invoiceReportDialog);
+    invoiceReportTextEdit->setGeometry(0, 0, 600, 700);
+    QPushButton* btn = new QPushButton("Print", invoiceReportDialog);
+    btn->setGeometry(5, 550, 100, 45);
+
     QSqlQuery query;
+
+    query.exec("SELECT name, address, city, pincode, state, country, email, website, contact1, contact2 FROM CompanyInfo");
+    if (!query.next()) {
+        qDebug() << "SmartBill: on_openInvoiceReportPushButton_clicked(): " << query.lastError();
+    }
+
+    QTextCursor cursor(invoiceReportTextEdit->textCursor());
+
+    QTextBlockFormat blockFormat = cursor.blockFormat();
+    QTextCharFormat charFormat = cursor.charFormat();
+
+    blockFormat.setAlignment(Qt::AlignCenter);
+    charFormat.setFontFamily("Cambria");
+    charFormat.setFontPointSize(20);
+    charFormat.setFontWeight(10);
+    cursor.mergeBlockFormat(blockFormat);
+    cursor.mergeCharFormat(charFormat);
+    cursor.insertText(query.value(0).toString() + "\n");
+
+    charFormat.setFontPointSize(10);
+    cursor.mergeCharFormat(charFormat);
+    cursor.insertText(query.value(1).toString() + "\n");
+    cursor.insertText(query.value(2).toString() + ",  " + query.value(3).toString() + ", " + query.value(4).toString() + ", " + query.value(5).toString() + "\n");
+    cursor.insertText(tr("E-Mail: ") + query.value(6).toString() + ",  " + tr("Website: ") + query.value(7).toString() + "\n");
+    cursor.insertText(tr("Contact: ") + query.value(8).toString() + " " + query.value(9).toString() + "\n");
+    cursor.insertText(tr("\n\n"));
+    query.finish();
+
     query.prepare("SELECT * FROM InvoiceInfo WHERE InvoiceID = ?");
     query.addBindValue(InvoiceID);
     query.exec();
 
-    QString clientName;
-    QString clientAddress;
-    QString productList;
-    double billingAmount = 0.0;
-    double gstAmount = 0.0;
-    double shipAmount = 0.0;
-    QString issueDate;
-    QString dueDate;
-
-    if (query.next()) {
-        clientName = query.value(1).toString();
-        clientAddress = query.value(2).toString();
-        productList = query.value(3).toString();
-        issueDate = QDate::fromString(query.value(4).toString(), "yyyy-MM-dd").toString();
-        dueDate = QDate::fromString(query.value(5).toString(), "yyyy-MM-dd").toString();
-        billingAmount = query.value(6).toDouble();
-        gstAmount = query.value(7).toDouble();
-        shipAmount = query.value(8).toDouble();
+    if (!query.next()) {
+        qDebug() << "SmartBill: on_openInvoiceReportPushButton_clicked(): " << "Invoice Data: " << query.lastError();
     }
 
-    invoiceReportDialog = new QDialog(this);
-    invoiceReportDialog->setGeometry(0, 0, 700, 600);
-    invoiceReportTextEdit = new QTextEdit(invoiceReportDialog);
-    invoiceReportTextEdit->setGeometry(5, 5, 690, 545);
-    QPushButton* btn = new QPushButton("Print", invoiceReportDialog);
-    btn->setGeometry(5, 550, 100, 45);
+    blockFormat.setAlignment(Qt::AlignLeft);
+    charFormat.setFontPointSize(10);
+    cursor.mergeBlockFormat(blockFormat);
+    cursor.mergeCharFormat(charFormat);
+    cursor.insertText(tr("Invoice ID: ") + QString::number(InvoiceID) + "\n");
+    cursor.insertText(tr("Name: ") + query.value(1).toString() + "\n");
+    cursor.insertText(tr("Address: ") + query.value(2).toString() + "\n");
+    cursor.insertText(tr("\n\n"));
 
-    QString html =
-            "<h1 align=\"center\">Invoice</h1><br>"
-            "<h2 align=\"center\"><b>" + clientName + "</b></h2><br>"
-            "<h3 align=\"center\"><i>" + clientAddress + "</i></h3><br>"
-            "<table align=\"center\" border=\"1\">"
-            "<tr>"
-            "<td>ProductID</td>"
-            "<td>ProductName</td>"
-            "<td>Quantity</td>"
-            "<td>Price/Item</td>"
-            "<td>Price</td>"
-            "</tr>";
-
-    QJsonDocument doc = QJsonDocument::fromJson(productList.toUtf8());
+    QJsonDocument doc = QJsonDocument::fromJson(query.value(3).toString().toUtf8());
     QJsonObject obj = doc.object();
 
-    for (QJsonObject::Iterator it = obj.begin(); it != obj.end(); ++it) {
-        qDebug() << it.key() << it.value() <<  it.value().toString();
-        html += "<tr>";
+    QTextTableFormat tableFormat;
+    QVector<QTextLength> constraints;
+    constraints << QTextLength(QTextLength::PercentageLength, 52);
+    constraints << QTextLength(QTextLength::PercentageLength, 16);
+    constraints << QTextLength(QTextLength::PercentageLength, 16);
+    constraints << QTextLength(QTextLength::PercentageLength, 16);
+    tableFormat.setColumnWidthConstraints(constraints);
+    QTextTable* table  = cursor.insertTable(obj.size() + 1, 4, tableFormat);
+
+    setCellContent(table, 0, 0, "Product Name", &cursor);
+    setCellContent(table, 0, 1, "Quantity", &cursor);
+    setCellContent(table, 0, 2, "Unit Price", &cursor);
+    setCellContent(table, 0, 3, "Price", &cursor);
+
+    int row = 1;
+    for (QJsonObject::Iterator it = obj.begin(); it != obj.end(); ++it, ++row) {
+
         int ProductID = it.key().toInt();
+        int quantity = it.value().toInt();
+
         QSqlQuery query;
         query.prepare("SELECT ProductName, Price FROM ProductInfo WHERE ProductID = ?");
         query.addBindValue(ProductID);
         query.exec();
 
-        if (query.next()) {
-            html += ("<td>" + it.key() + "</td>");
-            html += ("<td>" + query.value(0).toString() + "</td>");
-            html += ("<td>" + QString::number(it.value().toInt()) + "</td>");
-            html += ("<td>" + query.value(1).toString() + "</td>");
-            html += ("<td>" + QString::number((query.value(1).toDouble() * it.value().toInt())) + "</td>");
+        if (!query.next()) {
+            qDebug() << "SmartBill: on_openInvoiceReportPushButton_clicked(): " << "String to JSON: " << query.lastError();
+            break;
         }
-        html += "</tr>";
+
+        setCellContent(table, row, 0, query.value(0).toString(), &cursor);
+        setCellContent(table, row, 1, QString::number(quantity), &cursor);
+        setCellContent(table, row, 2, query.value(1).toString(), &cursor);
+        setCellContent(table, row, 3, QString::number(query.value(1).toDouble() * quantity), &cursor);
+
+        query.finish();
     }
 
-    html += "</table>";
+    cursor.movePosition(QTextCursor::NextBlock);
+    cursor.insertText(tr("\n\n"));
+    charFormat.setFontFamily("Cambria");
+    charFormat.setFontPointSize(10);
+    charFormat.setFontWeight(10);
+    cursor.mergeCharFormat(charFormat);
+    cursor.insertText(tr("Bill Amount: ") + query.value(7).toString() + "\n");
+    cursor.insertText(tr("GST: ") + query.value(8).toString() + "\n");
+    cursor.insertText(tr("Ship Amount: ") + query.value(9).toString() + "\n");
+    cursor.insertText(tr("Total Amount: ") + QString::number(query.value(7).toDouble() + query.value(8).toDouble() + query.value(9).toDouble()) + "\n");
+    cursor.insertText(tr("Paid Amount: ") + query.value(10).toString() + "\n");
 
-    html += "<h3 align=\"center\">GST Price: " + QString::number(gstAmount) + "</h3>";
-    html += "<h3 align=\"center\">Shipping Price: " + QString::number(shipAmount) + "</h3>";
-    html += "<h2 align=\"center\">Total Price: " + QString::number(billingAmount + gstAmount + shipAmount) + "</h2>";
-    html += "<h3 align=\"center\">Date issued: " + issueDate + "</h3>";
-    html += "<h3 align=\"center\">Payment due till date: " + dueDate + "</h3>";
+    blockFormat.setAlignment(Qt::AlignCenter);
+    cursor.mergeBlockFormat(blockFormat);
+    cursor.insertText("Thank You. :)");
 
-    invoiceReportTextEdit->setHtml(html);
     invoiceReportDialog->open();
     QObject::connect(btn, SIGNAL(clicked()), this, SLOT(printInvoiceReport()));
 }
@@ -382,23 +431,6 @@ void SmartBill::submitCompanyInfo()
     companyInfo->close();
 }
 
-QValidator::State NameValidator::validate(QString& name, int& cursorPosition) const
-{
-    bool nameContainsSpecialChars = false;
-    for (QChar c : name) {
-        if (not c.isLetter()) {
-            nameContainsSpecialChars = true;
-        }
-    }
-
-    if (nameContainsSpecialChars == false and cursorPosition == name.length()) {
-        return QValidator::Acceptable;
-    }
-    else {
-        return QValidator::Invalid;
-    }
-}
-
 void SmartBill::on_paymentStatusComboBox_activated(const QString &paymentStatus)
 {
     qDebug() << "SmartBill: on_paymentStatusComboBox_activated(): " << paymentStatus << " selected";
@@ -414,12 +446,30 @@ void SmartBill::on_paymentStatusComboBox_activated(const QString &paymentStatus)
         sql = "SELECT " + selectQueryParam + " FROM InvoiceInfo WHERE " + remainingAmount + " = 0 and isDeleted = 0";
     }
     else if (paymentStatus == "Due") {
-        sql = "SELECT " + selectQueryParam + " FROM InvoiceInfo WHERE " + remainingAmount + " != 0 and DueDate >= date('now') and isDeleted = 0";
+        sql = "SELECT " + selectQueryParam + " FROM InvoiceInfo WHERE " + remainingAmount + " != 0 and DueDate_sqlite >= date('now') and isDeleted = 0";
     }
     else if (paymentStatus == "Overdue") {
-        sql = "SELECT " + selectQueryParam + " FROM InvoiceInfo WHERE " + remainingAmount + " != 0 and DueDate < date('now') and isDeleted = 0";
+        sql = "SELECT " + selectQueryParam + " FROM InvoiceInfo WHERE " + remainingAmount + " != 0 and DueDate_sqlite < date('now') and isDeleted = 0";
     }
     query.exec(sql);
-    qDebug() << "SmartBill: on_paymentStatusComboBox_activated(): " << query.lastError();
+    if (!query.next())
+        qDebug() << "SmartBill: on_paymentStatusComboBox_activated(): " << query.lastError();
     model->setQuery(query);
+}
+
+QValidator::State NameValidator::validate(QString& name, int& cursorPosition) const
+{
+    bool nameContainsSpecialChars = false;
+    for (QChar c : name) {
+        if (not c.isLetter()) {
+            nameContainsSpecialChars = true;
+        }
+    }
+
+    if (nameContainsSpecialChars == false and cursorPosition == name.length()) {
+        return QValidator::Acceptable;
+    }
+    else {
+        return QValidator::Invalid;
+    }
 }

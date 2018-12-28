@@ -53,6 +53,7 @@ private:
     double paidAmount;
     QDate issueDate;
     QDate dueDate;
+    QDate dueDate_sqlite;
     QString productList;
 
     /* Previous Value holders for Amounts */
