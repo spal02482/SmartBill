@@ -10,6 +10,7 @@
 #include <QtWidgets/QMessageBox>
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlError>
+#include <QtSql/QSqlRecord>
 #include <QtSql/QSqlDatabase>
 
 #include <memory>
@@ -24,7 +25,7 @@ class Invoice : public QDialog
 
 public:
     explicit Invoice(QWidget *parent = nullptr);
-    explicit Invoice(QString, QString, double, double, double, double, QDate, QDate, QString, int, QWidget *parent = nullptr);
+    explicit Invoice(QSqlRecord, QWidget *parent = nullptr);
     ~Invoice();
 
     void initializeInvoiceWindow(Ui::Invoice*);

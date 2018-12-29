@@ -6,6 +6,8 @@ Product::Product(QWidget *parent) :
     ui(new Ui::Product)
 {
     ui->setupUi(this);
+    qDebug() << "Product: Default Constructor: " << "Product Window created";
+
     this->setAttribute(Qt::WA_DeleteOnClose);
 }
 
@@ -14,6 +16,8 @@ Product::Product(QSqlRecord rec, QWidget *parent):
     ui(new Ui::Product)
 {
     ui->setupUi(this);
+    qDebug() << "Product: Parmeterized Constructor: " << "Product Window created";
+
     this->setAttribute(Qt::WA_DeleteOnClose);
 
     updateProduct = true;
@@ -29,7 +33,7 @@ Product::Product(QSqlRecord rec, QWidget *parent):
 Product::~Product()
 {
     delete ui;
-    qDebug() << "Deleting Product Window";
+    qDebug() << "Product: Product Destructor: " << "Product Window destroyed";
 }
 
 bool Product::validateProduct(QString ProductName, double Price, int NumberInStock)
@@ -55,6 +59,7 @@ void Product::on_addProductInPushButton_clicked()
 
     /* If Product Information is valid, then add it to ProductInfo Table */
     if (validateProduct(ProductName, Price, NumberInStock)) {
+
         QString sql;
         if (updateProduct) {
             sql = "UPDATE ProductInfo SET ProductName = ?, Price = ?, NumberInStock = ?, SupplierName = ?, Description = ? WHERE "
@@ -64,6 +69,7 @@ void Product::on_addProductInPushButton_clicked()
             sql = "INSERT INTO ProductInfo (ProductName, Price, NumberInStock, SupplierName, Description)"
                     "VALUES (?, ?, ?, ?, ?)";
         }
+
         QSqlQuery query;
         query.prepare(sql);
         query.addBindValue(ProductName);
@@ -76,12 +82,8 @@ void Product::on_addProductInPushButton_clicked()
             query.addBindValue(toBeUpdatedProductID);
         }
 
-
-        if (query.exec()) {
-            qDebug() << "Query Successfull";
-        }
-        else {
-            qDebug() << "Query Unsuccessfull " << query.lastError();
+        if (!query.exec()) {
+            qDebug() << "Product: on_addProductInPushButton_clicked(): " << "Failed to Add product " << ProductName;
         }
 
         query.finish();

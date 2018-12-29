@@ -21,9 +21,7 @@ Invoice::Invoice(QWidget *parent) :
  * 1. Fills the Invoice fields.
  * 2. Converts Product List string to JSON Object and accordingly fills the Product List Widget.
  */
-Invoice::Invoice(QString clientName, QString clientAddress, \
-                 double billingAmount, double gstAmount, double shipAmount, double paidAmount, \
-                 QDate issueDate, QDate dueDate, QString productList, int InvoiceID, QWidget* parent) :
+Invoice::Invoice(QSqlRecord rec,  QWidget* parent) :
     QDialog(parent),
     ui(new Ui::Invoice)
 {
@@ -33,18 +31,18 @@ Invoice::Invoice(QString clientName, QString clientAddress, \
     initializeInvoiceWindow(ui);
 
     updateInvoice = true;
-    toBeUpdatedinvoiceID = InvoiceID;
+    toBeUpdatedinvoiceID = rec.value(0).toInt();
 
-    ui->clientNameLineEdit->setText(clientName);
-    ui->clientAddressLineEdit->setText(clientAddress);
-    ui->billingAmountDoubleSpinBox->setValue(billingAmount);
-    ui->gstAmountDoubleSpinBox->setValue(gstAmount);
-    ui->shipAmountDoubleSpinBox->setValue(shipAmount);
-    ui->paidAmountDoubleSpinBox->setValue(paidAmount);
-    ui->issueDateDateEdit->setDate(issueDate);
-    ui->dueDateDateEdit->setDate(dueDate);
+    ui->clientNameLineEdit->setText(rec.value(1).toString());
+    ui->clientAddressLineEdit->setText(rec.value(2).toString());
+    ui->issueDateDateEdit->setDate(rec.value(4).toDate());
+    ui->dueDateDateEdit->setDate(rec.value(5).toDate());
+    ui->billingAmountDoubleSpinBox->setValue(rec.value(7).toDouble());
+    ui->gstAmountDoubleSpinBox->setValue(rec.value(8).toDouble());
+    ui->shipAmountDoubleSpinBox->setValue(rec.value(9).toDouble());
+    ui->paidAmountDoubleSpinBox->setValue(rec.value(10).toDouble());
 
-    QJsonDocument doc = QJsonDocument::fromJson(productList.toUtf8());
+    QJsonDocument doc = QJsonDocument::fromJson(rec.value(3).toString().toUtf8());
     QJsonObject productListJSONobj = doc.object();
 
     for (QJsonObject::iterator it = productListJSONobj.begin(); it != productListJSONobj.end(); ++it) {
@@ -125,7 +123,7 @@ void Invoice::initializeInvoiceWindow(Ui::Invoice* ui)
 bool Invoice::validateInvoice() const
 {
     bool invoiceValid = false;
-    if (clientName != "" and numberOfProductsAdded > 0 and billingAmount >= 0.0 and gstAmount >= 0.0 \
+    if (clientName != "" and ((numberOfProductsAdded > 0 or updateInvoice == true))  and billingAmount >= 0.0 and gstAmount >= 0.0 \
             and shipAmount >= 0.0 and issueDate >= QDate::currentDate() and dueDate >=  QDate::currentDate()) {
         invoiceValid = true;
     }

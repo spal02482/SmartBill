@@ -93,7 +93,10 @@ void Login::on_LoginBtn_clicked()
 void Login::on_changeCredPushButton_clicked()
 {
     changeCredentials = new QDialog(this);
+    changeCredentials->setWindowModality(Qt::ApplicationModal);
     changeCredentials->resize(255, 240);
+    changeCredentials->setFixedSize(255, 240);
+
     QLabel *label_1, *label_2, *label_3, *label_4;
     label_1 = new QLabel("Old User Name", changeCredentials);
     oldusername = new QLineEdit(changeCredentials);

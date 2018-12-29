@@ -5,27 +5,10 @@ company::company(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::company)
 {
-    /*
-    CREATE TABLE "CompanyInfo" (
-        "name"	text,
-        "address"	text,
-        "city"	text,
-        "state"	text,
-        "country"	text,
-        "pincode"	text,
-        "pan"	text,
-        "email"	text,
-        "website"	text,
-        "cin"	text,
-        "gstin"	text,
-        "taxationtype"	text,
-        "contact1"	text,
-        "contact2"	text
-    )*/
-
     ui->setupUi(this);
-    this->setAttribute(Qt::WA_DeleteOnClose);
     qDebug() << "Company: Company Constructor: " << "Company Window constructed";
+
+    this->setAttribute(Qt::WA_DeleteOnClose);
 
     ui->taxationtypeComboBox->addItem("GST");
     ui->taxationtypeComboBox->addItem("Composition Scheme");
@@ -33,8 +16,10 @@ company::company(QWidget *parent) :
     QSqlQuery query;
     query.prepare("SELECT * FROM CompanyInfo");
     query.exec();
-    if (!query.next())
+    if (!query.next()) {
         qDebug() << "Company: Company Constructor: " << query.lastError();
+        return;
+    }
 
     ui->nameLineEdit->setText(query.value(0).toString());
     ui->addressLineEdit->setText(query.value(1).toString());
@@ -64,7 +49,6 @@ void company::on_updateCompanyInfoPushButton_clicked()
     QSqlQuery query;
     query.prepare("UPDATE CompanyInfo SET name = ?, address = ?, city = ?, state = ?, country = ?, pincode = ?, pan = ?, email = ?, website = ?, cin = ?, gstin = ?, taxationtype = ?, contact1 = ?, contact2 = ?");
     query.addBindValue(ui->nameLineEdit->text());
-    qDebug() << ui->nameLineEdit->text();
     query.addBindValue(ui->addressLineEdit->text());
     query.addBindValue(ui->cityLineEdit->text());
     query.addBindValue(ui->stateLineEdit->text());
@@ -78,7 +62,8 @@ void company::on_updateCompanyInfoPushButton_clicked()
     query.addBindValue(ui->taxationtypeComboBox->currentText());
     query.addBindValue(ui->contact1LineEdit->text());
     query.addBindValue(ui->contact2LineEdit->text());
-    query.exec();
-    qDebug() << "Company: on_updateCompanyInfoPushButton_clicked(): " << query.lastError();
+    if (!query.exec()) {
+        qDebug() << "Company: on_updateCompanyInfoPushButton_clicked(): " << query.lastError();
+    }
     this->close();
 }

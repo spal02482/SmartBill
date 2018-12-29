@@ -1,0 +1,43 @@
+CREATE TABLE InvoiceInfo (
+ InvoiceID integer primary key,
+ ClientName text not null,
+ ClientAddress text,
+ ProductList blob not null,
+ IssueDate text not null,
+ DueDate text not null,
+ DueDate_sqlite not null,
+ BillingAmount real not null check (BillingAmount >= 0.0),
+ GstAmount real not null check (GstAmount >= 0.0),
+ ShipAmount real not null check (ShipAmount >= 0.0),
+ PaidAmount real not null check (PaidAmount >= 0.0),
+ isDeleted integer not null default 0
+ );
+CREATE TABLE ProductInfo (
+ ProductID integer primary key,
+ ProductName text not null,
+ Price double not null check (Price >= 0.0),
+ NumberInStock integer not null check (NumberInStock > 0),
+ SupplierName varchar(50),
+ Description text,
+ isDeleted integer default 0
+);
+CREATE TABLE UserInfo (
+ UserName varchar(30),
+ PassWord varchar(30)
+);
+CREATE TABLE CompanyInfo (
+ name text,
+ address text,
+ city text,
+ state text,
+ country text,
+ pincode text,
+ pan text,
+ email text,
+ website text,
+ cin text,
+ gstin text,
+ taxationtype text,
+ contact1 text,
+ contact2 text
+);

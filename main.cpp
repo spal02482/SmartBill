@@ -10,20 +10,3 @@ int main(int argc, char *argv[])
     login.open();
     return a.exec();
 }
-
-/*
- * QJsonObject
- *      |
- *      | Pass to QJsonDocument() Constructor.
- *      |
- * QJsonDocument
- *      |
- *      | toJson() QJsonDocment Non-static Public function.
- *      |
- * QByteArray(i.e. utf-8 text, can be assigned to QString)
- *      |
- *      | fromJson() QJsonDocument static public function.
- *      |
- * QJsonDocument
- */
-

@@ -54,7 +54,10 @@ private slots:
 
 private:
     Ui::SmartBill *ui;
+
     std::unique_ptr<QSqlQueryModel> model;
+    std::unique_ptr<QCompleter> completer;
+
     /* For adding new Invoices */
     Invoice* invoice;
 
@@ -69,12 +72,11 @@ private:
     QDialog* ProductView;
     std::unique_ptr<QSqlQueryModel> modelProductView;
 
-    std::unique_ptr<QCompleter> completer;
-
-    QDialog* invoiceReportDialog;
+    /* For Invoice Report Generation */
     QTextEdit* invoiceReportTextEdit;
+    QDialog* invoiceReportDialog;
 
-    /* Company Info */
+    /* To display Company Info on Widget */
     QLineEdit* companyName;
     QLineEdit* companyEmail;
     QLineEdit* companyCIN;
