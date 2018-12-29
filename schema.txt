@@ -1,3 +1,5 @@
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
 CREATE TABLE InvoiceInfo (
  InvoiceID integer primary key,
  ClientName text not null,
@@ -25,6 +27,7 @@ CREATE TABLE UserInfo (
  UserName varchar(30),
  PassWord varchar(30)
 );
+INSERT INTO UserInfo VALUES('suraj','pal');
 CREATE TABLE CompanyInfo (
  name text,
  address text,
@@ -41,3 +44,5 @@ CREATE TABLE CompanyInfo (
  contact1 text,
  contact2 text
 );
+INSERT INTO CompanyInfo VALUES('Dwaipayana Technologies Pvt. Ltd.','Bhaktivedanta Swami Marg, Gulmohar Road, Suvarna Nagar, Vile Parle (W)','Mumbai','Maharashtra','India','400056','SKFJS5873E','contact.dwaipayanatech@gmail.com','dwaipayanatechnologies.tk','U72200KA2018PTC114875','U72200KA2018PTC114875','GST','+91 776 00 41608','+91 733 77 63918');
+COMMIT;

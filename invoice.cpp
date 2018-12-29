@@ -155,8 +155,25 @@ bool Invoice::collectInvoiceData()
 
         QJsonObject productListJSONobj;
         for (int i = 0; i < productTableWidget.rowCount(); ++i) {
-            productListJSONobj.insert(productTableWidget.item(i, 0)->text(), productTableWidget.item(i, 2)->text().toInt());
+            QString ProductID = productTableWidget.item(i, 0)->text();
+            QString quantity = productTableWidget.item(i, 2)->text();
+
+            QJsonValue val = productListJSONobj.value(ProductID);
+            if (val.isUndefined()) {
+                productListJSONobj.insert(ProductID, quantity.toInt());
+            }
+            else {
+                productListJSONobj.insert(ProductID, val.toInt() + quantity.toInt());
+            }
         }
+
+        qDebug() << productListJSONobj;
+
+        for (QJsonObject::iterator it = productListJSONobj.begin(); it != productListJSONobj.end(); ++it) {
+            productIdList << it.key().toInt();
+            quantityList << it.value().toInt();
+        }
+
         QJsonDocument productListJSONdoc(productListJSONobj);
         productList = productListJSONdoc.toJson(QJsonDocument::Compact);
 
@@ -217,10 +234,6 @@ void Invoice::on_addProductPushButton_clicked()
     ui->billingAmountDoubleSpinBox->setValue(ui->billingAmountDoubleSpinBox->value() + (price * quantity));
     numberOfProductsAdded += 1;
 
-    productIdList << productID;
-    NumberInStockList << NumberInStock;
-    quantityList << quantity;
-
     qDebug() << "Invoice: on_addProductPushButton_clicked(): " << productName <<  " added";
 }
 
@@ -259,15 +272,31 @@ void Invoice::on_submitInvoicePushButton_clicked()
         if (updateInvoice) {
             query.addBindValue(toBeUpdatedinvoiceID);
         }
-        query.exec();
+        if (!query.exec()) {
+            qDebug() << "Invoice: on_submitInvoicePushButton_clicked(): " << query.lastError();
+        }
         query.finish();
 
-        query.prepare("UPDATE ProductInfo SET NumberInStock = ? - ? WHERE ProductID = ?");
-        query.addBindValue(NumberInStockList);
-        query.addBindValue(quantityList);
-        query.addBindValue(productIdList);
-        query.execBatch(QSqlQuery::ValuesAsRows);
-        query.finish();
+        for (int i = 0; i < productIdList.size(); ++i) {
+
+            QSqlQuery queryl;
+            queryl.prepare("SELECT NumberInStock FROM ProductInfo WHERE ProductID = ?");
+            queryl.addBindValue(productIdList.at(i));
+            queryl.exec();
+            if (!queryl.next()) {
+                qDebug() << "Invoice: on_submitInvoicePushButton_clicked(): " << query.lastError();
+                return;
+            }
+
+            QSqlQuery queryr;
+            queryr.prepare("UPDATE ProductInfo SET NumberInStock = ? WHERE ProductID = ?");
+            queryr.addBindValue(QString::number(queryl.value(0).toInt() - quantityList.at(i).toInt()));
+            queryr.addBindValue(productIdList.at(i).toInt());
+            if (!queryr.exec()) {
+                qDebug() << "Invoice: on_submitInvoicePushButton_clicked(): " << query.lastError();
+                return;
+            }
+        }
 
         close();
     }

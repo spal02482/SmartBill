@@ -12,10 +12,11 @@ Login::Login(QWidget *parent) :
     ui(new Ui::Login)
 {
     ui->setupUi(this);
+    this->setFixedSize(670, 370);
     qDebug() << "Login: Constructor: " << "Login Window constructed";
 
     db = std::make_unique<QSqlDatabase>(QSqlDatabase::addDatabase("QSQLITE"));
-    db->setDatabaseName(QCoreApplication::applicationDirPath() + "/smartbill.db");
+    db->setDatabaseName(QCoreApplication::applicationDirPath() + "/translations/smartbill.db");
     qDebug() << "Login: Constructor: " << "Database Connection Added";
 
     if (db->open()) {

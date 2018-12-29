@@ -67,7 +67,6 @@ private:
 
     /* These variables are used to update the product quantity in stock after making the purchase */
     QVariantList productIdList;
-    QVariantList NumberInStockList;
     QVariantList quantityList;
 
 };
