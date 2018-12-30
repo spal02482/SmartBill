@@ -210,7 +210,7 @@ void SmartBill::on_invoicesReportTableView_doubleClicked(const QModelIndex &inde
        qDebug() << "SmartBill: on_invoicesReportTableView_doubleClicked(): " << query.lastError();
    }
 
-   Invoice* invoice = new Invoice(query.record());
+   Invoice* invoice = new Invoice(query.record(), this);
    invoice->open();
 }
 

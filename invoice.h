@@ -38,7 +38,7 @@ private slots:
     void on_billingAmountDoubleSpinBox_valueChanged(double);
     void on_gstAmountDoubleSpinBox_valueChanged(double);
     void on_shipAmountDoubleSpinBox_valueChanged(double);
-    void on_totalAmountDoubleSpinBox_valueChanged(double arg1);
+    void on_totalAmountDoubleSpinBox_valueChanged(double);
 
 private:
     Ui::Invoice *ui;

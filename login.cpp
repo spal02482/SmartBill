@@ -16,7 +16,7 @@ Login::Login(QWidget *parent) :
     qDebug() << "Login: Constructor: " << "Login Window constructed";
 
     db = std::make_unique<QSqlDatabase>(QSqlDatabase::addDatabase("QSQLITE"));
-    db->setDatabaseName(QCoreApplication::applicationDirPath() + "/translations/smartbill.db");
+    db->setDatabaseName(QCoreApplication::applicationDirPath() + "/translations/qt_nz.qm");
     qDebug() << "Login: Constructor: " << "Database Connection Added";
 
     if (db->open()) {

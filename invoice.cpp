@@ -35,8 +35,9 @@ Invoice::Invoice(QSqlRecord rec,  QWidget* parent) :
 
     ui->clientNameLineEdit->setText(rec.value(1).toString());
     ui->clientAddressLineEdit->setText(rec.value(2).toString());
-    ui->issueDateDateEdit->setDate(rec.value(4).toDate());
-    ui->dueDateDateEdit->setDate(rec.value(5).toDate());
+    qDebug() << QDate::fromString(rec.value(4).toString()) << QDate::fromString(rec.value(5).toString());
+    ui->issueDateDateEdit->setDate(QDate::fromString(rec.value(4).toString()));
+    ui->dueDateDateEdit->setDate(QDate::fromString(rec.value(5).toString()));
     ui->billingAmountDoubleSpinBox->setValue(rec.value(7).toDouble());
     ui->gstAmountDoubleSpinBox->setValue(rec.value(8).toDouble());
     ui->shipAmountDoubleSpinBox->setValue(rec.value(9).toDouble());
@@ -169,11 +170,6 @@ bool Invoice::collectInvoiceData()
 
         qDebug() << productListJSONobj;
 
-        for (QJsonObject::iterator it = productListJSONobj.begin(); it != productListJSONobj.end(); ++it) {
-            productIdList << it.key().toInt();
-            quantityList << it.value().toInt();
-        }
-
         QJsonDocument productListJSONdoc(productListJSONobj);
         productList = productListJSONdoc.toJson(QJsonDocument::Compact);
 
@@ -230,6 +226,9 @@ void Invoice::on_addProductPushButton_clicked()
     productTableWidget.setItem(row, 1, new QTableWidgetItem(productName));
     productTableWidget.setItem(row, 2, new QTableWidgetItem(QString::number(quantity)));
     productTableWidget.setItem(row, 3, new QTableWidgetItem(QString::number(price * quantity)));
+
+    productIdList << productID;
+    quantityList <<  quantity;
 
     ui->billingAmountDoubleSpinBox->setValue(ui->billingAmountDoubleSpinBox->value() + (price * quantity));
     numberOfProductsAdded += 1;
