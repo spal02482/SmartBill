@@ -16,18 +16,35 @@ SmartBill::SmartBill(QWidget *parent) :
         qDebug() << "Error retrieving values, SmartBill Constructor:" << query.lastError();
         return;
     }
+    /*
+     name text,
+      address text,
+      district text,
+      state text,
+      country text,
+      city text,
+      pincode text,
+      pan text,
+      email text,
+      website text,
+      cin text,
+      gstin text,
+      taxationtype text,
+      contact1 text,
+      contact2 text
+      */
     ui->companyNameLabel->setText(query.value(0).toString());
-    ui->companyEmailLabel->setText(query.value(7).toString());
-    ui->companyCinLabel->setText("<b>CIN:</b>" + query.value(9).toString());
-    ui->companyAddressLabel->setText(query.value(1).toString() + " " +  query.value(2).toString() + " " + query.value(5).toString() + \
+    ui->companyEmailLabel->setText(query.value(8).toString());
+    ui->companyCinLabel->setText("<b>CIN:</b>" + query.value(10).toString());
+    ui->companyAddressLabel->setText(query.value(1).toString() + " " +  query.value(5).toString() + " " + query.value(6).toString() + \
                                      " " + query.value(3).toString() + " " + query.value(4).toString());
-    ui->companyContact1Label->setText(query.value(12).toString());
-    ui->companyContact2Label->setText(query.value(13).toString());
+    ui->companyContact1Label->setText(query.value(13).toString());
+    ui->companyContact2Label->setText(query.value(14).toString());
 
 
     selectQueryParam = "InvoiceID, ClientName, ClientAddress, IssueDate, DueDate, BillingAmount,"
-                       "GstAmount, ShipAmount, (BillingAmount + GstAmount + ShipAmount),"
-                        "(BillingAmount + GstAmount + ShipAmount) - paidAmount";
+                       "GstAmount, ShipAmount, (BillingAmount + BillingAmount * GstAmount / 100.0 + ShipAmount),"
+                        "(BillingAmount + BillingAmount * GstAmount / 100.0 + ShipAmount) - paidAmount";
 
     model = std::make_unique<QSqlQueryModel>(this);
     model->setQuery("SELECT " + selectQueryParam +  " FROM InvoiceInfo WHERE isDeleted = 0");
@@ -407,7 +424,7 @@ void SmartBill::on_paymentStatusComboBox_activated(const QString &paymentStatus)
 {
     qDebug() << "SmartBill: on_paymentStatusComboBox_activated(): " << paymentStatus << " selected";
 
-    QString remainingAmount = "((BillingAmount + GstAmount + ShipAmount) - paidAmount)";
+    QString remainingAmount = "((BillingAmount + BillingAmount * GstAmount / 100.0 + ShipAmount) - paidAmount)";
     QString sql;
 
     QSqlQuery query;

@@ -124,8 +124,8 @@ void Invoice::initializeInvoiceWindow(Ui::Invoice* ui)
 bool Invoice::validateInvoice() const
 {
     bool invoiceValid = false;
-    if (clientName != "" and ((numberOfProductsAdded > 0 or updateInvoice == true))  and billingAmount >= 0.0 and gstAmount >= 0.0 \
-            and shipAmount >= 0.0 and issueDate >= QDate::currentDate() and dueDate >=  QDate::currentDate()) {
+    if (clientName != "" and ((numberOfProductsAdded > 0 or updateInvoice == true))  and billingAmount >= 0.0 and (gstAmount >= 0.0 \
+            and gstAmount <= 100.0) and shipAmount >= 0.0 and issueDate >= QDate::currentDate() and dueDate >=  QDate::currentDate()) {
         invoiceValid = true;
     }
     qDebug() << "Invoice: validateInvoice(): " << "Invoice validation: " << invoiceValid;
@@ -308,13 +308,15 @@ void Invoice::on_submitInvoicePushButton_clicked()
 
 void Invoice::on_billingAmountDoubleSpinBox_valueChanged(double value)
 {
-    ui->totalAmountDoubleSpinBox->setValue(ui->totalAmountDoubleSpinBox->value() + value - prevBillingAmount);
+    double gstPercent = ui->gstAmountDoubleSpinBox->value();
+    ui->totalAmountDoubleSpinBox->setValue(ui->totalAmountDoubleSpinBox->value() - (prevBillingAmount + prevBillingAmount * gstPercent / 100.0)  + (value + value * gstPercent / 100.0));
     prevBillingAmount = value;
 }
 
 void Invoice::on_gstAmountDoubleSpinBox_valueChanged(double value)
 {
-     ui->totalAmountDoubleSpinBox->setValue(ui->totalAmountDoubleSpinBox->value() + value - prevGstAmount);
+     double billAmount = ui->billingAmountDoubleSpinBox->value();
+     ui->totalAmountDoubleSpinBox->setValue(ui->totalAmountDoubleSpinBox->value() + (value - prevGstAmount) * billAmount / 100.0);
      prevGstAmount = value;
 }
 
