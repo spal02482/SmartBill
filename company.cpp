@@ -33,7 +33,8 @@ company::company(QWidget *parent) :
 
     ui->nameLineEdit->setText(query.value(0).toString());
     ui->addressLineEdit->setText(query.value(1).toString());
-    ui->districtComboBox->setCurrentText(query.value(2).toString());
+    //ui->districtComboBox->setCurrentText(query.value(2).toString());
+    ui->districtLineEdit->setText(query.value(2).toString());
     ui->stateComboBox->setCurrentText(query.value(3).toString());
     ui->countryLineEdit->setText(query.value(4).toString());
     ui->cityLineEdit->setText(query.value(5).toString());
@@ -61,7 +62,8 @@ void company::on_updateCompanyInfoPushButton_clicked()
     query.prepare("UPDATE CompanyInfo SET name = ?, address = ?, district = ?, state = ?, country = ?, city = ?, pincode = ?, pan = ?, email = ?, website = ?, cin = ?, gstin = ?, taxationtype = ?, contact1 = ?, contact2 = ?");
     query.addBindValue(ui->nameLineEdit->text());
     query.addBindValue(ui->addressLineEdit->text());
-    query.addBindValue(ui->districtComboBox->currentText());
+//    query.addBindValue(ui->districtComboBox->currentText());
+    query.addBindValue(ui->districtLineEdit->text());
     query.addBindValue(ui->stateComboBox->currentText());
     query.addBindValue(ui->countryLineEdit->text());
     query.addBindValue(ui->cityLineEdit->text());

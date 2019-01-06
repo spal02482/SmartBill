@@ -184,15 +184,11 @@
       </property>
      </widget>
     </item>
-    <item row="5" column="0">
-     <widget class="QComboBox" name="districtComboBox">
-      <property name="editable">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
     <item row="13" column="0" colspan="2">
      <widget class="QLineEdit" name="emailLineEdit"/>
+    </item>
+    <item row="5" column="0">
+     <widget class="QLineEdit" name="districtLineEdit"/>
     </item>
    </layout>
   </widget>

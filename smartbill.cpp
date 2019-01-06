@@ -464,3 +464,61 @@ QValidator::State NameValidator::validate(QString& name, int& cursorPosition) co
         return QValidator::Invalid;
     }
 }
+
+void SmartBill::on_aboutPushButton_clicked()
+{
+    QDialog* About = new QDialog(this);
+    About->setAttribute(Qt::WA_DeleteOnClose);
+    QLabel *label;
+    QLabel *label_2;
+    QLabel *label_3;
+    QLabel *label_4;
+
+   if (About->objectName().isEmpty())
+        About->setObjectName(QStringLiteral("About"));
+    About->resize(390, 190);
+    label = new QLabel(About);
+    label->setObjectName(QStringLiteral("label"));
+    label->setGeometry(QRect(20, 0, 341, 21));
+    QFont font;
+    font.setFamily(QStringLiteral("Bookman Old Style"));
+    font.setPointSize(12);
+    font.setBold(true);
+    font.setWeight(75);
+    label->setFont(font);
+    label->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
+    label_2 = new QLabel(About);
+    label_2->setObjectName(QStringLiteral("label_2"));
+    label_2->setGeometry(QRect(10, 50, 371, 41));
+    QFont font1;
+    font1.setFamily(QStringLiteral("Cambria"));
+    font1.setPointSize(10);
+    label_2->setFont(font1);
+    label_3 = new QLabel(About);
+    label_3->setObjectName(QStringLiteral("label_3"));
+    label_3->setGeometry(QRect(10, 100, 351, 81));
+    label_3->setFont(font1);
+    label_3->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
+    label_4 = new QLabel(About);
+    label_4->setObjectName(QStringLiteral("label_4"));
+    label_4->setGeometry(QRect(100, 20, 281, 20));
+    QFont font2;
+    font2.setFamily(QStringLiteral("Myanmar Text"));
+    font2.setBold(true);
+    font2.setWeight(75);
+    label_4->setFont(font2);
+    label_4->setAlignment(Qt::AlignCenter);
+
+
+    About->setWindowTitle(QApplication::translate("About", "Dialog", nullptr));
+            label->setText(QApplication::translate("About", "Smartbill Application", nullptr));
+            label_2->setText(QApplication::translate("About", "This application is smart invoice and bill management application <br> loaded with a lot of features.", nullptr));
+            label_3->setText(QApplication::translate("About", "For any bugs and suggestions, contact: <br>\n"
+    "<b>spal02482@gmail.com</b><br>\n"
+    "<b>+91 9930448105 / +91 9137555466 </b>\n"
+    "<p align=\"left\">-Suraj B. Pal</p>\n"
+    "", nullptr));
+            label_4->setText(QApplication::translate("About", "-Developed by Dwaipayana Technologies Pvt. Ltd.", nullptr));
+
+     About->open();
+}

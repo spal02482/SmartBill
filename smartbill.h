@@ -52,6 +52,8 @@ private slots:
     void submitCompanyInfo();
     void on_paymentStatusComboBox_activated(const QString&);
 
+    void on_aboutPushButton_clicked();
+
 private:
     Ui::SmartBill *ui;
 
